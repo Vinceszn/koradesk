@@ -1,4 +1,5 @@
 ---
+import CheckIcon from "./CheckIcon.astro";
 import { naira, plans } from "../data/site";
 ---
 
@@ -45,7 +46,7 @@ import { naira, plans } from "../data/site";
           <ul class="mt-5 flex-1 space-y-2.5 border-t border-sand pt-5 text-sm">
             {plan.includes.map((item) => (
               <li class="flex gap-2.5">
-                <span class="font-semibold text-accent" aria-hidden="true">✓</span>
+                <CheckIcon tone="plain" />
                 {item}
               </li>
             ))}

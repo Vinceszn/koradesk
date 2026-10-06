@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import CheckIcon from "../components/CheckIcon.astro";
 import DemoPhone from "../components/DemoPhone.astro";
 import Faq from "../components/Faq.astro";
 import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
@@ -30,7 +31,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       </p>
       <h1 class="mx-auto mt-6 max-w-3xl text-5xl font-bold leading-[1.04] tracking-tighter md:text-6xl">
         You didn&rsquo;t start a shop to do
-        <span class="relative inline-block whitespace-nowrap">
+        <span class="relative inline-block">
           paperwork.
           <svg class="absolute -left-2 top-1/2 h-3 w-[calc(100%+1rem)] -translate-y-1/2 -rotate-2 md:h-4" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
             <path d="M3 8 C 60 3, 140 3, 197 7" stroke="var(--color-clay)" stroke-width="5" stroke-linecap="round" fill="none" />
@@ -48,54 +49,54 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       <div class="ticker">
         <div class="ticker-track">
           <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Copying voice notes into ledgers</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Hunting unmatched transfers</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Friday stock counts</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Chasing &ldquo;who paid?&rdquo;</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Rewriting price lists</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Month-end cleanup</span>
             </div>
           </div>
           <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Copying voice notes into ledgers</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Hunting unmatched transfers</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Friday stock counts</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Chasing &ldquo;who paid?&rdquo;</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Rewriting price lists</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-ink text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Month-end cleanup</span>
             </div>
           </div>
@@ -105,46 +106,46 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       <div class="ticker">
         <div class="ticker-track reverse">
           <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Serve the person in front of you</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Close the shop at 6pm</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Count cash, not chats</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">One WhatsApp number for everything</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Books that balance themselves</span>
             </div>
           </div>
           <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Serve the person in front of you</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Close the shop at 6pm</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Count cash, not chats</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:-rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">One WhatsApp number for everything</span>
             </div>
-            <div class="flex w-64 shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left sm:w-72 md:rotate-1">
-              <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-white">✓</span>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">Books that balance themselves</span>
             </div>
           </div>
@@ -192,29 +193,32 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
 
   <section class="border-b border-sand bg-paper">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-5 text-sm text-muted">
-      <p class="flex items-center gap-2"><span class="font-bold text-leaf" aria-hidden="true">✓</span>No app to install</p>
-      <p class="flex items-center gap-2"><span class="font-bold text-leaf" aria-hidden="true">✓</span>Works on slow networks</p>
-      <p class="flex items-center gap-2"><span class="font-bold text-leaf" aria-hidden="true">✓</span>You approve money moves</p>
+      <p class="flex items-center gap-2"><CheckIcon tone="plain" />No app to install</p>
+      <p class="flex items-center gap-2"><CheckIcon tone="plain" />Works on slow networks</p>
+      <p class="flex items-center gap-2"><CheckIcon tone="plain" />You approve money moves</p>
     </div>
   </section>
 
   <!-- The daily mess -->
   <section class="mx-auto max-w-6xl px-4 py-16">
     <p class="eyebrow">The 9pm pile-up</p>
-    <h2 class="mt-3 text-3xl md:text-4xl">The daily <span class="line-through decoration-clay decoration-[3px]">mess</span>, in three lines</h2>
+    <h2 class="mt-3 text-3xl md:text-4xl">The daily wahala, in three lines</h2>
     <div class="mt-8 grid gap-4 md:grid-cols-3">
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
-        <h3 class="text-xl">Missed orders</h3>
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Surulere · 9:14 PM</p>
+        <h3 class="mt-2 text-xl">Missed orders</h3>
         <p class="mt-2 text-muted">Voice notes pile up while you serve the person in front of you.</p>
         <p class="mt-4 text-sm font-semibold text-accent">Fix: the Orders agent drafts every request as it arrives.</p>
       </article>
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:rotate-1">
-        <h3 class="text-xl">Unmatched payments</h3>
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Agege · 9:41 PM</p>
+        <h3 class="mt-2 text-xl">Unmatched payments</h3>
         <p class="mt-2 text-muted">Alerts and screenshots sit in chat. You guess who paid.</p>
         <p class="mt-4 text-sm font-semibold text-accent">Fix: Payments matches transfers to open invoices.</p>
       </article>
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
-        <h3 class="text-xl">Stock that never adds up</h3>
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Yaba · Friday 6:02 PM</p>
+        <h3 class="mt-2 text-xl">Stock that never adds up</h3>
         <p class="mt-2 text-muted">The shelf and the book disagree by Friday.</p>
         <p class="mt-4 text-sm font-semibold text-accent">Fix: Stock updates from sales and deliveries, then flags odd gaps.</p>
       </article>
@@ -228,8 +232,14 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       <h2 class="mt-3 text-3xl md:text-4xl">Four agents. One WhatsApp number.</h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
         {
-          agents.map((agent) => (
-            <a href={agent.href} class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]">
+          agents.map((agent, i) => (
+            <a
+              href={agent.href}
+              class:list={[
+                "rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]",
+                i % 2 === 1 && "sm:mt-10",
+              ]}
+            >
               <h3 class="text-2xl">{agent.name}</h3>
               <p class="mt-2 text-muted">{agent.job}</p>
               <p class="mt-4 text-sm text-muted">{agent.checkpoint}</p>
@@ -244,21 +254,28 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <!-- How it works -->
   <section class="mx-auto max-w-6xl px-4 py-16">
     <h2 class="text-3xl md:text-4xl">How it works</h2>
-    <ol class="mt-8 grid gap-4 md:grid-cols-3">
-      <li class="rounded-3xl border border-sand bg-white p-6">
-        <p class="text-sm font-semibold tracking-widest text-accent">01</p>
-        <h3 class="mt-3 text-lg font-semibold">Connect your number</h3>
-        <p class="mt-2 text-muted">We link the WhatsApp line customers already use. No app for them to install.</p>
+    <p class="mt-3 max-w-2xl text-muted">No onboarding webinar. No 40-page manual.</p>
+    <ol class="mt-8 border-t border-sand">
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">01</p>
+        <div>
+          <h3 class="text-xl">Connect your number</h3>
+          <p class="mt-2 max-w-2xl text-muted">We link the WhatsApp line customers already use. No app for them to install.</p>
+        </div>
       </li>
-      <li class="rounded-3xl border border-sand bg-white p-6">
-        <p class="text-sm font-semibold tracking-widest text-accent">02</p>
-        <h3 class="mt-3 text-lg font-semibold">Tell it your prices</h3>
-        <p class="mt-2 text-muted">Share a price list, even a photo of a handwritten sheet. You can correct it any time.</p>
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">02</p>
+        <div>
+          <h3 class="text-xl">Tell it your prices</h3>
+          <p class="mt-2 max-w-2xl text-muted">Share a price list, even a photo of a handwritten sheet. You can correct it any time.</p>
+        </div>
       </li>
-      <li class="rounded-3xl border border-sand bg-white p-6">
-        <p class="text-sm font-semibold tracking-widest text-accent">03</p>
-        <h3 class="mt-3 text-lg font-semibold">Approve the first few actions</h3>
-        <p class="mt-2 text-muted">Watch the log. Raise or lower limits. Undo for 24 hours.</p>
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">03</p>
+        <div>
+          <h3 class="text-xl">Approve the first few actions</h3>
+          <p class="mt-2 max-w-2xl text-muted">Watch the log. Raise or lower limits. Undo for 24 hours.</p>
+        </div>
       </li>
     </ol>
     <p class="mt-6"><a class="link-accent font-semibold" href="/how-it-works">See the full walkthrough</a></p>
@@ -268,7 +285,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <section class="border-y border-sand bg-surface py-16">
     <div class="mx-auto max-w-6xl px-4">
       <p class="eyebrow">Early access</p>
-      <h2 class="mt-3 text-3xl md:text-4xl">Built with <span class="rounded bg-accent-soft px-1">founding shops</span> in Lagos</h2>
+      <h2 class="mt-3 text-3xl md:text-4xl">Built with founding shops in Lagos</h2>
       <p class="mt-3 max-w-2xl text-muted">
         Kora Desk is live in a guided pilot. We onboard a few shops each week, sit with you through the first 14 days, and shape the product around what breaks.
       </p>
@@ -290,8 +307,8 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   </section>
 
   <!-- Trust band -->
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <div class="rounded-3xl bg-ink px-6 py-10 text-white md:px-10 md:py-12">
+  <section class="bg-ink py-16 text-white">
+    <div class="mx-auto max-w-6xl px-4">
       <p class="text-sm font-semibold uppercase tracking-widest text-accent-bright">Trust</p>
       <h2 class="mt-3 max-w-2xl text-3xl">You <span class="underline decoration-accent-bright decoration-[3px] underline-offset-[6px]">approve money moves</span>. Everything is logged. You can undo.</h2>
       <p class="mt-4 max-w-2xl text-sand">
@@ -303,7 +320,8 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
 
   <!-- Pricing teaser -->
   <section class="mx-auto max-w-6xl px-4 pb-16">
-    <h2 class="text-3xl">Simple prices in <span class="rounded bg-accent-soft px-1">naira</span></h2>
+    <h2 class="text-3xl">Simple prices in naira</h2>
+    <p class="mt-3 max-w-2xl text-muted">No hidden charges. No “DM for price” games.</p>
     <p class="mt-2 text-muted">Starter from {naira(15000)} / month. Growth {naira(45000)}. 14-day pilot free.</p>
     <a class="btn btn-ghost mt-5" href="/pricing">See full pricing</a>
   </section>
@@ -317,6 +335,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   </section>
 
   <!-- Final CTA -->
+  <div class="awning" aria-hidden="true"></div>
   <section class="bg-ink py-16 text-white">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <h2 class="text-4xl">Ready in two minutes</h2>

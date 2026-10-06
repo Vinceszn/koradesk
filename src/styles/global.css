@@ -1,4 +1,5 @@
 @import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/space-grotesk/index.css";
 @import "tailwindcss";
 
 /*
@@ -33,6 +34,9 @@
   --font-sans:
     "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui,
+    sans-serif;
 
   --shadow-soft: 0 1px 2px rgb(17 20 19 / 0.06), 0 24px 48px -24px rgb(17 20 19 / 0.22);
 
@@ -83,9 +87,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.15;
   text-wrap: balance;
 }
@@ -268,6 +272,18 @@ h1 {
   font-weight: 600;
 }
 
+/* Market-awning divider: a single urban texture strip, token-mapped */
+.awning {
+  height: 0.625rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-sand) 0,
+    var(--color-sand) 0.75rem,
+    transparent 0.75rem,
+    transparent 1.5rem
+  );
+}
+
 /* FAQ disclosure affordance */
 .faq-item summary::-webkit-details-marker {
   display: none;
@@ -279,4 +295,75 @@ h1 {
 }
 .faq-item[open] summary .faq-icon {
   transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dark mode — remapped semantic tokens + pinned fixed surfaces        */
+/* Page and cards go deep green-charcoal (never pure black); brand     */
+/* bands stay near-black; text accents switch to bright variants.      */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-paper: #0c1210;
+  --color-surface: #131917;
+  --color-sand: #2b3531;
+  --color-ink: #edf2f0;
+  --color-muted: #9aa5a0;
+  --color-accent: #34d399;
+  --color-accent-deep: #0e9f6e;
+  --color-accent-soft: #123f36;
+  --color-leaf: #4ade80;
+  --color-clay: #f97066;
+  --color-warning: #fbbf24;
+  --color-faint: #6b7672;
+  --color-chat: #0a0f0d;
+  --color-bubble: #1b2523;
+  --color-bubble-out: #0c3f34;
+}
+
+/* fixed surfaces keep their roles across themes */
+.dark .bg-white {
+  background-color: #151d1a;
+}
+.dark .bg-ink {
+  background-color: #080d0b;
+}
+.dark .bg-accent {
+  background-color: #0a5c42;
+}
+.dark .text-sand {
+  color: var(--color-muted);
+}
+.dark .hover\:bg-accent:hover {
+  background-color: #0a5c42;
+}
+
+/* buttons keep readable text in both themes */
+.dark .btn-primary {
+  background-color: #e9f0ed;
+  color: #101514;
+}
+.dark .btn-primary:hover {
+  background-color: #ffffff;
+}
+.dark .btn-accent:hover {
+  background-color: #0d6b4c;
+}
+.dark .btn-light {
+  color: #101514;
+}
+
+/* form controls */
+.dark .field {
+  background-color: #141b18;
+  border-color: var(--color-sand);
+  color: var(--color-ink);
+}
+.dark .panel {
+  background-color: #141b18;
 }
