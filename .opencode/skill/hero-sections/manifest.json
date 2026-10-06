@@ -1,0 +1,7 @@
+{
+  "name": "hero-sections",
+  "version": "1.0.0",
+  "description": "Research-backed patterns and implementation rules for high-converting website hero sections — concept selection, outcome-led copy, motion, accessibility, and Astro/Tailwind build specs.",
+  "entry": "SKILL.md",
+  "tags": ["frontend", "hero", "landing-page", "copywriting", "conversion", "tailwind"]
+}

@@ -1,5 +1,5 @@
 {
   "skills": {
-    "autoLoad": ["frontend-design"]
+    "autoLoad": ["frontend-design", "hero-sections"]
   }
 }
