@@ -172,20 +172,26 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   .ticker-track {
     display: flex;
     width: max-content;
+    -webkit-animation: ticker-scroll 48s linear infinite;
     animation: ticker-scroll 48s linear infinite;
   }
   .ticker-track.reverse {
     animation-direction: reverse;
     animation-duration: 60s;
   }
-  .ticker:hover .ticker-track {
-    animation-play-state: paused;
+  @media (hover: hover) {
+    .ticker:hover .ticker-track {
+      animation-play-state: paused;
+    }
+  }
+  @-webkit-keyframes ticker-scroll {
+    to { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
   }
   @keyframes ticker-scroll {
     to { transform: translateX(-50%); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .ticker-track { animation: none; }
+    .ticker-track { -webkit-animation: none; animation: none; }
   }
 </style>
 
