@@ -3,12 +3,12 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Marketing website for Kora Desk, a fictional WhatsApp back-office for small businesses in Africa.",
+  "description": "Marketing website for Kora Desk, a WhatsApp back-office for small businesses in Africa.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "cf deploy",
+    "deploy": "npm run build && wrangler deploy",
     "cf-typegen": "cf workers types"
   },
   "dependencies": {
