@@ -1,16 +1,54 @@
 ---
-const steps = [
+interface Props {
+  anchorId?: string;
+}
+const { anchorId } = Astro.props;
+
+const scenarios = [
   {
-    title: "Voice note in",
-    caption: "A customer sends a voice note. The agent transcribes it instantly.",
+    id: "orders",
+    label: "Orders",
+    contact: "Chinedu Stores",
+    initials: "CS",
+    status: "online",
+    steps: [
+      { title: "Voice note in", caption: "A customer sends a voice note. The agent transcribes it instantly." },
+      { title: "Order drafted", caption: "Prices come from your list. The customer confirms on WhatsApp." },
+      { title: "Invoice sent", caption: "You still approve anything above your limit. Money never moves without you." },
+    ],
   },
   {
-    title: "Order drafted",
-    caption: "Prices come from your list. The customer confirms on WhatsApp.",
+    id: "payments",
+    label: "Payments",
+    contact: "Chinedu Stores",
+    initials: "CS",
+    status: "online",
+    steps: [
+      { title: "Bank alert in", caption: "A transfer lands with no name attached. The agent reads the alert." },
+      { title: "Payment matched", caption: "Matched to the open invoice. Receipt sent — nothing left hunting." },
+    ],
   },
   {
-    title: "Invoice sent",
-    caption: "You still approve anything above your limit. Money never moves without you.",
+    id: "stock",
+    label: "Stock",
+    contact: "Shop Staff",
+    initials: "SS",
+    status: "3 online",
+    steps: [
+      { title: "Stock flag", caption: "Indomie drops to 4 cartons. The agent drafts a reorder." },
+      { title: "You approve", caption: "One tap notifies the supplier. Counts update on delivery." },
+    ],
+  },
+  {
+    id: "books",
+    label: "Books",
+    contact: "My Accountant",
+    initials: "MA",
+    status: "online",
+    steps: [
+      { title: "Day summary", caption: "Sales, orders, and unpaid invoices — every evening at 6pm." },
+      { title: "Accountant-ready", caption: "Simple P&L and tax-ready exports. Nothing filed without review." },
+    ],
   },
 ];
 
@@ -22,21 +60,39 @@ const lines = [
   { item: "1 × 25L cooking oil", price: "₦41,000" },
 ];
 const orderTotal = "₦233,500";
+
+const stepsMeta = scenarios.map((s) => ({ id: s.id, steps: s.steps }));
+const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initials: s.initials, status: s.status }));
 ---
 
-<section class="bg-surface" aria-labelledby="demo-heading">
+<section class="bg-surface" aria-labelledby="demo-heading" id={anchorId}>
   <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 lg:grid-cols-2">
     <div>
-      <p class="eyebrow">Sample conversation</p>
+      <p class="eyebrow">Sample conversations</p>
       <h2 id="demo-heading" class="mt-3 text-3xl font-bold md:text-4xl">
-        A voice note becomes an order and an invoice.
+        One number does all four jobs.
       </h2>
       <p class="mt-3 text-lg text-muted">
-        A sample from a food distributor in Agege. Press play or tap a step — no sound, no autoplay.
+        Pick an agent and tap through a sample. Press play or tap a step — no sound, no autoplay.
       </p>
-      <ol class="mt-6 space-y-2.5" id="demo-steps">
+      <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Choose an agent demo">
         {
-          steps.map((step, i) => (
+          scenarios.map((s, i) => (
+            <button
+              type="button"
+              class="demo-scenario min-h-11 rounded-full border px-4 text-sm font-semibold transition-all duration-200 ease-out active:scale-[0.98]"
+              class:list={i === 0 ? "border-ink bg-ink text-white" : "border-sand bg-white text-ink"}
+              data-scenario={s.id}
+              aria-pressed={i === 0 ? "true" : "false"}
+            >
+              {s.label}
+            </button>
+          ))
+        }
+      </div>
+      <ol class="mt-4 space-y-2.5" id="demo-steps">
+        {
+          scenarios[0].steps.map((step, i) => (
             <li>
               <button
                 type="button"
@@ -60,16 +116,15 @@ const orderTotal = "₦233,500";
         }
       </ol>
       <div class="mt-6 flex flex-wrap items-center gap-3">
-        <button type="button" id="demo-play" class="btn btn-primary disabled:opacity-50">Play full demo</button>
+        <button type="button" id="demo-play" class="btn btn-primary disabled:opacity-50">Play this demo</button>
         <button type="button" id="demo-reset" class="btn btn-ghost">Reset</button>
-        <p id="demo-status" class="w-full text-xs text-muted" aria-live="polite">Step 1 of 3</p>
+        <p id="demo-status" class="w-full text-xs text-muted" aria-live="polite">Orders · Step 1 of 3</p>
       </div>
     </div>
 
     <div class="mx-auto w-full max-w-sm">
       <div class="flex flex-col rounded-[2.5rem] bg-ink p-2 shadow-soft">
         <div class="flex h-[640px] flex-col overflow-hidden rounded-[2rem] bg-chat">
-          <!-- device status bar -->
           <div class="flex items-center justify-between px-6 pb-1 pt-3 text-xs font-semibold text-white" aria-hidden="true">
             <span>9:41</span>
             <span class="flex items-center gap-1.5">
@@ -78,20 +133,18 @@ const orderTotal = "₦233,500";
               <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="19" height="11" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M22 4v4a2 2 0 0 0 0-4Z" fill="currentColor" opacity="0.5"/></svg>
             </span>
           </div>
-          <!-- WhatsApp chat header -->
           <div class="flex items-center gap-2 bg-accent px-2 py-2 text-white">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold" aria-hidden="true">CS</span>
+            <span id="demo-avatar" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold" aria-hidden="true">CS</span>
             <span class="min-w-0 flex-1">
-              <span class="block truncate text-sm font-semibold leading-tight">Chinedu Stores</span>
-              <span class="block text-xs leading-tight text-white/80" data-online>online</span>
+              <span id="demo-contact" class="block truncate text-sm font-semibold leading-tight">Chinedu Stores</span>
+              <span id="demo-presence" class="block text-xs leading-tight text-white/80">online</span>
             </span>
             <span class="flex items-center gap-4 pr-1" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
             </span>
           </div>
-          <!-- chat scroll area -->
           <div id="demo-chat" class="flex-1 space-y-2 overflow-y-auto px-3 py-3" role="log" aria-live="polite" aria-label="Illustrative WhatsApp conversation">
             <p class="mx-auto w-fit rounded-lg border border-sand bg-bubble px-3 py-1 text-xs text-muted">Today</p>
             <p class="mx-auto w-fit rounded-lg border border-sand bg-bubble px-3 py-1 text-center text-xs leading-relaxed text-muted">
@@ -99,7 +152,6 @@ const orderTotal = "₦233,500";
             </p>
             <div id="demo-msgs" class="space-y-2"></div>
           </div>
-          <!-- quick replies -->
           <div id="demo-chips" class="hidden flex-wrap gap-2 px-3 pb-2">
             <button
               type="button"
@@ -115,8 +167,14 @@ const orderTotal = "₦233,500";
             >
               Move delivery to 10–12
             </button>
+            <button
+              type="button"
+              id="demo-chip-approve"
+              class="hidden min-h-11 items-center rounded-full border border-accent bg-accent px-4 text-sm font-semibold text-white transition-all duration-200 ease-out active:scale-[0.98]"
+            >
+              Approve reorder
+            </button>
           </div>
-          <!-- message input (decorative) -->
           <div class="flex items-center gap-2 px-3 pb-4 pt-1" aria-hidden="true">
             <div class="flex min-h-11 flex-1 items-center rounded-full bg-bubble px-4 text-sm text-muted">Message</div>
             <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white">
@@ -125,7 +183,7 @@ const orderTotal = "₦233,500";
           </div>
         </div>
       </div>
-      <p class="mt-3 text-center text-xs text-muted">Sample chat on a mid-range Android · silent</p>
+      <p class="mt-3 text-center text-xs text-muted">Mid-range Android · illustrative chats · silent</p>
     </div>
   </div>
 </section>
@@ -148,24 +206,31 @@ const orderTotal = "₦233,500";
   }
 </style>
 
-<script define:vars={{ bars, lines, orderTotal }}>
+<script define:vars={{ bars, lines, orderTotal, stepsMeta, contactsMeta }}>
   const msgs = document.getElementById("demo-msgs");
   const chat = document.getElementById("demo-chat");
-  const stepBtns = Array.from(document.querySelectorAll(".demo-step"));
-  const stepNums = Array.from(document.querySelectorAll(".demo-num"));
+  const stepsOl = document.getElementById("demo-steps");
+  const tabBtns = Array.from(document.querySelectorAll(".demo-scenario"));
   const playBtn = document.getElementById("demo-play");
   const resetBtn = document.getElementById("demo-reset");
   const statusEl = document.getElementById("demo-status");
   const chipsEl = document.getElementById("demo-chips");
   const chipYes = document.getElementById("demo-chip-yes");
   const chipMove = document.getElementById("demo-chip-move");
+  const chipApprove = document.getElementById("demo-chip-approve");
+  const contactEl = document.getElementById("demo-contact");
+  const avatarEl = document.getElementById("demo-avatar");
+  const presenceEl = document.getElementById("demo-presence");
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let runId = 0;
   let timers = [];
+  let scenario = "orders";
   let currentAct = 0;
   let playing = false;
   let moved = false;
+  let confirmed = false;
+  let approved = false;
   let clockMin = 8 * 60 + 9;
 
   function wait(ms) {
@@ -181,10 +246,9 @@ const orderTotal = "₦233,500";
     timers.forEach((t) => window.clearTimeout(t));
     timers = [];
     document.querySelectorAll('[data-playing="1"]').forEach((el) => {
-      const btn = el;
-      const tid = Number(btn.dataset.timer);
+      const tid = Number(el.dataset.timer);
       if (tid) window.clearInterval(tid);
-      btn.dataset.playing = "0";
+      el.dataset.playing = "0";
     });
   }
 
@@ -362,6 +426,100 @@ const orderTotal = "₦233,500";
     upgradeTicks(tick2, runId);
   }
 
+  function addAlert(animate) {
+    if (!msgs) return;
+    const b = baseBubble("them", animate);
+    const label = document.createElement("p");
+    label.className = "text-xs font-semibold text-muted";
+    label.textContent = "BANK ALERT · GTB";
+    b.appendChild(label);
+    const p = document.createElement("p");
+    p.className = "mt-1";
+    p.textContent = "₦168,000 credited to 0123456789 KD-MERCHANTS. No sender name attached.";
+    b.appendChild(p);
+    b.appendChild(metaRow(stamp(), null));
+    msgs.appendChild(b);
+    scrollBottom();
+  }
+
+  function addMatched(animate) {
+    addText("us", "Matched: ₦168,000 → Invoice KD-1842 (Chinedu Stores). Receipt sent — nothing left unmatched tonight.", animate, true);
+  }
+
+  function addStockCard(animate) {
+    if (!msgs) return;
+    const b = baseBubble("us", animate);
+    const head = document.createElement("p");
+    head.className = "text-sm font-bold tracking-tight text-ink";
+    head.textContent = "Stock flag · Indomie";
+    b.appendChild(head);
+    const list = document.createElement("div");
+    list.className = "mt-2 space-y-1 border-t border-ink/10 pt-2 text-sm";
+    [
+      ["On hand", "4 cartons"],
+      ["Burn rate", "~3 / day"],
+      ["Draft", "Reorder 10 from supplier"],
+    ].forEach(([k, v]) => {
+      const r = document.createElement("div");
+      r.className = "flex items-center justify-between gap-4";
+      const kk = document.createElement("span");
+      kk.className = "text-muted";
+      kk.textContent = k;
+      const vv = document.createElement("span");
+      vv.className = "font-semibold";
+      vv.textContent = v;
+      r.append(kk, vv);
+      list.appendChild(r);
+    });
+    b.appendChild(list);
+    const foot = document.createElement("p");
+    foot.className = "mt-2 text-sm";
+    foot.textContent = "Tap Approve reorder below and I notify the supplier.";
+    b.appendChild(foot);
+    const tick = {};
+    b.appendChild(metaRow(stamp(), tick));
+    msgs.appendChild(b);
+    scrollBottom();
+    upgradeTicks(tick, runId);
+  }
+
+  function addBooksCard(animate) {
+    if (!msgs) return;
+    const b = baseBubble("us", animate);
+    const head = document.createElement("p");
+    head.className = "text-sm font-bold tracking-tight text-ink";
+    head.textContent = "Today · 6:02 PM";
+    b.appendChild(head);
+    const list = document.createElement("div");
+    list.className = "mt-2 space-y-1 border-t border-ink/10 pt-2 text-sm";
+    [
+      ["Sales", "₦1,240,000"],
+      ["Orders", "34 confirmed"],
+      ["Unpaid", "2 invoices · ₦86,500"],
+    ].forEach(([k, v]) => {
+      const r = document.createElement("div");
+      r.className = "flex items-center justify-between gap-4";
+      const kk = document.createElement("span");
+      kk.className = "text-muted";
+      kk.textContent = k;
+      const vv = document.createElement("span");
+      vv.className = "font-semibold";
+      vv.textContent = v;
+      r.append(kk, vv);
+      list.appendChild(r);
+    });
+    b.appendChild(list);
+    const foot = document.createElement("p");
+    foot.className = "mt-2 text-sm";
+    foot.textContent = "Daily summary saved to Books.";
+    b.appendChild(foot);
+    const tick = {};
+    b.appendChild(metaRow(stamp(), tick));
+    msgs.appendChild(b);
+    scrollBottom();
+    upgradeTicks(tick, runId);
+  }
+
   async function showTyping(id) {
     if (!msgs || id !== runId) return;
     const b = baseBubble("us", !reduced);
@@ -379,110 +537,246 @@ const orderTotal = "₦233,500";
     if (id === runId && b.parentNode) b.remove();
   }
 
-  function paintSteps() {
-    stepBtns.forEach((btn, i) => {
-      const on = i === currentAct;
+  function setContact(id) {
+    const c = contactsMeta.find((x) => x.id === id);
+    if (!c) return;
+    if (contactEl) contactEl.textContent = c.contact;
+    if (avatarEl) avatarEl.textContent = c.initials;
+    if (presenceEl) presenceEl.textContent = c.status;
+  }
+
+  function stepsFor(id) {
+    const s = stepsMeta.find((x) => x.id === id);
+    return s ? s.steps : [];
+  }
+
+  function labelFor(id) {
+    const map = { orders: "Orders", payments: "Payments", stock: "Stock", books: "Books" };
+    return map[id] || id;
+  }
+
+  function paintTabs() {
+    tabBtns.forEach((btn) => {
+      const on = btn.dataset.scenario === scenario;
       btn.setAttribute("aria-pressed", String(on));
+      btn.classList.toggle("bg-ink", on);
+      btn.classList.toggle("text-white", on);
       btn.classList.toggle("border-ink", on);
+      btn.classList.toggle("bg-white", !on);
+      btn.classList.toggle("text-ink", !on);
       btn.classList.toggle("border-sand", !on);
-      const num = stepNums[i];
-      if (!num) return;
-      const done = i < currentAct;
-      num.textContent = done ? "✓" : String(i + 1);
-      num.classList.toggle("bg-accent", done || on);
-      num.classList.toggle("bg-ink", !done && !on);
     });
-    if (statusEl) {
-      statusEl.textContent = playing
-        ? `Playing… step ${currentAct + 1} of 3`
-        : `Step ${currentAct + 1} of 3${currentAct === 1 ? " — try Reply YES in the phone" : ""}`;
+  }
+
+  function paintSteps() {
+    if (!stepsOl) return;
+    const steps = stepsFor(scenario);
+    stepsOl.innerHTML = "";
+    steps.forEach((step, i) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left transition-all duration-200 ease-out active:scale-[0.98] rounded-2xl border bg-white";
+      btn.classList.add(i === currentAct ? "border-ink" : "border-sand");
+      btn.dataset.step = String(i);
+      btn.setAttribute("aria-pressed", String(i === currentAct));
+      const num = document.createElement("span");
+      num.className = "mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full text-white";
+      num.classList.add(i < currentAct ? "bg-accent" : "bg-ink");
+      num.setAttribute("aria-hidden", "true");
+      num.textContent = i < currentAct ? "✓" : String(i + 1);
+      const wrap = document.createElement("span");
+      const title = document.createElement("strong");
+      title.className = "block text-base font-semibold text-ink";
+      title.textContent = step.title;
+      const cap = document.createElement("span");
+      cap.className = "text-sm text-muted";
+      cap.textContent = step.caption;
+      wrap.append(title, cap);
+      btn.append(num, wrap);
+      li.appendChild(btn);
+      stepsOl.appendChild(li);
+    });
+    const n = steps.length;
+    let hint = "";
+    if (scenario === "orders" && currentAct === 1 && !confirmed) hint = " — try Reply YES in the phone";
+    if (scenario === "stock" && currentAct === 0 && !approved) hint = " — tap Approve reorder in the phone";
+    if (statusEl) statusEl.textContent = playing
+      ? `Playing… ${labelFor(scenario)} · step ${currentAct + 1} of ${n}`
+      : `${labelFor(scenario)} · Step ${currentAct + 1} of ${n}${hint}`;
+    paintChips();
+  }
+
+  function showChip(el, on, inlineFlex) {
+    if (!el) return;
+    el.classList.toggle("hidden", !on);
+    el.classList.toggle(inlineFlex ? "inline-flex" : "flex", on);
+  }
+
+  function paintChips() {
+    const awaitingYes = scenario === "orders" && currentAct === 1 && !confirmed;
+    const awaitingApprove = scenario === "stock" && currentAct === 0 && !approved;
+    const open = awaitingYes || awaitingApprove;
+    if (chipsEl) {
+      chipsEl.classList.toggle("hidden", !open);
+      chipsEl.classList.toggle("flex", open);
     }
-    const awaiting = currentAct === 1;
-    chipsEl?.classList.toggle("hidden", !awaiting);
-    chipsEl?.classList.toggle("flex", awaiting);
-    chipYes?.classList.toggle("hidden", !awaiting);
-    chipYes?.classList.toggle("inline-flex", awaiting);
-    const showMove = awaiting && !moved;
-    chipMove?.classList.toggle("hidden", !showMove);
-    chipMove?.classList.toggle("inline-flex", showMove);
+    showChip(chipYes, awaitingYes, true);
+    showChip(chipMove, awaitingYes, true);
+    showChip(chipApprove, awaitingApprove, true);
   }
 
   function clearChat() {
     if (msgs) msgs.innerHTML = "";
     clockMin = 8 * 60 + 9;
     moved = false;
+    confirmed = false;
+    approved = false;
   }
 
-  async function jumpTo(i) {
-    cancelPending();
+  async function showScenario(sc, act, animate) {
     const id = runId;
-    clearChat();
-    if (i === 0) {
-      currentAct = 0;
-      addVoice(false);
-      paintSteps();
-      return;
+    scenario = sc;
+    currentAct = act;
+    setContact(sc);
+    if (sc === "orders") {
+      if (animate) {
+        if (act >= 1) addVoice(false);
+        if (act >= 2) {
+          addOrder(false);
+          if (confirmed) addText("them", "YES", false, false);
+        }
+        if (act === 0) addVoice(true);
+        if (act === 1) {
+          await showTyping(id);
+          if (id !== runId) return;
+          addOrder(true);
+        }
+        if (act >= 2) {
+          await wait(500);
+          if (id !== runId) return;
+          if (!confirmed) addText("them", "YES", true, false);
+          await showTyping(id);
+          if (id !== runId) return;
+          addInvoice(true);
+        }
+      } else {
+        addVoice(false);
+        if (act >= 1) addOrder(false);
+        if (act >= 2) {
+          addText("them", "YES", false, false);
+          addInvoice(false);
+        }
+      }
     }
-    currentAct = i;
-    addVoice(false);
-    if (id !== runId) return;
-    addOrder(false);
-    if (i === 2) {
-      addText("them", "YES", false, false);
-      addInvoice(false);
+    if (sc === "payments") {
+      if (act === 0) addAlert(animate);
+      if (act >= 1) {
+        if (animate) {
+          if (msgs && !msgs.children.length) addAlert(false);
+          await showTyping(id);
+          if (id !== runId) return;
+        } else {
+          addAlert(false);
+        }
+        addMatched(animate);
+      }
     }
+    if (sc === "stock") {
+      if (act === 0) addStockCard(animate);
+      if (act >= 1) {
+        if (animate) {
+          if (msgs && !msgs.children.length) addStockCard(false);
+          await wait(400);
+          if (id !== runId) return;
+          if (!approved) addText("them", "Approve reorder", true, false);
+          await showTyping(id);
+          if (id !== runId) return;
+          addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", true, true);
+        } else {
+          addStockCard(false);
+          addText("them", "Approve reorder", false, false);
+          addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", false, true);
+        }
+      }
+    }
+    if (sc === "books") {
+      if (act === 0) addBooksCard(animate);
+      if (act >= 1) {
+        if (animate) {
+          if (msgs && !msgs.children.length) addBooksCard(false);
+          await showTyping(id);
+          if (id !== runId) return;
+        } else {
+          addBooksCard(false);
+        }
+        addText("us", "P&L and VAT summary exported for October. Nothing is filed until your accountant reviews.", animate, true);
+      }
+    }
+    paintTabs();
     paintSteps();
   }
 
-  async function playAll() {
+  function switchScenario(sc) {
+    if (playing || sc === scenario) return;
+    cancelPending();
+    clearChat();
+    showScenario(sc, 0, false);
+    scrollBottom();
+  }
+
+  function jumpTo(i) {
+    if (playing) return;
+    cancelPending();
+    clearChat();
+    showScenario(scenario, i, false);
+    scrollBottom();
+  }
+
+  async function playScenario() {
     if (playing) return;
     playing = true;
     if (playBtn) playBtn.setAttribute("disabled", "true");
     cancelPending();
     clearChat();
-    currentAct = 0;
-    paintSteps();
-    addVoice(true);
-    await wait(1600);
-    currentAct = 1;
-    paintSteps();
-    await showTyping(runId);
-    addOrder(true);
-    await wait(2200);
-    if (playing) {
-      currentAct = 2;
-      paintSteps();
-      addText("them", "YES", true, false);
-      await wait(600);
-      await showTyping(runId);
-      addInvoice(true);
+    const maxAct = stepsFor(scenario).length - 1;
+    for (let a = 0; a <= maxAct; a += 1) {
+      clearChat();
+      await showScenario(scenario, a, true);
+      if (!playing) break;
+      await wait(a === 0 ? 1500 : 2000);
+      if (!playing) break;
     }
-    paintSteps();
     playing = false;
     if (playBtn) playBtn.removeAttribute("disabled");
+    paintTabs();
+    paintSteps();
   }
 
-  stepBtns.forEach((btn, i) => {
-    btn.addEventListener("click", () => {
-      if (playing) return;
-      jumpTo(i);
-    });
+  tabBtns.forEach((btn) => {
+    btn.addEventListener("click", () => switchScenario(btn.dataset.scenario));
   });
 
-  playBtn?.addEventListener("click", playAll);
+  stepsOl?.addEventListener("click", (e) => {
+    const t = e.target;
+    const btn = t.closest ? t.closest(".demo-step") : null;
+    if (!btn) return;
+    jumpTo(Number(btn.dataset.step));
+  });
+
+  playBtn?.addEventListener("click", playScenario);
 
   resetBtn?.addEventListener("click", () => {
     if (playing) return;
     cancelPending();
     clearChat();
-    currentAct = 0;
-    addVoice(false);
-    paintSteps();
+    showScenario(scenario, 0, false);
     scrollBottom();
   });
 
   chipYes?.addEventListener("click", () => {
-    if (playing || currentAct !== 1) return;
+    if (playing || scenario !== "orders" || currentAct !== 1 || confirmed) return;
+    confirmed = true;
     cancelPending();
     const id = runId;
     currentAct = 2;
@@ -490,29 +784,50 @@ const orderTotal = "₦233,500";
     showTyping(id).then(() => {
       if (id !== runId) return;
       addInvoice(true);
+      paintTabs();
       paintSteps();
     });
+    paintTabs();
     paintSteps();
   });
 
   chipMove?.addEventListener("click", () => {
-    if (playing || currentAct !== 1 || moved) return;
+    if (playing || scenario !== "orders" || currentAct !== 1 || moved) return;
     moved = true;
     addText("them", "Can you move delivery to 10–12?", true, false);
     const id = runId;
     showTyping(id).then(() => {
       if (id !== runId) return;
       addText("us", "Done — delivery moved to 10–12am. Reply YES to confirm.", true, true);
+      paintTabs();
       paintSteps();
     });
+    paintTabs();
+    paintSteps();
+  });
+
+  chipApprove?.addEventListener("click", () => {
+    if (playing || scenario !== "stock" || approved) return;
+    approved = true;
+    cancelPending();
+    const id = runId;
+    currentAct = 1;
+    addText("them", "Approve reorder", true, false);
+    showTyping(id).then(() => {
+      if (id !== runId) return;
+      addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", true, true);
+      paintTabs();
+      paintSteps();
+    });
+    paintTabs();
     paintSteps();
   });
 
   chat?.addEventListener("click", (e) => {
     const target = e.target;
-    const btn = target.closest("[data-voice-toggle]");
+    const btn = target.closest ? target.closest("[data-voice-toggle]") : null;
     if (!btn || reduced) return;
-    const bubble = btn.closest("div.ml-10, div.mr-10") ?? btn.parentElement?.parentElement;
+    const bubble = btn.closest("div.ml-10, div.mr-10") || (btn.parentElement ? btn.parentElement.parentElement : null);
     if (!bubble) return;
     const barEls = Array.from(bubble.querySelectorAll("[data-voice-bars] span"));
     const timeEl = bubble.querySelector("[data-voice-time]");
@@ -557,7 +872,9 @@ const orderTotal = "₦233,500";
     btn.dataset.timer = String(timer);
   });
 
+  scenario = "orders";
   currentAct = 0;
   addVoice(false);
+  paintTabs();
   paintSteps();
 </script>
