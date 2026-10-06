@@ -2,73 +2,98 @@
 # Metadata
 ---
 name: hero-sections
-description: Research-backed patterns and implementation rules for high-converting website hero sections — concept selection, outcome-led copy, motion, accessibility, and Astro/Tailwind build specs.
-version: 1.0.0
+description: A generative system for inventing original website hero sections — combinatorial idea space, divergence methods, concept scoring, plus conversion copy, motion, accessibility, and Astro/Tailwind build specs.
+version: 2.0.0
 author: OpenCode UI Team
-tags: [frontend, hero, landing-page, copywriting, conversion, tailwind]
+tags: [frontend, hero, landing-page, copywriting, conversion, creativity, tailwind]
 ---
 
 ## Core Intent
-When this skill is activated, you are a senior landing-page designer and conversion copywriter. The hero must answer three questions in under three seconds: what is this, who is it for, and what do I do next. Every hero you build shows the product in use, carries exactly one primary action, and proves its claims above the fold. Never ship abstract decoration, competing CTAs, or invented social proof.
+When this skill is activated, you are an inventor, not a librarian. You never pick a hero from a fixed list of styles — you generate fresh concepts from a combinatorial idea space, then score and refine them. Every hero you ship still answers three questions in under three seconds (what, who-for, what-next), shows the product in use, carries exactly one primary action, and proves its claims above the fold.
 
 ---
 
-## 1. Concept Patterns (pick one, commit fully)
-*   **Product-Story Loop:** A looping micro-animation of one core workflow (message in → result out). Best when the product's value is hard to compress into a line. Auto-plays muted, loops seamlessly, respects reduced motion.
-*   **Chaos Ticker:** Counter-scrolling marquee rows contrasting problem artifacts (alerts, screenshots, voice notes) against resolved outputs (drafts, receipts, flags). Best for products that absorb mess. Two rows, opposite directions, pause on hover.
-*   **Before/After Bento:** A grid pairing a chaotic "before" cell with calm output cells. Best for multi-feature products needing one-glance comprehension. Keep cells to one idea each.
-*   **Segmenting Hero:** Visitor picks their segment (role, trade, use case); headline, visual, and CTA adapt. Best when audiences diverge sharply. Chips must be 44px targets with pressed states.
-*   **Editorial Statement:** Oversized type, minimal visual, proof strip. Best for strong brands with simple propositions. Typography carries the entire section — weight 700+, tighter tracking, one accent word maximum.
-*   **Never:** Generic stock imagery, abstract geometric illustration as the sole visual, feature lists in the hero, or more than one primary CTA.
+## 1. The Idea Space (six axes — combine, never shop)
+A hero concept is one choice per axis. With 4–6 options each, the space holds thousands of concepts; most have never been built.
+
+*   **SUBJECT — what the hero is about:** the product in action · the user's before-state · the after-state · the proof itself · the process · the objection being answered.
+*   **STRUCTURE — how it fills the viewport:** split · centered · full-bleed · bento grid · immersive background · overlapping layers · sequential scroll acts.
+*   **MOTION — what moves:** ambient loop · scroll-driven reveal · visitor-triggered playback · marquee/ticker · parallax depth · physics/playful response · none (stillness as contrast).
+*   **PROOF — what makes it believable:** live product behavior · real artifacts (messages, receipts, alerts) · process transparency (pilot, humans, method) · numbers measured in-house · third-party voices · explicit absence of proof, stated honestly ("too early for stats — here's our method instead").
+*   **ACTION — what the visitor does:** single CTA · forced choice between two segments · typed input that changes the hero · a micro-task inside the hero (tap, approve, play) · nothing (pure statement, action deferred below).
+*   **TONE — how it feels:** bold · playful · editorial · dramatic · clinical · warm · defiant.
+
+**Method:** roll one option per axis (deliberately include one uncomfortable pick), write the 2-sentence concept, repeat until you hold 6–8 candidates. Ten minutes, no judging yet.
 
 ---
 
-## 2. Copy Formulas
-*   **Eyebrow:** A live status signal, not a category label. Prefer "Now onboarding X in Y" or "New: Z" with a pulsing dot over "Welcome to Our Product".
-*   **H1:** An outcome phrase a customer would say, under 10 words. Name the result ("Close at 6pm, not 10pm"), never the mechanism ("AI-powered synergy platform"). One accent-colored word maximum.
-*   **Lede:** One sentence: who it is for + what it does + the human guarantee. Cap at ~25 words, `text-lg` to `text-xl`, muted color for header/body drop-off.
-*   **CTA:** Exactly one primary button taking the single highest-intent action. Surround it with friction removers (checks row: time, cost, commitment), never with a second competing button. A scroll-to-demo text link is a second CTA — cut it.
-*   **Proof strip:** Real, verifiable signals only (languages supported, pilot status, message volumes, named integrations). Never invent testimonials, customer names, or statistics. If proof does not exist yet, show process proof ("Guided 14-day pilot · Human onboarding").
+## 2. Divergence Engines (run at least two per brief)
+*   **SCAMPER the default:** Take the obvious hero (split layout, headline left, screenshot right) and force each move — Substitute the visual for live behavior; Combine hero with proof section; Adapt a pattern from another industry (election-night results boards, sports tickers, market stalls); Magnify one element 10× (a headline that fills the screen, a single giant button); Put the demo to another use (let visitors break it, not just watch it); Eliminate the headline entirely; Reverse the arc (show the resolution first, the chaos on scroll).
+*   **Invert:** Design the worst possible hero (three CTAs, stock photo, lorem stats), then flip every property. The inverse of generic is usually specific — and specific converts.
+*   **Time-slice:** Freeze one moment of user life (9pm chaos, 6am calm, payday, stock day) and build the hero inside that timestamp. Temporal specificity beats abstract benefit claims.
+*   **Make the visitor act:** Replace passive viewing with a first-viewport verb — tap, choose, approve, play, type. Comprehension through doing beats comprehension through reading.
+*   **Steal sideways:** Borrow mechanics from games (scores, streaks), markets (haggling, weighing), messaging (threads, ticks, typing), or broadcast (tickers, results graphics) — then re-skin in the product's own tokens.
+*   **Subtract to amplify:** Remove headline, or visual, or CTA, or color. Whatever remains must work harder; what you add back earns its place.
 
 ---
 
-## 3. Layout Engineering
+## 3. Convergence (score, then commit)
+Score each candidate 1–5 on four axes. Build the highest total; kill anything scoring 1 on Comprehension or Credibility regardless of total.
+
+*   **Comprehension:** Can a stranger state product, audience, and action after 3 seconds? Test with the blur test — squint at the layout; the hierarchy must survive.
+*   **Credibility:** Is every claim measured, shown live, or honestly framed as process? Invented testimonials, names, or statistics score 0 and disqualify.
+*   **Conversion clarity:** One primary action, zero competitors. Secondary links, competing buttons, and "learn more" escape hatches each cost a point.
+*   **Craft feasibility:** Buildable in the current stack (Astro + Tailwind + tokens) within the budget, under ~120 hero DOM nodes, with zero web requests in the visual.
+
+**Novelty check (bonus point):** Name three live sites using this exact composition. If you can, run one more divergence pass — familiarity is the enemy.
+
+---
+
+## 4. Copy Formulas (apply to the winning concept)
+*   **Eyebrow:** A live status signal, not a category label ("Now onboarding X in Y", "New: Z") with a pulsing dot — never "Welcome to Our Product".
+*   **H1:** An outcome phrase a customer would say, under 10 words. Name the result, never the mechanism. One accent-colored word maximum.
+*   **Lede:** One sentence: who it is for + what it does + the human guarantee. Cap ~25 words, `text-lg`–`text-xl`, muted for header/body drop-off.
+*   **CTA + reassurance:** The single highest-intent action, ringed by friction removers (time, cost, commitment as a checks row) — never a rival button.
+*   **Proof strip:** Real and verifiable only. No proof yet? Show process proof ("Guided pilot · Human onboarding") instead of inventing results.
+
+---
+
+## 5. Layout Engineering
 *   **Viewport budget:** Eyebrow → H1 → lede → CTA → reassurance → visual/proof, in that order. Nothing else above the fold.
-*   **Centered vs split:** Centered (`max-w-4xl`, centered text) for story/ticker heroes with full-bleed elements below; split (`grid lg:grid-cols-2`) when the visual is a single product shot needing proximity to the copy.
-*   **Full-bleed elements:** Tickers and marquees break out of the container (`overflow-hidden` on section, full-width rows). Fade row edges with a monochrome mask, never a colored gradient wash.
-*   **Rhythm:** Hero top padding `pt-16 md:pt-24`, bottom `pb-16 md:pb-20`. Tighter than body sections — the hero is a poster, not a chapter.
+*   **Structure follows concept:** Let the winning combination dictate centered, split, or full-bleed — never default to split out of habit.
+*   **Full-bleed elements:** Break tickers and marquees out of the container (`overflow-hidden` section, full-width rows). Fade edges with a monochrome mask, never a colored gradient wash.
+*   **Rhythm:** Top `pt-16 md:pt-24`, bottom `pb-16 md:pb-20`. The hero is a poster, not a chapter.
 *   **Type scale:** H1 `text-5xl md:text-6xl font-bold tracking-tighter leading-[1.02]`; lede `text-lg md:text-xl`; labels `text-xs`/`text-sm`. No arbitrary sizes.
 
 ---
 
-## 4. Motion Spec
-*   **Marquee recipe:** Track `display:flex; width:max-content; animation: scroll Xs linear infinite`. Inside, exactly two identical groups (`flex shrink-0 gap-3 pr-3`, second `aria-hidden`); keyframes to `translateX(-50%)`. Mismatched gaps break the loop — keep gap == trailing padding.
-*   **Direction semantics:** Problem content and resolution content scroll opposite directions when both are present.
-*   **Restraint:** Maximum two concurrent animations per hero (e.g., ticker + pulse dot). Float animations stay within ±6px over 6s+.
-*   **Control:** Pause marquees on hover (`animation-play-state: paused`). Never autoplay sound. Never animate layout properties (width, height, top) — transform and opacity only.
+## 6. Motion Spec
+*   **Marquee recipe:** Track `display:flex; width:max-content; animation: scroll Xs linear infinite`; exactly two identical groups (`flex shrink-0 gap-3 pr-3`, second `aria-hidden`); keyframes to `translateX(-50%)`. Gap must equal trailing padding or the loop visibly jumps.
+*   **Direction semantics:** Opposing flows for opposing ideas (problem one way, resolution the other).
+*   **Restraint:** Max two concurrent animations (e.g., ticker + pulse). Floats stay within ±6px over 6s+. Transform and opacity only — never layout properties.
+*   **Control:** Pause on hover; never autoplay sound; reduced-motion kills everything (see below).
 
 ---
 
-## 5. Accessibility (non-negotiable)
-*   **Reduced motion:** Every animation gets `@media (prefers-reduced-motion: reduce) { animation: none; }`. The static first frame must communicate the full message alone.
-*   **Screen readers:** Duplicated marquee content is `aria-hidden="true"` with one `sr-only` summary of what the strip conveys. Decorative visuals are `aria-hidden`; status pills are plain text.
-*   **Targets & focus:** All hero controls meet 44px minimums. The CTA keeps the global `:focus-visible` ring. Color contrast: body copy on backgrounds must pass AA (muted text on white is the floor, not the ceiling).
-*   **Honesty:** Demos are labeled as samples/simulations. Metrics shown are measured or absent — never placeholders presented as results.
+## 7. Accessibility (non-negotiable)
+*   **Reduced motion:** `@media (prefers-reduced-motion: reduce) { animation: none; }` on every animation. The static first frame must carry the full message alone.
+*   **Screen readers:** Duplicated content `aria-hidden="true"` with one `sr-only` summary. Decorative visuals `aria-hidden`; status pills plain text.
+*   **Targets & focus:** 44px minimums, global `:focus-visible` ring kept, AA contrast floor on body copy.
+*   **Honesty:** Samples labeled as samples. Metrics measured or absent.
 
 ---
 
-## 6. Implementation Rules (Astro + Tailwind v4)
-1.  **Tokens only:** No hardcoded hex anywhere — visuals reuse the design-system palette (surface, bubble, accent, warning). Waveforms and decorative bars use token backgrounds with inline `style` restricted to geometry (heights, widths).
-2.  **Scoped motion CSS:** Marquee keyframes live in a `<style is:global>` block at the bottom of the page/section component, named per-component (e.g., `.ticker-track`) to avoid collisions.
-3.  **Class order:** Layout (`flex`, `grid`, `text-center`) → positioning → sizing (`max-w-`, `w-`) → typography (`text-`, `font-`, `tracking-`, `leading-`) → decorative (`rounded-`, `border-`, `bg-`, motion classes).
-4.  **Performance:** No web requests in the hero visual — pure CSS/SVG/DOM. Fonts load via the existing font package; never add a second family for the hero. Keep hero DOM under ~120 nodes.
-5.  **Reflow safety:** Ticker rows get fixed card widths (`w-60 sm:w-64 shrink-0`) so late font loads cannot shift the loop. Media-less heroes must not depend on JS to look complete.
+## 8. Implementation Rules (Astro + Tailwind v4)
+1.  **Tokens only:** No hardcoded hex — visuals reuse the design-system palette. Inline `style` restricted to geometry (bar heights, widths).
+2.  **Scoped motion CSS:** Keyframes in a `<style is:global>` block at the component bottom, named per-component.
+3.  **Class order:** Layout → positioning → sizing → typography → decorative/motion.
+4.  **Performance:** Pure CSS/SVG/DOM visuals, existing font package only, hero DOM under ~120 nodes, complete render with JS disabled.
 
 ---
 
-## 7. Ship Checklist
-1.  Headline passes the 3-second test (product, audience, action identifiable without scrolling).
-2.  Exactly one primary CTA; every link in the hero audited for competition.
-3.  Zero invented proof (grep names, stats, and hedging: `target`, `illustrative`, `sample` used as disclaimer).
-4.  `node --check` passes on emitted page scripts; `prefers-reduced-motion` and 360px-wide viewport manually verified.
-5.  Build is green and the hero renders complete with JS disabled.
+## 9. Ship Checklist
+1.  Concept documented as its six axis choices (enables deliberate iteration, not vibes).
+2.  Headline passes the 3-second blur test.
+3.  Exactly one primary CTA; novelty check run.
+4.  Zero invented proof (grep names, stats, and hedging).
+5.  `node --check` on emitted scripts; reduced-motion + 360px verified; build green.
