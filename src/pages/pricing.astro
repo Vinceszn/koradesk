@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import PricingTable from "../components/PricingTable.astro";
+import RoiCalculator from "../components/RoiCalculator.astro";
+---
+
+<BaseLayout title="Pricing" description="Starter ₦15,000, Growth ₦45,000, Partner ₦8,000 per client. 14-day free pilot, no card.">
+  <PageHero
+    eyebrow="Pricing"
+    title="Pay for conversations, not surprises"
+    lede="Naira prices. Annual billing is 10 months. No card for the 14-day pilot."
+  />
+  <section class="mx-auto max-w-6xl px-4 py-14">
+    <PricingTable />
+    <article class="mt-12 rounded-3xl border border-sand bg-white p-6">
+      <h2 class="text-2xl">What counts as a conversation?</h2>
+      <p class="mt-2">
+        A conversation is one customer, on one number, in a 24-hour window. Ten messages with the same person in one day count as one. A new day starts a new conversation. Unused conversations do not roll over. Extra packs can be added in the dashboard.
+      </p>
+    </article>
+    <div class="mt-12">
+      <RoiCalculator />
+    </div>
+  </section>
+</BaseLayout>

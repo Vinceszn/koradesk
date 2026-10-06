@@ -1,0 +1,7 @@
+{
+  "name": "frontend-design",
+  "version": "1.0.0",
+  "description": "Strict guidelines for production-grade UI design systems, layout alignment, typography, and micro-animations to prevent generic AI-generated aesthetics.",
+  "entry": "SKILL.md",
+  "tags": ["frontend", "ui-ux", "design-system", "tailwind", "typography"]
+}

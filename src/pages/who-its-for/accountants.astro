@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import { businessTypes, site } from "../../data/site";
+---
+
+<BaseLayout title="Accountant partner program" description="Partner plan for accountants and bookkeepers who manage many small clients.">
+  <PageHero
+    eyebrow="Partners"
+    title="See many shops. File when you are ready."
+    lede="₦8,000 per client / month, with volume pricing. You keep review rights."
+  />
+  <section class="mx-auto max-w-3xl px-4 py-14">
+    <div class="prose-kora">
+      <p>
+        Clients stay on WhatsApp. You get exports, a multi-client dashboard, and a named support person. Nothing is filed until you say so.
+      </p>
+    </div>
+    <form id="partner-form" class="mt-8 space-y-4" data-email={site.email} novalidate>
+      <label class="block">
+        <span class="text-sm font-semibold">Your name</span>
+        <input class="field mt-1.5" name="name" required />
+      </label>
+      <label class="block">
+        <span class="text-sm font-semibold">Practice name</span>
+        <input class="field mt-1.5" name="practice" required />
+      </label>
+      <label class="block">
+        <span class="text-sm font-semibold">How many small-business clients?</span>
+        <input class="field mt-1.5" name="clients" type="number" min="1" required />
+      </label>
+      <label class="block">
+        <span class="text-sm font-semibold">WhatsApp or email</span>
+        <input class="field mt-1.5" name="contact" required />
+      </label>
+      <label class="flex items-start gap-3 text-sm">
+        <input type="checkbox" name="consent" required class="mt-1 h-5 w-5" />
+        I agree to be contacted about the partner program.
+      </label>
+      <button class="btn btn-primary w-full" type="submit">Send partner enquiry</button>
+      <div id="partner-ok" class="hidden rounded-2xl border border-sand bg-surface p-4">
+        <p class="font-semibold text-leaf">Thanks — your enquiry is ready to send.</p>
+        <p class="mt-1 text-sm text-muted">Your email app should have opened with the enquiry addressed to us. We reply within one working day.</p>
+      </div>
+    </form>
+    <p class="mt-6 text-sm text-muted">Typical client types: {businessTypes.slice(0, 4).join(", ")}.</p>
+  </section>
+</BaseLayout>
+
+<script>
+  const partnerForm = document.getElementById("partner-form");
+  partnerForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem("kora-partner", JSON.stringify(data));
+    const email = partnerForm.getAttribute("data-email");
+    const subject = encodeURIComponent(`Partner enquiry from ${data.practice}`);
+    const body = encodeURIComponent(`Name: ${data.name}\nPractice: ${data.practice}\nSmall-business clients: ${data.clients}\nReach me on: ${data.contact}`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    document.getElementById("partner-ok")?.classList.remove("hidden");
+    form.reset();
+  });
+</script>

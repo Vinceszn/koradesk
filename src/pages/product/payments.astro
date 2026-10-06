@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import AgentStory from "../../components/AgentStory.astro";
+---
+
+<BaseLayout title="Payments agent" description="Match bank alerts and transfer screenshots to open invoices, with you approving refunds and write-offs.">
+  <PageHero
+    eyebrow="Payments"
+    title="Match the alert. Stop hunting screenshots."
+    lede="Bank transfers, USSD, and mobile money sit next to the invoice they belong to."
+  />
+  <AgentStory
+    slug="payments"
+    title="Polite reminders. Strict rules on money."
+    lede="When a GTBank alert or a transfer screenshot arrives, the agent tries to match amount, name, and open invoice."
+    story={[
+      "If the match is clear, the invoice is marked paid and the delivery note can move. If two invoices are close, it asks you.",
+      "Reminders go out in the language the customer used. They stay short and polite. You control the schedule.",
+      "Refunds and write-offs never send themselves. They sit with a reason until you tap approve.",
+    ]}
+    checkpoints={[
+      "Approve every refund and write-off.",
+      "See unmatched items in one list.",
+      "Export a payment log for your accountant.",
+    ]}
+  />
+</BaseLayout>

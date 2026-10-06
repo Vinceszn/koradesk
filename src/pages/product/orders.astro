@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import AgentStory from "../../components/AgentStory.astro";
+---
+
+<BaseLayout title="Orders agent" description="The Orders agent reads WhatsApp text, voice notes, and photos of lists, then drafts the order for you to confirm.">
+  <PageHero
+    eyebrow="Orders"
+    title="From voice note to confirmed order"
+    lede="Built for shops that take lists in Pidgin, English, and photos of exercise books."
+  />
+  <AgentStory
+    slug="orders"
+    title="It listens, then writes the order in your prices."
+    lede="A customer at Chinedu Stores sends a voice note at 6:40am. The agent transcribes it, maps items to your price list, and sends a confirmation before your first delivery leaves."
+    story={[
+      "Handwritten lists in photos are treated the same as typed messages. If a line is unclear, the agent asks one short question instead of guessing.",
+      "You set a naira limit. Orders under the limit go out after the customer says YES. Orders above it wait in your queue.",
+      "The same thread stays on WhatsApp. Your staff can still type; the agent just stops duplicating the notebook.",
+    ]}
+    checkpoints={[
+      "Approve orders above your value limit.",
+      "Edit the price list any time.",
+      "Undo a drafted order for 24 hours.",
+    ]}
+  />
+</BaseLayout>

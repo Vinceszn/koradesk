@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import PilotForm from "../../components/PilotForm.astro";
+---
+
+<BaseLayout title="Start a free pilot" description="Start a 14-day Kora Desk pilot. Name, business type, and WhatsApp number. No card.">
+  <PageHero
+    eyebrow="14-day pilot"
+    title="Two minutes. Then a person sets up your number."
+    lede="Guided on purpose. We do not drop you into an empty dashboard."
+  />
+  <section class="mx-auto max-w-lg px-4 py-14">
+    <PilotForm />
+  </section>
+</BaseLayout>

@@ -1,0 +1,282 @@
+@import "@fontsource-variable/inter/index.css";
+@import "tailwindcss";
+
+/*
+ * Kora Desk design system — "modern & minimal"
+ * ------------------------------------------------
+ * Near-white canvas, near-black ink, hairline borders, one deep emerald
+ * accent (with a brighter variant for use on dark surfaces).
+ */
+@theme {
+  --color-ink: #111413;
+  --color-paper: #ffffff;
+  --color-surface: #f5f5f3;
+  --color-sand: #e6e7e3;
+  --color-muted: #6d726f;
+  --color-accent: #07754f;
+  --color-accent-deep: #065c3f;
+  --color-accent-soft: #d3f3e4;
+  --color-accent-bright: #34d399;
+  --color-leaf: #067647;
+  --color-clay: #d92d20;
+  --color-warning: #b45309;
+  --color-faint: #9ca3a0;
+
+  /* chat surface + message bubbles (WhatsApp-inspired, token-mapped) */
+  --color-chat: #eae6de;
+  --color-bubble: #ffffff;
+  --color-bubble-out: #d8f3dc;
+  --color-tick: #34a3e0;
+  /* official WhatsApp brand green for the floating chat button */
+  --color-whatsapp: #25d366;
+
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgb(17 20 19 / 0.06), 0 24px 48px -24px rgb(17 20 19 / 0.22);
+
+  /* tighter shape language: inputs 8px · cards 16px */
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-accent);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* display headings get the high-contrast weight + tighter tracking */
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  border-radius: 0.5rem;
+  background: var(--color-ink);
+  color: white;
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Component classes — shared building blocks for every page           */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.625rem 1.375rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.1s ease-out;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-primary {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-accent);
+  }
+
+  .btn-accent {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .btn-accent:hover {
+    background: var(--color-accent-deep);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: var(--color-sand);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
+    background: var(--color-surface);
+  }
+
+  .btn-light {
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .btn-light:hover {
+    background: var(--color-surface);
+  }
+
+  .btn-on-dark {
+    background: transparent;
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.35);
+  }
+  .btn-on-dark:hover {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 2.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-sand);
+    background: #fff;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+  }
+  .field::placeholder {
+    color: var(--color-faint);
+  }
+
+  .panel {
+    background: #fff;
+    border: 1px solid var(--color-sand);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .link-accent {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    transition: color 0.15s ease;
+  }
+  .link-accent:hover {
+    color: var(--color-accent-deep);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Long-form content (blog, help, legal, agent stories)                */
+/* ------------------------------------------------------------------ */
+.prose-kora a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color 0.15s ease;
+}
+
+.prose-kora h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.prose-kora h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.prose-kora p,
+.prose-kora li {
+  margin-bottom: 0.85rem;
+  line-height: 1.75;
+}
+
+.prose-kora ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.prose-kora strong {
+  font-weight: 600;
+}
+
+/* FAQ disclosure affordance */
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item summary .faq-icon {
+  display: inline-block;
+  color: var(--color-accent);
+  transition: transform 0.2s ease;
+}
+.faq-item[open] summary .faq-icon {
+  transform: rotate(45deg);
+}

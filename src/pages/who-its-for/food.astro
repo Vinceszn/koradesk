@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout title="Food & catering" description="WhatsApp order and payment matching for food vendors, caterers, and frozen-food distributors.">
+  <PageHero
+    eyebrow="Food"
+    title="Catering lists and distributor invoices, without the night shift"
+    lede="We started with food distribution because the chats are dense and the money is time-sensitive."
+  />
+  <section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+    <p>
+      Frozen foods in Agege, pepper soup catering in Ikeja, market suppliers sending crates at dawn — the pattern is the same. The order is in WhatsApp. The proof of payment is a screenshot. Stock lives in someone’s head.
+    </p>
+    <ul>
+      <li>Bulk orders with delivery windows</li>
+      <li>Transfer matching before a driver leaves</li>
+      <li>Low-stock flags before a Saturday run</li>
+    </ul>
+    <p><a href="/customers">See Bello Frozen Foods</a> · <a href="/pilot">Start a pilot</a></p>
+  </section>
+</BaseLayout>

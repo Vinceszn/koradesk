@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+---
+
+<BaseLayout title="Privacy notice" description="How Kora Desk handles personal data.">
+  <article class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+    <h1 class="text-4xl md:text-5xl">Privacy notice</h1>
+    <p class="text-sm text-muted">Last updated 6 October 2026.</p>
+    <h2>Who we are</h2>
+    <p>{site.name}, {site.address}. Email {site.email}.</p>
+    <h2>What we collect</h2>
+    <p>Name, business name, WhatsApp number, business type, and the messages needed to run Orders, Payments, Stock, and Books on a connected number. Optional analytics cookies if you consent.</p>
+    <h2>Why</h2>
+    <p>To run the service you asked for, to contact you about a pilot, and — only with consent — to understand which pages help owners decide.</p>
+    <h2>Lawful bases</h2>
+    <p>Contract, consent, and legitimate interests such as keeping a security log. In Nigeria this notice aligns with the NDPA.</p>
+    <h2>Sharing</h2>
+    <p>WhatsApp/Meta as the channel, payment APIs you connect, hosting providers in Africa, and an accountant you invite. We do not sell lists.</p>
+    <h2>Your rights</h2>
+    <p>Access, correction, deletion, and a portable export. Write to {site.email}.</p>
+    <p><a class="link-accent" href="/legal/data-processing">Data processing terms</a></p>
+  </article>
+</BaseLayout>

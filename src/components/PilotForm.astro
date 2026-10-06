@@ -1,0 +1,92 @@
+---
+import { businessTypes, site } from "../data/site";
+---
+
+<form id="pilot-form" class="space-y-4" novalidate>
+  <label class="block">
+    <span class="text-sm font-semibold">Your name</span>
+    <input class="field mt-1.5" name="name" autocomplete="name" required />
+    <span class="error hidden text-sm text-clay">Please enter your name.</span>
+  </label>
+  <label class="block">
+    <span class="text-sm font-semibold">Business name</span>
+    <input class="field mt-1.5" name="business" required />
+    <span class="error hidden text-sm text-clay">Please enter the business name.</span>
+  </label>
+  <label class="block">
+    <span class="text-sm font-semibold">Business type</span>
+    <select class="field mt-1.5" name="type" required>
+      <option value="">Choose one</option>
+      {businessTypes.map((t) => <option value={t}>{t}</option>)}
+    </select>
+    <span class="error hidden text-sm text-clay">Please choose a type.</span>
+  </label>
+  <label class="block">
+    <span class="text-sm font-semibold">WhatsApp number</span>
+    <input
+      class="field mt-1.5"
+      name="whatsapp"
+      inputmode="tel"
+      autocomplete="tel"
+      placeholder="+234 801 234 5678"
+      required
+    />
+    <span class="error hidden text-sm text-clay">Use a number with country code, for example +234…</span>
+  </label>
+  <label class="flex items-start gap-3 text-sm">
+    <input class="mt-1 h-5 w-5" type="checkbox" name="consent" required />
+    <span>
+      I agree that Kora Desk may contact me on WhatsApp about this pilot, and I have read the
+      <a class="link-accent" href="/legal/privacy">privacy notice</a>.
+    </span>
+  </label>
+  <p class="consent-error hidden text-sm text-clay">Please tick the box to continue.</p>
+  <button type="submit" class="btn btn-primary w-full">
+    Start free 14-day pilot
+  </button>
+  <p class="text-sm text-muted">No card required. A person from {site.name} will confirm your number.</p>
+</form>
+
+<script>
+  const form = document.getElementById("pilot-form");
+  const phone = /^\+[1-9]\d{7,14}$/;
+
+  function showError(input, on) {
+    const err = input.parentElement?.querySelector(".error");
+    err?.classList.toggle("hidden", !on);
+    input.setAttribute("aria-invalid", String(on));
+  }
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = form.elements.namedItem("name");
+    const business = form.elements.namedItem("business");
+    const type = form.elements.namedItem("type");
+    const whatsapp = form.elements.namedItem("whatsapp");
+    const consent = form.elements.namedItem("consent");
+    const cleaned = String(data.get("whatsapp") || "").replace(/[\s-]/g, "");
+    let ok = true;
+    showError(name, !name.value.trim());
+    if (!name.value.trim()) ok = false;
+    showError(business, !business.value.trim());
+    if (!business.value.trim()) ok = false;
+    showError(type, !type.value);
+    if (!type.value) ok = false;
+    const phoneOk = phone.test(cleaned);
+    showError(whatsapp, !phoneOk);
+    if (!phoneOk) ok = false;
+    document.querySelector(".consent-error")?.classList.toggle("hidden", consent.checked);
+    if (!consent.checked) ok = false;
+    if (!ok) return;
+    const payload = {
+      name: name.value.trim(),
+      business: business.value.trim(),
+      type: type.value,
+      whatsapp: cleaned,
+      at: new Date().toISOString(),
+    };
+    localStorage.setItem("kora-pilot", JSON.stringify(payload));
+    window.location.href = "/pilot/thanks";
+  });
+</script>

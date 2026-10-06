@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout title="Templates" description="Printable price list, order form, and invoice templates for small shops.">
+  <PageHero eyebrow="Templates" title="Start on paper if you need to. Bring them into WhatsApp later." />
+  <section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+    <ul>
+      <li><a href="/templates/price-list.html">Price list</a> — item, unit, naira price, notes</li>
+      <li><a href="/templates/order-form.html">Order form</a> — customer, items, delivery window</li>
+      <li><a href="/templates/invoice.html">Invoice</a> — number, items, total, transfer details</li>
+    </ul>
+    <p>Open a template and use your browser’s print dialog. They are plain HTML so they load on a weak connection.</p>
+  </section>
+</BaseLayout>

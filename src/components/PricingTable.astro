@@ -1,0 +1,93 @@
+---
+import { naira, plans } from "../data/site";
+---
+
+<div>
+  <div class="mb-8 flex items-center justify-center gap-3 text-sm">
+    <span class="text-muted">Monthly</span>
+    <button
+      type="button"
+      id="billing-toggle"
+      class="relative h-11 w-16 rounded-full bg-ink"
+      role="switch"
+      aria-checked="false"
+      aria-label="Show annual prices"
+    >
+      <span id="billing-knob" class="absolute left-1 top-1.5 h-8 w-8 rounded-full bg-white transition-transform"></span>
+    </button>
+    <span class="text-muted">Annual <span class="font-semibold text-accent">(2 months free)</span></span>
+  </div>
+  <div class="grid gap-4 md:grid-cols-3">
+    {
+      plans.map((plan) => (
+        <article
+          class:list={[
+            "flex flex-col rounded-3xl border p-6",
+            plan.featured ? "border-ink bg-white shadow-soft" : "border-sand bg-white",
+          ]}
+        >
+          {plan.featured && (
+            <p class="mb-2 w-fit rounded-full bg-ink px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+              Most shops start here
+            </p>
+          )}
+          <h2 class="text-2xl">{plan.name}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">{plan.blurb}</p>
+          <p class="mt-5 text-4xl font-semibold tracking-tight">
+            <span data-price-monthly={plan.monthly} data-price-annual={plan.annual}>
+              {naira(plan.monthly)}
+            </span>
+            <span class="text-base font-normal text-muted">
+              {plan.perClient ? " / client / month" : " / month"}
+            </span>
+          </p>
+          <p class="price-note mt-1 text-sm text-muted">Billed monthly. Cancel any time.</p>
+          <ul class="mt-5 flex-1 space-y-2.5 border-t border-sand pt-5 text-sm">
+            {plan.includes.map((item) => (
+              <li class="flex gap-2.5">
+                <span class="font-semibold text-accent" aria-hidden="true">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={plan.id === "partner" ? "/who-its-for/accountants" : "/pilot"}
+            class:list={["mt-6 w-full", plan.featured ? "btn btn-primary" : "btn btn-ghost"]}
+          >
+            {plan.id === "partner" ? "Talk to partnerships" : "Start free pilot"}
+          </a>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById("billing-toggle");
+  const knob = document.getElementById("billing-knob");
+  const nodes = document.querySelectorAll("[data-price-monthly]");
+  const notes = document.querySelectorAll(".price-note");
+  let annual = false;
+
+  function format(n) {
+    return new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+      maximumFractionDigits: 0,
+    }).format(n);
+  }
+
+  toggle?.addEventListener("click", () => {
+    annual = !annual;
+    toggle.setAttribute("aria-checked", String(annual));
+    knob?.classList.toggle("translate-x-6", annual);
+    nodes.forEach((el) => {
+      const monthly = Number(el.dataset.priceMonthly);
+      const year = Number(el.dataset.priceAnnual);
+      el.textContent = annual ? format(Math.round(year / 12)) : format(monthly);
+    });
+    notes.forEach((n) => {
+      n.textContent = annual ? "Billed annually (10 months)." : "Billed monthly. Cancel any time.";
+    });
+  });
+</script>

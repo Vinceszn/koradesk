@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import AgentStory from "../../components/AgentStory.astro";
+---
+
+<BaseLayout title="Stock agent" description="Stock counts update from sales and supplier deliveries, with flags for low stock and odd variances.">
+  <PageHero
+    eyebrow="Stock"
+    title="The shelf and the book, closer together"
+    lede="Sales reduce counts. Deliveries add them. Odd gaps get a flag, not a silent guess."
+  />
+  <AgentStory
+    slug="stock"
+    title="Low stock before you run out on a Saturday."
+    lede="A frozen-food distributor can see which SKUs will not last the weekend, then approve a reorder draft."
+    story={[
+      "You start with a simple list: item, unit, quantity, reorder point. A photo of a stock sheet is enough to begin.",
+      "Variances above your threshold are called out in plain language: “Oil 25L is 12 units below expected after yesterday’s sales.”",
+      "Reorder drafts name a supplier if you have one on file. Nothing is sent until you approve.",
+    ]}
+    checkpoints={[
+      "Approve reorder drafts.",
+      "Set variance thresholds.",
+      "Count still belongs to your staff; the agent only tracks.",
+    ]}
+  />
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout title="Who it's for" description="Retail shops and food distributors first, then caterers, wholesalers, and accountants.">
+  <PageHero
+    eyebrow="Who it's for"
+    title="Built first for food distribution and retail"
+    lede="Those two verticals teach us fastest. Other shops are welcome; the stories below start there."
+  />
+  <section class="mx-auto grid max-w-6xl gap-4 px-4 py-14 md:grid-cols-2">
+    <a href="/who-its-for/retail" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99] md:p-8">
+      <p class="eyebrow">Focus</p>
+      <h2 class="mt-3 text-3xl">Retail &amp; shops</h2>
+      <p class="mt-2 text-muted">Provisions, pharmacies, boutiques — anywhere lists arrive in chat.</p>
+    </a>
+    <a href="/who-its-for/food" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99] md:p-8">
+      <p class="eyebrow">Focus</p>
+      <h2 class="mt-3 text-3xl">Food distribution &amp; catering</h2>
+      <p class="mt-2 text-muted">Frozen foods, market suppliers, caterers taking bulk orders on WhatsApp.</p>
+    </a>
+    <a href="/who-its-for/distributors" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99] md:p-8">
+      <h2 class="text-3xl">Wholesale distributors</h2>
+      <p class="mt-2 text-muted">Many small invoices, many transfer alerts.</p>
+    </a>
+    <a href="/who-its-for/accountants" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99] md:p-8">
+      <h2 class="text-3xl">Accountants</h2>
+      <p class="mt-2 text-muted">A partner program with a multi-client dashboard.</p>
+    </a>
+  </section>
+</BaseLayout>

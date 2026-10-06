@@ -1,0 +1,34 @@
+<div
+  id="cookie-banner"
+  class="fixed inset-x-0 bottom-16 z-40 mx-auto hidden max-w-md rounded-2xl border border-sand bg-paper p-5 shadow-soft md:bottom-6"
+  role="dialog"
+  aria-labelledby="cookie-title"
+>
+  <p id="cookie-title" class="font-semibold">Cookies</p>
+  <p class="mt-1 text-sm leading-relaxed text-muted">
+    We use a small analytics cookie only if you agree. The site works without it. See the
+    <a class="link-accent" href="/legal/cookies">cookie notice</a>.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button type="button" id="cookie-accept" class="btn btn-primary">
+      Accept analytics
+    </button>
+    <button type="button" id="cookie-reject" class="btn btn-ghost">
+      Essential only
+    </button>
+  </div>
+</div>
+
+<script>
+  const key = "kora-consent";
+  const banner = document.getElementById("cookie-banner");
+  if (!localStorage.getItem(key) && banner) banner.classList.remove("hidden");
+  document.getElementById("cookie-accept")?.addEventListener("click", () => {
+    localStorage.setItem(key, "analytics");
+    banner?.classList.add("hidden");
+  });
+  document.getElementById("cookie-reject")?.addEventListener("click", () => {
+    localStorage.setItem(key, "essential");
+    banner?.classList.add("hidden");
+  });
+</script>

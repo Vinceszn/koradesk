@@ -1,0 +1,29 @@
+---
+import { agents } from "../data/site";
+interface Props {
+  slug: string;
+  title: string;
+  lede: string;
+  story: string[];
+  checkpoints: string[];
+}
+const { slug, title, lede, story, checkpoints } = Astro.props;
+const agent = agents.find((a) => a.slug === slug);
+---
+
+<section class="mx-auto max-w-3xl px-4 py-12 prose-kora">
+  <p class="eyebrow">{agent?.name} agent</p>
+  <h2 class="mt-2 text-3xl">{title}</h2>
+  <p class="mt-3 text-muted">{lede}</p>
+  {story.map((p) => <p>{p}</p>)}
+  <h3>You stay in charge</h3>
+  <ul>
+    {checkpoints.map((c) => <li>{c}</li>)}
+  </ul>
+  <p>
+    Human checkpoint: {agent?.checkpoint}
+  </p>
+  <p>
+    <a href="/pilot" class="btn btn-primary">Start free pilot</a>
+  </p>
+</section>

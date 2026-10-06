@@ -1,0 +1,563 @@
+---
+const steps = [
+  {
+    title: "Voice note in",
+    caption: "A customer sends a voice note. The agent transcribes it instantly.",
+  },
+  {
+    title: "Order drafted",
+    caption: "Prices come from your list. The customer confirms on WhatsApp.",
+  },
+  {
+    title: "Invoice sent",
+    caption: "You still approve anything above your limit. Money never moves without you.",
+  },
+];
+
+const bars = Array.from({ length: 26 }, (_, i) => 6 + Math.round(12 * Math.abs(Math.sin(i * 1.35))));
+
+const lines = [
+  { item: "3 × 50kg rice", price: "₦168,000" },
+  { item: "2 × Indomie carton", price: "₦24,500" },
+  { item: "1 × 25L cooking oil", price: "₦41,000" },
+];
+const orderTotal = "₦233,500";
+---
+
+<section class="bg-surface" aria-labelledby="demo-heading">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 lg:grid-cols-2">
+    <div>
+      <p class="eyebrow">Sample conversation</p>
+      <h2 id="demo-heading" class="mt-3 text-3xl font-bold md:text-4xl">
+        A voice note becomes an order and an invoice.
+      </h2>
+      <p class="mt-3 text-lg text-muted">
+        A sample from a food distributor in Agege. Press play or tap a step — no sound, no autoplay.
+      </p>
+      <ol class="mt-6 space-y-2.5" id="demo-steps">
+        {
+          steps.map((step, i) => (
+            <li>
+              <button
+                type="button"
+                class="demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left transition-all duration-200 ease-out active:scale-[0.98] rounded-2xl border border-sand bg-white"
+                data-step={i}
+                aria-pressed={i === 0 ? "true" : "false"}
+              >
+                <span
+                  class="demo-num mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full bg-ink text-white"
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </span>
+                <span>
+                  <strong class="block text-base font-semibold text-ink">{step.title}</strong>
+                  <span class="text-sm text-muted">{step.caption}</span>
+                </span>
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <button type="button" id="demo-play" class="btn btn-primary disabled:opacity-50">Play full demo</button>
+        <button type="button" id="demo-reset" class="btn btn-ghost">Reset</button>
+        <p id="demo-status" class="w-full text-xs text-muted" aria-live="polite">Step 1 of 3</p>
+      </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-sm">
+      <div class="flex flex-col rounded-[2.5rem] bg-ink p-2 shadow-soft">
+        <div class="flex h-[640px] flex-col overflow-hidden rounded-[2rem] bg-chat">
+          <!-- device status bar -->
+          <div class="flex items-center justify-between px-6 pb-1 pt-3 text-xs font-semibold text-white" aria-hidden="true">
+            <span>9:41</span>
+            <span class="flex items-center gap-1.5">
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="0.5"/><rect x="4.5" y="5" width="3" height="7" rx="0.5"/><rect x="9" y="2.5" width="3" height="9.5" rx="0.5"/><rect x="13" y="0" width="3" height="12" rx="0.5" opacity="0.4"/></svg>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.5a10 10 0 0 1 13 0M4 7.2a6.4 6.4 0 0 1 8 0M6.6 9.8a2.8 2.8 0 0 1 2.8 0"/><circle cx="8" cy="11" r="0.9" fill="currentColor" stroke="none"/></svg>
+              <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="19" height="11" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2.5" y="2.5" width="13" height="7" rx="1.5" fill="currentColor"/><path d="M22 4v4a2 2 0 0 0 0-4Z" fill="currentColor" opacity="0.5"/></svg>
+            </span>
+          </div>
+          <!-- WhatsApp chat header -->
+          <div class="flex items-center gap-2 bg-accent px-2 py-2 text-white">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold" aria-hidden="true">CS</span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate text-sm font-semibold leading-tight">Chinedu Stores</span>
+              <span class="block text-xs leading-tight text-white/80" data-online>online</span>
+            </span>
+            <span class="flex items-center gap-4 pr-1" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg>
+            </span>
+          </div>
+          <!-- chat scroll area -->
+          <div id="demo-chat" class="flex-1 space-y-2 overflow-y-auto px-3 py-3" role="log" aria-live="polite" aria-label="Illustrative WhatsApp conversation">
+            <p class="mx-auto w-fit rounded-lg border border-sand bg-bubble px-3 py-1 text-xs text-muted">Today</p>
+            <p class="mx-auto w-fit rounded-lg border border-sand bg-bubble px-3 py-1 text-center text-xs leading-relaxed text-muted">
+              Messages are end-to-end encrypted. This is a simulated demo — no real money moves.
+            </p>
+            <div id="demo-msgs" class="space-y-2"></div>
+          </div>
+          <!-- quick replies -->
+          <div id="demo-chips" class="hidden flex-wrap gap-2 px-3 pb-2">
+            <button
+              type="button"
+              id="demo-chip-yes"
+              class="hidden min-h-11 items-center rounded-full border border-accent px-4 text-sm font-semibold text-accent transition-all duration-200 ease-out active:scale-[0.98]"
+            >
+              Reply YES
+            </button>
+            <button
+              type="button"
+              id="demo-chip-move"
+              class="hidden min-h-11 items-center rounded-full border border-sand bg-bubble px-4 text-sm font-semibold text-ink transition-all duration-200 ease-out active:scale-[0.98]"
+            >
+              Move delivery to 10–12
+            </button>
+          </div>
+          <!-- message input (decorative) -->
+          <div class="flex items-center gap-2 px-3 pb-4 pt-1" aria-hidden="true">
+            <div class="flex min-h-11 flex-1 items-center rounded-full bg-bubble px-4 text-sm text-muted">Message</div>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p class="mt-3 text-center text-xs text-muted">Sample chat on a mid-range Android · silent</p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  @keyframes demo-rise {
+    from { opacity: 0; transform: translateY(10px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .demo-enter { animation: demo-rise 0.28s ease-out; }
+  @keyframes demo-blink {
+    0%, 60%, 100% { opacity: 0.25; }
+    30% { opacity: 1; }
+  }
+  .demo-dot { animation: demo-blink 1.1s infinite ease-in-out; }
+  .demo-dot.d2 { animation-delay: 0.18s; }
+  .demo-dot.d3 { animation-delay: 0.36s; }
+  @media (prefers-reduced-motion: reduce) {
+    .demo-enter, .demo-dot { animation: none; }
+  }
+</style>
+
+<script define:vars={{ bars, lines, orderTotal }}>
+  const msgs = document.getElementById("demo-msgs");
+  const chat = document.getElementById("demo-chat");
+  const stepBtns = Array.from(document.querySelectorAll(".demo-step"));
+  const stepNums = Array.from(document.querySelectorAll(".demo-num"));
+  const playBtn = document.getElementById("demo-play");
+  const resetBtn = document.getElementById("demo-reset");
+  const statusEl = document.getElementById("demo-status");
+  const chipsEl = document.getElementById("demo-chips");
+  const chipYes = document.getElementById("demo-chip-yes");
+  const chipMove = document.getElementById("demo-chip-move");
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let runId = 0;
+  let timers = [];
+  let currentAct = 0;
+  let playing = false;
+  let moved = false;
+  let clockMin = 8 * 60 + 9;
+
+  function wait(ms) {
+    return new Promise((resolve) => {
+      if (reduced) { resolve(); return; }
+      const t = window.setTimeout(resolve, ms);
+      timers.push(t);
+    });
+  }
+
+  function cancelPending() {
+    runId += 1;
+    timers.forEach((t) => window.clearTimeout(t));
+    timers = [];
+    document.querySelectorAll('[data-playing="1"]').forEach((el) => {
+      const btn = el;
+      const tid = Number(btn.dataset.timer);
+      if (tid) window.clearInterval(tid);
+      btn.dataset.playing = "0";
+    });
+  }
+
+  function stamp() {
+    clockMin += 2;
+    const h = Math.floor(clockMin / 60);
+    const m = String(clockMin % 60).padStart(2, "0");
+    return `${h}:${m} AM`;
+  }
+
+  function scrollBottom() {
+    if (chat) chat.scrollTop = chat.scrollHeight;
+  }
+
+  function metaRow(time, tick) {
+    const row = document.createElement("div");
+    row.className = "mt-1 flex items-center justify-end gap-1 text-xs text-muted";
+    const t = document.createElement("span");
+    t.textContent = time;
+    row.appendChild(t);
+    if (tick) {
+      const s = document.createElement("span");
+      s.textContent = "✓";
+      s.setAttribute("aria-label", "sent");
+      row.appendChild(s);
+      tick.el = s;
+    }
+    return row;
+  }
+
+  function baseBubble(from, animate) {
+    const wrap = document.createElement("div");
+    wrap.className =
+      from === "us"
+        ? "ml-10 rounded-xl rounded-tr-sm bg-bubble-out px-3 py-2 text-sm leading-relaxed text-ink"
+        : "mr-10 rounded-xl rounded-tl-sm bg-bubble px-3 py-2 text-sm leading-relaxed text-ink";
+    if (animate && !reduced) wrap.classList.add("demo-enter");
+    return wrap;
+  }
+
+  function upgradeTicks(tick, id) {
+    if (!tick.el || id !== runId) return;
+    wait(700).then(() => {
+      if (id !== runId || !tick.el) return;
+      tick.el.textContent = "✓✓";
+      tick.el.setAttribute("aria-label", "delivered");
+      return wait(900);
+    }).then(() => {
+      if (id !== runId || !tick.el) return;
+      tick.el.classList.add("text-tick");
+      tick.el.setAttribute("aria-label", "read");
+    });
+  }
+
+  function addText(from, text, animate, withTicks) {
+    if (!msgs) return;
+    const b = baseBubble(from, animate);
+    const p = document.createElement("p");
+    p.textContent = text;
+    b.appendChild(p);
+    const tick = {};
+    b.appendChild(metaRow(stamp(), withTicks ? tick : null));
+    msgs.appendChild(b);
+    scrollBottom();
+    if (withTicks) upgradeTicks(tick, runId);
+  }
+
+  function addVoice(animate) {
+    if (!msgs) return;
+    const b = baseBubble("them", animate);
+    const row = document.createElement("div");
+    row.className = "flex items-center gap-2";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-white transition-all duration-200 ease-out active:scale-[0.98]";
+    btn.setAttribute("aria-label", "Play voice note, 12 seconds");
+    btn.dataset.voiceToggle = "0";
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+    const wave = document.createElement("div");
+    wave.className = "flex flex-1 items-center gap-[3px]";
+    wave.setAttribute("aria-hidden", "true");
+    wave.dataset.voiceBars = "1";
+    bars.forEach((h) => {
+      const bar = document.createElement("span");
+      bar.className = "w-[3px] shrink-0 rounded-full bg-sand";
+      bar.style.height = `${h}px`;
+      wave.appendChild(bar);
+    });
+    const dur = document.createElement("span");
+    dur.className = "shrink-0 text-xs text-muted";
+    dur.dataset.voiceTime = "1";
+    dur.textContent = "0:12";
+    row.append(btn, wave, dur);
+    b.appendChild(row);
+    const cap = document.createElement("p");
+    cap.className = "mt-1 text-xs text-muted";
+    cap.textContent = "Voice note · transcribed by the Orders agent";
+    b.appendChild(cap);
+    b.appendChild(metaRow(stamp(), null));
+    msgs.appendChild(b);
+    scrollBottom();
+  }
+
+  function addOrder(animate) {
+    if (!msgs) return;
+    const b = baseBubble("us", animate);
+    const head = document.createElement("p");
+    head.className = "text-sm font-bold tracking-tight text-ink";
+    head.textContent = "Order draft · Chinedu Stores";
+    b.appendChild(head);
+    const list = document.createElement("div");
+    list.className = "mt-2 space-y-1 border-t border-ink/10 pt-2";
+    lines.forEach((l) => {
+      const r = document.createElement("div");
+      r.className = "flex items-center justify-between gap-4 text-sm";
+      const k = document.createElement("span");
+      k.textContent = `• ${l.item}`;
+      const v = document.createElement("span");
+      v.className = "font-semibold";
+      v.textContent = l.price;
+      r.append(k, v);
+      list.appendChild(r);
+    });
+    b.appendChild(list);
+    const total = document.createElement("div");
+    total.className = "mt-2 flex items-center justify-between gap-4 border-t border-ink/10 pt-2 text-sm font-bold tracking-tight";
+    const tk = document.createElement("span");
+    tk.textContent = "Total";
+    const tv = document.createElement("span");
+    tv.textContent = orderTotal;
+    total.append(tk, tv);
+    b.appendChild(total);
+    const foot = document.createElement("p");
+    foot.className = "mt-2 text-sm";
+    foot.textContent = "Delivery tomorrow 7–9am. Reply YES to confirm.";
+    b.appendChild(foot);
+    const tick = {};
+    b.appendChild(metaRow(stamp(), tick));
+    msgs.appendChild(b);
+    scrollBottom();
+    upgradeTicks(tick, runId);
+  }
+
+  function addInvoice(animate) {
+    if (!msgs) return;
+    const doc = baseBubble("us", animate);
+    const row = document.createElement("div");
+    row.className = "flex items-center gap-3";
+    const icon = document.createElement("span");
+    icon.className = "flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-surface text-xs font-bold text-clay";
+    icon.textContent = "PDF";
+    const meta = document.createElement("span");
+    meta.className = "min-w-0 flex-1";
+    const name = document.createElement("span");
+    name.className = "block truncate text-sm font-semibold";
+    name.textContent = "Invoice KD-1842.pdf";
+    const sub = document.createElement("span");
+    sub.className = "block text-xs text-muted";
+    sub.textContent = "1 page · tax-ready";
+    meta.append(name, sub);
+    row.append(icon, meta);
+    doc.appendChild(row);
+    const tick = {};
+    doc.appendChild(metaRow(stamp(), tick));
+    msgs.appendChild(doc);
+    upgradeTicks(tick, runId);
+    const note = baseBubble("us", animate);
+    const p = document.createElement("p");
+    p.textContent = "Transfer to GTBank 0123456789, Kora Desk Merchants. I will match the alert and release the delivery note.";
+    note.appendChild(p);
+    const tick2 = {};
+    note.appendChild(metaRow(stamp(), tick2));
+    msgs.appendChild(note);
+    scrollBottom();
+    upgradeTicks(tick2, runId);
+  }
+
+  async function showTyping(id) {
+    if (!msgs || id !== runId) return;
+    const b = baseBubble("us", !reduced);
+    b.classList.add("mr-10", "w-fit");
+    const dots = document.createElement("span");
+    dots.className = "flex items-center gap-1 py-1";
+    dots.innerHTML = '<span class="demo-dot inline-block h-2 w-2 rounded-full bg-muted"></span><span class="demo-dot d2 inline-block h-2 w-2 rounded-full bg-muted"></span><span class="demo-dot d3 inline-block h-2 w-2 rounded-full bg-muted"></span>';
+    const sr = document.createElement("span");
+    sr.className = "sr-only";
+    sr.textContent = "Kora Desk is typing";
+    b.append(dots, sr);
+    msgs.appendChild(b);
+    scrollBottom();
+    await wait(1200);
+    if (id === runId && b.parentNode) b.remove();
+  }
+
+  function paintSteps() {
+    stepBtns.forEach((btn, i) => {
+      const on = i === currentAct;
+      btn.setAttribute("aria-pressed", String(on));
+      btn.classList.toggle("border-ink", on);
+      btn.classList.toggle("border-sand", !on);
+      const num = stepNums[i];
+      if (!num) return;
+      const done = i < currentAct;
+      num.textContent = done ? "✓" : String(i + 1);
+      num.classList.toggle("bg-accent", done || on);
+      num.classList.toggle("bg-ink", !done && !on);
+    });
+    if (statusEl) {
+      statusEl.textContent = playing
+        ? `Playing… step ${currentAct + 1} of 3`
+        : `Step ${currentAct + 1} of 3${currentAct === 1 ? " — try Reply YES in the phone" : ""}`;
+    }
+    const awaiting = currentAct === 1;
+    chipsEl?.classList.toggle("hidden", !awaiting);
+    chipsEl?.classList.toggle("flex", awaiting);
+    chipYes?.classList.toggle("hidden", !awaiting);
+    chipYes?.classList.toggle("inline-flex", awaiting);
+    const showMove = awaiting && !moved;
+    chipMove?.classList.toggle("hidden", !showMove);
+    chipMove?.classList.toggle("inline-flex", showMove);
+  }
+
+  function clearChat() {
+    if (msgs) msgs.innerHTML = "";
+    clockMin = 8 * 60 + 9;
+    moved = false;
+  }
+
+  async function jumpTo(i) {
+    cancelPending();
+    const id = runId;
+    clearChat();
+    if (i === 0) {
+      currentAct = 0;
+      addVoice(false);
+      paintSteps();
+      return;
+    }
+    currentAct = i;
+    addVoice(false);
+    if (id !== runId) return;
+    addOrder(false);
+    if (i === 2) {
+      addText("them", "YES", false, false);
+      addInvoice(false);
+    }
+    paintSteps();
+  }
+
+  async function playAll() {
+    if (playing) return;
+    playing = true;
+    if (playBtn) playBtn.setAttribute("disabled", "true");
+    cancelPending();
+    clearChat();
+    currentAct = 0;
+    paintSteps();
+    addVoice(true);
+    await wait(1600);
+    currentAct = 1;
+    paintSteps();
+    await showTyping(runId);
+    addOrder(true);
+    await wait(2200);
+    if (playing) {
+      currentAct = 2;
+      paintSteps();
+      addText("them", "YES", true, false);
+      await wait(600);
+      await showTyping(runId);
+      addInvoice(true);
+    }
+    paintSteps();
+    playing = false;
+    if (playBtn) playBtn.removeAttribute("disabled");
+  }
+
+  stepBtns.forEach((btn, i) => {
+    btn.addEventListener("click", () => {
+      if (playing) return;
+      jumpTo(i);
+    });
+  });
+
+  playBtn?.addEventListener("click", playAll);
+
+  resetBtn?.addEventListener("click", () => {
+    if (playing) return;
+    cancelPending();
+    clearChat();
+    currentAct = 0;
+    addVoice(false);
+    paintSteps();
+    scrollBottom();
+  });
+
+  chipYes?.addEventListener("click", () => {
+    if (playing || currentAct !== 1) return;
+    cancelPending();
+    const id = runId;
+    currentAct = 2;
+    addText("them", "YES", true, false);
+    showTyping(id).then(() => {
+      if (id !== runId) return;
+      addInvoice(true);
+      paintSteps();
+    });
+    paintSteps();
+  });
+
+  chipMove?.addEventListener("click", () => {
+    if (playing || currentAct !== 1 || moved) return;
+    moved = true;
+    addText("them", "Can you move delivery to 10–12?", true, false);
+    const id = runId;
+    showTyping(id).then(() => {
+      if (id !== runId) return;
+      addText("us", "Done — delivery moved to 10–12am. Reply YES to confirm.", true, true);
+      paintSteps();
+    });
+    paintSteps();
+  });
+
+  chat?.addEventListener("click", (e) => {
+    const target = e.target;
+    const btn = target.closest("[data-voice-toggle]");
+    if (!btn || reduced) return;
+    const bubble = btn.closest("div.ml-10, div.mr-10") ?? btn.parentElement?.parentElement;
+    if (!bubble) return;
+    const barEls = Array.from(bubble.querySelectorAll("[data-voice-bars] span"));
+    const timeEl = bubble.querySelector("[data-voice-time]");
+    const total = barEls.length || bars.length;
+
+    if (btn.dataset.playing === "1") {
+      btn.dataset.playing = "0";
+      const tid = Number(btn.dataset.timer);
+      if (tid) window.clearInterval(tid);
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      btn.setAttribute("aria-label", "Play voice note, 12 seconds");
+      return;
+    }
+    btn.dataset.playing = "1";
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+    btn.setAttribute("aria-label", "Pause voice note");
+    let n = Number(btn.dataset.progress || "0");
+    const timer = window.setInterval(() => {
+      n += 1;
+      btn.dataset.progress = String(n);
+      barEls.forEach((bar, bi) => {
+        bar.classList.toggle("bg-accent", bi < n);
+        bar.classList.toggle("bg-sand", bi >= n);
+      });
+      const secs = Math.min(12, Math.round((n / total) * 12));
+      if (timeEl) timeEl.textContent = `0:${String(secs).padStart(2, "0")}`;
+      if (n >= total) {
+        window.clearInterval(timer);
+        btn.dataset.playing = "0";
+        btn.dataset.progress = "0";
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+        btn.setAttribute("aria-label", "Replay voice note, 12 seconds");
+        window.setTimeout(() => {
+          barEls.forEach((bar) => {
+            bar.classList.remove("bg-accent");
+            bar.classList.add("bg-sand");
+          });
+          if (timeEl) timeEl.textContent = "0:12";
+        }, 900);
+      }
+    }, 450);
+    btn.dataset.timer = String(timer);
+  });
+
+  currentAct = 0;
+  addVoice(false);
+  paintSteps();
+</script>

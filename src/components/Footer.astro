@@ -1,0 +1,57 @@
+---
+import { site, waLink } from "../data/site";
+---
+
+<footer class="mt-20 border-t border-sand bg-paper">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
+    <div>
+      <p class="text-lg font-semibold tracking-tight">{site.name}</p>
+      <p class="mt-2 text-sm leading-relaxed text-muted">
+        A team of assistants on WhatsApp. You approve anything that moves money.
+      </p>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-muted">Product</p>
+      <ul class="mt-3">
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/product">The four agents</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/pricing">Pricing</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/trust">Trust &amp; security</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/who-its-for/accountants">Partner program</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-muted">Resources</p>
+      <ul class="mt-3">
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/resources/help">Help centre</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/resources/blog">Blog</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/resources/templates">Templates</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/about">About</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/contact">Contact</a></li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="/demo">Book a demo</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-widest text-muted">Talk to us</p>
+      <ul class="mt-3">
+        <li>
+          <a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href={waLink("Hello, I have a question about Kora Desk.", "footer")}>
+            WhatsApp {site.whatsappDisplay}
+          </a>
+        </li>
+        <li><a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li class="flex min-h-11 items-center text-sm text-muted">{site.address}</li>
+        <li class="flex min-h-11 items-center text-sm text-muted">{site.hours}</li>
+        <li>
+          <a class="flex min-h-11 items-center text-sm text-muted no-underline transition-colors hover:text-ink" href="https://status.koradesk.com">Status page</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-1 border-t border-sand px-4 py-4 text-xs text-muted">
+    <a class="inline-flex min-h-11 items-center transition-colors hover:text-ink" href="/legal/privacy">Privacy</a>
+    <a class="inline-flex min-h-11 items-center transition-colors hover:text-ink" href="/legal/terms">Terms</a>
+    <a class="inline-flex min-h-11 items-center transition-colors hover:text-ink" href="/legal/data-processing">Data processing</a>
+    <a class="inline-flex min-h-11 items-center transition-colors hover:text-ink" href="/legal/cookies">Cookie notice</a>
+    <span>© {new Date().getFullYear()} {site.name}</span>
+  </div>
+</footer>

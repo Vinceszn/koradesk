@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Book a 15-minute demo" description="Book a short Kora Desk walkthrough. Times shown in West Africa Time.">
+  <PageHero
+    eyebrow="Demo"
+    title="Fifteen minutes, on your phone"
+    lede="Pick a WAT slot and send it to us on WhatsApp. We confirm within one working day."
+  />
+  <section class="mx-auto max-w-lg px-4 py-14">
+    <form id="demo-form" class="space-y-4" data-whatsapp={site.whatsappE164}>
+      <label class="block">
+        <span class="font-semibold">Name</span>
+        <input class="field mt-1.5" name="name" required />
+      </label>
+      <label class="block">
+        <span class="font-semibold">WhatsApp number</span>
+        <input class="field mt-1.5" name="whatsapp" required />
+      </label>
+      <label class="block">
+        <span class="font-semibold">Preferred time (WAT)</span>
+        <select class="field mt-1.5" name="slot" required>
+          <option>Tue 10:00</option>
+          <option>Tue 15:00</option>
+          <option>Wed 09:30</option>
+          <option>Thu 16:00</option>
+          <option>Fri 11:00</option>
+        </select>
+      </label>
+      <p class="text-sm text-muted">Times are West Africa Time. We will confirm the zone on the call.</p>
+      <button class="btn btn-primary" type="submit">Request this slot</button>
+      <div id="demo-ok" class="hidden rounded-2xl border border-sand bg-surface p-4">
+        <p class="font-semibold text-leaf">Slot noted. One tap sends it to us.</p>
+        <p class="mt-1 text-sm text-muted">Tap below to send your request on WhatsApp — that is what books it.</p>
+        <p class="mt-3">
+          <a id="demo-wa" class="btn btn-accent" href="#">Send request on WhatsApp</a>
+        </p>
+      </div>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  const demoForm = document.getElementById("demo-form");
+  demoForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem("kora-demo", JSON.stringify(data));
+    const number = demoForm.getAttribute("data-whatsapp");
+    const text = encodeURIComponent(`Hello, I'd like a 15-minute demo.\nName: ${data.name}\nWhatsApp: ${data.whatsapp}\nSlot: ${data.slot} WAT\n\n[ref:demo-form]`);
+    const link = document.getElementById("demo-wa");
+    if (link) link.setAttribute("href", `https://wa.me/${number}?text=${text}`);
+    document.getElementById("demo-ok")?.classList.remove("hidden");
+  });
+</script>

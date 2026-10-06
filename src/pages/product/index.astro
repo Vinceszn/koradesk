@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import { agents } from "../../data/site";
+---
+
+<BaseLayout title="Product" description="Orders, Payments, Stock, and Books agents that work on WhatsApp, with a human approving money moves.">
+  <PageHero
+    eyebrow="Product"
+    title="A small team of agents. You stay the manager."
+    lede="Each agent has one job. None of them send money without your approval."
+  />
+  <section class="mx-auto max-w-6xl px-4 py-14">
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        agents.map((agent) => (
+          <article class="rounded-3xl border border-sand bg-white p-6 transition-colors hover:border-ink">
+            <h2 class="text-2xl">{agent.name}</h2>
+            <p class="mt-3 text-muted">{agent.job}</p>
+            <p class="mt-3 text-sm text-muted">{agent.checkpoint}</p>
+            <a class="mt-4 inline-flex min-h-12 items-center text-sm font-semibold text-accent" href={agent.href}>
+              How {agent.name} works
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

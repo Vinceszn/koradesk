@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Blog" description="Practical writing on invoicing, stock, and WhatsApp-based operations for small businesses.">
+  <PageHero eyebrow="Blog" title="Useful pages, not launch noise" />
+  <section class="mx-auto max-w-3xl px-4 py-14 space-y-6">
+    {
+      posts.map((post) => (
+        <article class="border-b border-sand pb-6">
+          <p class="text-sm text-muted">
+            {post.data.pubDate.toLocaleDateString("en-NG", { day: "numeric", month: "long", year: "numeric" })} · {post.data.minutes} min
+          </p>
+          <h2 class="text-2xl">
+            <a class="inline-flex min-h-11 items-center text-ink no-underline transition-colors hover:text-accent" href={`/resources/blog/${post.id}`}>
+              {post.data.title}
+            </a>
+          </h2>
+          <p class="text-muted">{post.data.description}</p>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

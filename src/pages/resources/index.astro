@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+---
+
+<BaseLayout title="Resources" description="Help centre, blog, and downloadable templates for orders, price lists, and invoices.">
+  <PageHero eyebrow="Resources" title="Guides you can use even before you sign up" />
+  <section class="mx-auto grid max-w-6xl gap-4 px-4 py-14 md:grid-cols-3">
+    <a href="/resources/help" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99]">
+      <h2 class="text-2xl">Help centre</h2>
+      <p class="mt-2 text-muted">Short answers on pilots, numbers, and approvals.</p>
+    </a>
+    <a href="/resources/blog" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99]">
+      <h2 class="text-2xl">Blog</h2>
+      <p class="mt-2 text-muted">Invoicing, stock, and managing customer chats.</p>
+    </a>
+    <a href="/resources/templates" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:border-ink active:scale-[0.99]">
+      <h2 class="text-2xl">Templates</h2>
+      <p class="mt-2 text-muted">Price list, order form, and invoice you can print.</p>
+    </a>
+  </section>
+</BaseLayout>

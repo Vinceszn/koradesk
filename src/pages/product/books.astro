@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import AgentStory from "../../components/AgentStory.astro";
+---
+
+<BaseLayout title="Books agent" description="Daily sales summaries, simple P&L, and tax-ready exports, with accountant review before filing.">
+  <PageHero
+    eyebrow="Books"
+    title="A daily summary you can actually read"
+    lede="Not a full accounting suite. A clean trail from WhatsApp sales to an export your accountant can file from."
+  />
+  <AgentStory
+    slug="books"
+    title="You run the shop. Your accountant still files."
+    lede="Each evening you get sales, payments, outstanding invoices, and a simple profit sketch."
+    story={[
+      "Exports are CSV and PDF. They use the same invoice numbers the customer saw on WhatsApp.",
+      "Partners on the accountant plan can view many clients without logging into each shop’s WhatsApp.",
+      "Nothing is marked filed until a person — you or your accountant — says so.",
+    ]}
+    checkpoints={[
+      "Accountant review before filing.",
+      "You choose who can see the books.",
+      "Retention limits follow your privacy settings.",
+    ]}
+  />
+</BaseLayout>

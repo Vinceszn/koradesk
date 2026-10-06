@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site, waLink } from "../data/site";
+---
+
+<BaseLayout title="Contact" description="Talk to Kora Desk on WhatsApp, book a 15-minute demo, or email the team.">
+  <PageHero eyebrow="Contact" title="A person will answer during business hours" lede={site.hours} />
+  <section class="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:grid-cols-2">
+    <div class="space-y-3">
+      <p><a class="link-accent" href={waLink("Hello, I would like to speak with the team.", "contact")}>WhatsApp {site.whatsappDisplay}</a></p>
+      <p><a class="link-accent" href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p>{site.address}</p>
+      <p>
+        Live chat on this site is a simple WhatsApp handoff during {site.hours}. Outside those hours, leave a message on the form.
+      </p>
+    </div>
+    <form id="contact-form" class="space-y-4" data-email={site.email} data-whatsapp={site.whatsappE164}>
+      <label class="block">
+        <span class="font-semibold">Name</span>
+        <input class="field mt-1.5" name="name" required />
+      </label>
+      <label class="block">
+        <span class="font-semibold">Email or WhatsApp</span>
+        <input class="field mt-1.5" name="reach" required />
+      </label>
+      <label class="block">
+        <span class="font-semibold">Message</span>
+        <textarea class="field mt-1.5 min-h-32" name="message" required></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">Send</button>
+      <div id="contact-ok" class="hidden rounded-2xl border border-sand bg-surface p-4">
+        <p class="font-semibold text-leaf">Thanks — your message is ready to send.</p>
+        <p class="mt-1 text-sm text-muted">Your email app should have opened with the message addressed to us. Nothing opened? Reach us directly:</p>
+        <p class="mt-3 flex flex-wrap gap-3">
+          <a id="contact-wa" class="btn btn-accent" href={waLink("Hello, I sent a message from the website contact form.", "contact")}>Send on WhatsApp instead</a>
+        </p>
+      </div>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  const contactForm = document.getElementById("contact-form");
+  contactForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem("kora-contact", JSON.stringify(data));
+    const email = contactForm.getAttribute("data-email");
+    const subject = encodeURIComponent(`Website message from ${data.name}`);
+    const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.reach})`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    document.getElementById("contact-ok")?.classList.remove("hidden");
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="About" description="Kora Desk builds WhatsApp back-office agents for small businesses in Africa, starting in Lagos.">
+  <PageHero
+    eyebrow="About"
+    title="A reliable colleague, not a glowing robot"
+    lede={`We are starting in ${site.founderCity}, with food distribution and retail.`}
+  />
+  <section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+    <p>
+      Owners are overloaded, not under-digitized. Most already pay for apps. They lack time. Kora Desk sits in WhatsApp, does the copying, and waits when money is involved.
+    </p>
+    <p>
+      We are building in Lagos for shops like the ones on our street — provisions stores, frozen-food distributors, and the accountants who keep their books. Every pilot shop gets a named person, not a ticket queue.
+    </p>
+    <p><a class="link-accent" href="/contact">Contact</a> · <a class="link-accent" href="/trust">Trust</a></p>
+  </section>
+</BaseLayout>
