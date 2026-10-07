@@ -27,12 +27,13 @@ import { site, waLink } from "../../data/site";
 </BaseLayout>
 
 <script>
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const raw = localStorage.getItem("kora-pilot");
   const box = document.getElementById("summary");
   const link = document.getElementById("thanks-wa");
   if (box && raw) {
     const d = JSON.parse(raw);
-    box.innerHTML = `<p><strong>${d.name}</strong> · ${d.business}</p><p>${d.type}</p><p>${d.whatsapp}</p>`;
+    box.innerHTML = `<p><strong>${esc(d.name)}</strong> · ${esc(d.business)}</p><p>${esc(d.type)}</p><p>${esc(d.whatsapp)}</p>`;
     if (link) {
       const number = link.getAttribute("data-whatsapp");
       const text = encodeURIComponent(`Hello, I just requested a pilot.\nName: ${d.name}\nBusiness: ${d.business} (${d.type})\nWhatsApp: ${d.whatsapp}\n\n[ref:thanks]`);

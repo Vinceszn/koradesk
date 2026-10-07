@@ -9,7 +9,7 @@ const { items } = Astro.props;
   {
     items.map((item, i) => (
       <details class="faq-item border-b border-sand" open={i === 0}>
-        <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold transition-colors hover:text-accent">
+        <summary class="flex min-h-14 items-center justify-between gap-4 py-4 font-semibold list-none cursor-pointer transition-colors hover:text-accent">
           {item.q}
           <span class="faq-icon shrink-0 text-xl leading-none font-normal" aria-hidden="true">+</span>
         </summary>

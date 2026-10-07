@@ -1,0 +1,43 @@
+---
+interface Props {
+  slug: "orders" | "payments" | "stock" | "books";
+}
+const { slug } = Astro.props;
+
+const tiles: Record<string, string> = {
+  orders: "bg-accent/10",
+  payments: "bg-sun/15",
+  stock: "bg-lavender/15",
+  books: "bg-blush/15",
+};
+---
+
+<span
+  class:list={["flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-ink", tiles[slug]]}
+  aria-hidden="true"
+>
+  {slug === "orders" && (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1L3 20l1.1-4.3A8.5 8.5 0 1 1 21 11.5Z" />
+      <path d="M8.5 11.5h7M8.5 14.5h4" />
+    </svg>
+  )}
+  {slug === "payments" && (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+      <path d="M2.5 10h19M6 15h4" />
+    </svg>
+  )}
+  {slug === "stock" && (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2.5l8.5 4.75v9.5L12 21.5l-8.5-4.75v-9.5L12 2.5Z" />
+      <path d="M12 12l8.5-4.75M12 12L3.5 7.25M12 12v9.5" />
+    </svg>
+  )}
+  {slug === "books" && (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5 20v-6M11 20V6M17 20v-9" />
+      <path d="M3 20h18" />
+    </svg>
+  )}
+</span>

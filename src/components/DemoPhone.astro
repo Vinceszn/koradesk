@@ -24,8 +24,9 @@ const scenarios = [
     initials: "CS",
     status: "online",
     steps: [
-      { title: "Bank alert in", caption: "A transfer lands with no name attached. The agent reads the alert." },
-      { title: "Payment matched", caption: "Matched to the open invoice. Receipt sent — nothing left hunting." },
+      { title: "Gentle reminder", caption: "KD-1839 is 6 days overdue. The agent nudges first." },
+      { title: "Bank alert in", caption: "₦86,500 lands with no name attached. The agent reads the alert." },
+      { title: "Matched & receipted", caption: "Invoice closed, receipt sent, books updated." },
     ],
   },
   {
@@ -37,6 +38,7 @@ const scenarios = [
     steps: [
       { title: "Stock flag", caption: "Indomie drops to 4 cartons. The agent drafts a reorder." },
       { title: "You approve", caption: "One tap notifies the supplier. Counts update on delivery." },
+      { title: "Delivery landed", caption: "Stock back to 14, variance none. The loop closes." },
     ],
   },
   {
@@ -47,7 +49,8 @@ const scenarios = [
     status: "online",
     steps: [
       { title: "Day summary", caption: "Sales, orders, and unpaid invoices — every evening at 6pm." },
-      { title: "Accountant-ready", caption: "Simple P&L and tax-ready exports. Nothing filed without review." },
+      { title: "Export for review", caption: "Simple P&L and tax-ready exports. Nothing filed without review." },
+      { title: "Approved to file", caption: "Your accountant signs off inside the chat." },
     ],
   },
 ];
@@ -80,11 +83,12 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
           scenarios.map((s, i) => (
             <button
               type="button"
-              class="demo-scenario min-h-11 rounded-full border px-4 text-sm font-semibold transition-all duration-200 ease-out active:scale-[0.98]"
+              class="demo-scenario flex min-h-11 items-center gap-2 px-4 text-sm font-semibold rounded-full border transition-all duration-200 ease-out active:scale-[0.98]"
               class:list={i === 0 ? "border-ink bg-ink text-white" : "border-sand bg-white text-ink"}
               data-scenario={s.id}
               aria-pressed={i === 0 ? "true" : "false"}
             >
+              <span class:list={["h-2 w-2 rounded-full", s.id === "orders" ? "bg-accent" : s.id === "payments" ? "bg-sun" : s.id === "stock" ? "bg-lavender" : "bg-blush"]} aria-hidden="true"></span>
               {s.label}
             </button>
           ))
@@ -96,12 +100,12 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
             <li>
               <button
                 type="button"
-                class="demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left transition-all duration-200 ease-out active:scale-[0.98] rounded-2xl border border-sand bg-white"
+                class="demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left rounded-2xl border border-sand bg-white transition-all duration-200 ease-out active:scale-[0.98]"
                 data-step={i}
                 aria-pressed={i === 0 ? "true" : "false"}
               >
                 <span
-                  class="demo-num mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full bg-ink text-white"
+                  class="demo-num inline-flex mt-0.5 h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full bg-ink text-white"
                   aria-hidden="true"
                 >
                   {i + 1}
@@ -116,13 +120,17 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
         }
       </ol>
       <div class="mt-6 flex flex-wrap items-center gap-3">
-        <button type="button" id="demo-play" class="btn btn-primary disabled:opacity-50">Play this demo</button>
+        <button type="button" id="demo-play" class="btn btn-primary disabled:opacity-50">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Play this demo
+        </button>
         <button type="button" id="demo-reset" class="btn btn-ghost">Reset</button>
         <p id="demo-status" class="w-full text-xs text-muted" aria-live="polite">Orders · Step 1 of 3</p>
       </div>
     </div>
 
-    <div class="mx-auto w-full max-w-sm">
+    <div class="relative mx-auto w-full max-w-sm">
+      <div class="demo-dots absolute -inset-4 rounded-[3rem] opacity-70 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_100%)]" aria-hidden="true"></div>
       <div class="relative flex flex-col rounded-[3rem] border border-white/10 bg-ink px-2 pb-3 pt-2 shadow-soft">
         <span class="absolute -left-[3px] top-24 h-20 w-[3px] rounded-full bg-neutral-700" aria-hidden="true"></span>
         <span class="absolute -right-[3px] top-32 h-14 w-[3px] rounded-full bg-neutral-700" aria-hidden="true"></span>
@@ -161,21 +169,21 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
             <button
               type="button"
               id="demo-chip-yes"
-              class="hidden min-h-11 items-center rounded-full border border-accent px-4 text-sm font-semibold text-accent transition-all duration-200 ease-out active:scale-[0.98]"
+              class="hidden min-h-11 items-center px-4 text-sm font-semibold text-accent rounded-full border border-accent transition-all duration-200 ease-out active:scale-[0.98]"
             >
               Reply YES
             </button>
             <button
               type="button"
               id="demo-chip-move"
-              class="hidden min-h-11 items-center rounded-full border border-sand bg-bubble px-4 text-sm font-semibold text-ink transition-all duration-200 ease-out active:scale-[0.98]"
+              class="hidden min-h-11 items-center px-4 text-sm font-semibold text-ink rounded-full border border-sand bg-bubble transition-all duration-200 ease-out active:scale-[0.98]"
             >
               Move delivery to 10–12
             </button>
             <button
               type="button"
               id="demo-chip-approve"
-              class="hidden min-h-11 items-center rounded-full border border-accent bg-accent px-4 text-sm font-semibold text-white transition-all duration-200 ease-out active:scale-[0.98]"
+              class="hidden min-h-11 items-center px-4 text-sm font-semibold text-white rounded-full border border-accent bg-accent transition-all duration-200 ease-out active:scale-[0.98]"
             >
               Approve reorder
             </button>
@@ -208,6 +216,11 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
   .demo-dot.d3 { animation-delay: 0.36s; }
   @media (prefers-reduced-motion: reduce) {
     .demo-enter, .demo-dot { animation: none; }
+  }
+
+  .demo-dots {
+    background-image: radial-gradient(var(--color-sand) 1.2px, transparent 1.2px);
+    background-size: 1.25rem 1.25rem;
   }
 </style>
 
@@ -440,7 +453,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     b.appendChild(label);
     const p = document.createElement("p");
     p.className = "mt-1";
-    p.textContent = "₦168,000 credited to 0123456789 KD-MERCHANTS. No sender name attached.";
+    p.textContent = "₦86,500 credited to 0123456789 KD-MERCHANTS. No sender name attached.";
     b.appendChild(p);
     b.appendChild(metaRow(stamp(), null));
     msgs.appendChild(b);
@@ -448,7 +461,24 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
   }
 
   function addMatched(animate) {
-    addText("us", "Matched: ₦168,000 → Invoice KD-1842 (Chinedu Stores). Receipt sent — nothing left unmatched tonight.", animate, true);
+    addText("us", "Matched: ₦86,500 → Invoice KD-1839 (Chinedu Stores). Receipt sent, books updated.", animate, true);
+  }
+
+  function addReminder(animate) {
+    addText("us", "Reminder sent: KD-1839 · ₦86,500 · 6 days overdue. Polite and firm.", animate, true);
+  }
+
+  function addDelivery(animate) {
+    addText("us", "Delivery landed: 10 cartons Indomie received. Stock now 14 — variance none.", animate, true);
+  }
+
+  function addFiling(animate) {
+    addText("them", "Reviewed the March books. Clean — file when ready.", animate, false);
+    addText("us", "Marked ready-to-file. Nothing left pending on my side.", animate, true);
+  }
+
+  function addRipple(animate) {
+    addText("us", "Stock updated: rice -3 bags, Indomie -2 cartons.", animate, true);
   }
 
   function addStockCard(animate) {
@@ -500,7 +530,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     [
       ["Sales", "₦1,240,000"],
       ["Orders", "34 confirmed"],
-      ["Unpaid", "2 invoices · ₦86,500"],
+      ["Unpaid", "2 invoices · ₦154,000"],
     ].forEach(([k, v]) => {
       const r = document.createElement("div");
       r.className = "flex items-center justify-between gap-4";
@@ -581,15 +611,20 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
       const li = document.createElement("li");
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left transition-all duration-200 ease-out active:scale-[0.98] rounded-2xl border bg-white";
+      btn.className = "demo-step flex min-h-11 w-full items-start gap-3 px-4 py-3 text-left rounded-2xl border bg-white transition-all duration-200 ease-out active:scale-[0.98]";
       btn.classList.add(i === currentAct ? "border-ink" : "border-sand");
+      btn.classList.toggle("shadow-soft", i === currentAct);
       btn.dataset.step = String(i);
       btn.setAttribute("aria-pressed", String(i === currentAct));
       const num = document.createElement("span");
-      num.className = "mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full text-white";
+      num.className = "inline-flex mt-0.5 h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full text-white";
       num.classList.add(i < currentAct ? "bg-accent" : "bg-ink");
       num.setAttribute("aria-hidden", "true");
-      num.textContent = i < currentAct ? "✓" : String(i + 1);
+      if (i < currentAct) {
+        num.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5"/></svg>';
+      } else {
+        num.textContent = String(i + 1);
+      }
       const wrap = document.createElement("span");
       const title = document.createElement("strong");
       title.className = "block text-base font-semibold text-ink";
@@ -639,84 +674,101 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     approved = false;
   }
 
-  async function showScenario(sc, act, animate) {
-    const id = runId;
-    scenario = sc;
-    currentAct = act;
-    setContact(sc);
-    if (sc === "orders") {
+  async function ordersFinale(id, animate) {
+    if (!confirmed) {
       if (animate) {
-        if (act >= 1) addVoice(false);
-        if (act >= 2) {
-          addOrder(false);
-          if (confirmed) addText("them", "YES", false, false);
-        }
-        if (act === 0) addVoice(true);
-        if (act === 1) {
-          await showTyping(id);
-          if (id !== runId) return;
-          addOrder(true);
-        }
-        if (act >= 2) {
-          await wait(500);
-          if (id !== runId) return;
-          if (!confirmed) addText("them", "YES", true, false);
-          await showTyping(id);
-          if (id !== runId) return;
-          addInvoice(true);
-        }
+        await wait(500);
+        if (id !== runId) return false;
+        addText("them", "YES", true, false);
       } else {
-        addVoice(false);
-        if (act >= 1) addOrder(false);
-        if (act >= 2) {
-          addText("them", "YES", false, false);
-          addInvoice(false);
+        addText("them", "YES", false, false);
+      }
+    }
+    if (animate) {
+      await showTyping(id);
+      if (id !== runId) return false;
+    }
+    addInvoice(animate);
+    addRipple(animate);
+    return true;
+  }
+
+  async function stockApproval(id, animate) {
+    if (!approved) addText("them", "Approve reorder", animate, false);
+    if (animate) {
+      await showTyping(id);
+      if (id !== runId) return false;
+    }
+    addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", animate, true);
+    return true;
+  }
+
+  async function appendAct(sc, act, animate) {
+    const id = runId;
+    if (sc === "orders") {
+      if (act === 0) addVoice(animate);
+      if (act === 1) {
+        if (animate) {
+          await showTyping(id);
+          if (id !== runId) return;
         }
+        addOrder(animate);
+      }
+      if (act === 2) {
+        const ok = await ordersFinale(id, animate);
+        if (!ok) return;
       }
     }
     if (sc === "payments") {
-      if (act === 0) addAlert(animate);
-      if (act >= 1) {
+      if (act === 0) addReminder(animate);
+      if (act === 1) addAlert(animate);
+      if (act === 2) {
         if (animate) {
-          if (msgs && !msgs.children.length) addAlert(false);
           await showTyping(id);
           if (id !== runId) return;
-        } else {
-          addAlert(false);
         }
         addMatched(animate);
       }
     }
     if (sc === "stock") {
       if (act === 0) addStockCard(animate);
-      if (act >= 1) {
+      if (act === 1) {
+        const ok = await stockApproval(id, animate);
+        if (!ok) return;
+      }
+      if (act === 2) {
         if (animate) {
-          if (msgs && !msgs.children.length) addStockCard(false);
-          await wait(400);
+          await wait(600);
           if (id !== runId) return;
-          if (!approved) addText("them", "Approve reorder", true, false);
-          await showTyping(id);
-          if (id !== runId) return;
-          addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", true, true);
-        } else {
-          addStockCard(false);
-          addText("them", "Approve reorder", false, false);
-          addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", false, true);
         }
+        addDelivery(animate);
       }
     }
     if (sc === "books") {
       if (act === 0) addBooksCard(animate);
-      if (act >= 1) {
+      if (act === 1) {
         if (animate) {
-          if (msgs && !msgs.children.length) addBooksCard(false);
           await showTyping(id);
           if (id !== runId) return;
-        } else {
-          addBooksCard(false);
         }
         addText("us", "P&L and VAT summary exported for October. Nothing is filed until your accountant reviews.", animate, true);
       }
+      if (act === 2) {
+        if (animate) {
+          await wait(500);
+          if (id !== runId) return;
+        }
+        addFiling(animate);
+      }
+    }
+  }
+
+  async function renderUpTo(sc, act) {
+    scenario = sc;
+    currentAct = act;
+    setContact(sc);
+    for (let a = 0; a <= act; a += 1) {
+      await appendAct(sc, a, false);
     }
     paintTabs();
     paintSteps();
@@ -726,7 +778,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     if (playing || sc === scenario) return;
     cancelPending();
     clearChat();
-    showScenario(sc, 0, false);
+    renderUpTo(sc, 0);
     scrollBottom();
   }
 
@@ -734,7 +786,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     if (playing) return;
     cancelPending();
     clearChat();
-    showScenario(scenario, i, false);
+    renderUpTo(scenario, i);
     scrollBottom();
   }
 
@@ -744,12 +796,15 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     if (playBtn) playBtn.setAttribute("disabled", "true");
     cancelPending();
     clearChat();
+    setContact(scenario);
     const maxAct = stepsFor(scenario).length - 1;
     for (let a = 0; a <= maxAct; a += 1) {
-      clearChat();
-      await showScenario(scenario, a, true);
+      currentAct = a;
+      await appendAct(scenario, a, true);
       if (!playing) break;
-      await wait(a === 0 ? 1500 : 2000);
+      paintTabs();
+      paintSteps();
+      await wait(a === maxAct ? 800 : 1800);
       if (!playing) break;
     }
     playing = false;
@@ -775,7 +830,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     if (playing) return;
     cancelPending();
     clearChat();
-    showScenario(scenario, 0, false);
+    renderUpTo(scenario, 0);
     scrollBottom();
   });
 
@@ -786,9 +841,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     const id = runId;
     currentAct = 2;
     addText("them", "YES", true, false);
-    showTyping(id).then(() => {
-      if (id !== runId) return;
-      addInvoice(true);
+    ordersFinale(id, true).then(() => {
       paintTabs();
       paintSteps();
     });
@@ -818,9 +871,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     const id = runId;
     currentAct = 1;
     addText("them", "Approve reorder", true, false);
-    showTyping(id).then(() => {
-      if (id !== runId) return;
-      addText("us", "Approved — supplier notified, ETA Thursday. Counts update when stock lands.", true, true);
+    stockApproval(id, true).then(() => {
       paintTabs();
       paintSteps();
     });

@@ -1,5 +1,5 @@
 @import "@fontsource-variable/inter/index.css";
-@import "@fontsource-variable/space-grotesk/index.css";
+@import "@fontsource-variable/nunito/index.css";
 @import "tailwindcss";
 
 /*
@@ -9,19 +9,22 @@
  * accent (with a brighter variant for use on dark surfaces).
  */
 @theme {
-  --color-ink: #111413;
+  --color-ink: #0b1210;
   --color-paper: #ffffff;
   --color-surface: #f5f5f3;
   --color-sand: #e6e7e3;
   --color-muted: #6d726f;
-  --color-accent: #07754f;
-  --color-accent-deep: #065c3f;
+  --color-accent: #0f7a5b;
+  --color-accent-deep: #0a5a43;
   --color-accent-soft: #d3f3e4;
   --color-accent-bright: #34d399;
   --color-leaf: #067647;
   --color-clay: #d92d20;
   --color-warning: #b45309;
   --color-faint: #9ca3a0;
+  --color-sun: #f6b73c;
+  --color-blush: #ffa8bb;
+  --color-lavender: #a78bfa;
 
   /* chat surface + message bubbles (WhatsApp-inspired, token-mapped) */
   --color-chat: #eae6de;
@@ -35,7 +38,7 @@
     "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --font-display:
-    "Space Grotesk Variable", "Inter Variable", ui-sans-serif, system-ui,
+    "Nunito Variable", "Inter Variable", ui-sans-serif, system-ui,
     sans-serif;
 
   --shadow-soft: 0 1px 2px rgb(17 20 19 / 0.06), 0 24px 48px -24px rgb(17 20 19 / 0.22);
@@ -216,11 +219,8 @@ h1 {
     color: var(--color-faint);
   }
 
-  .panel {
-    background: #fff;
-    border: 1px solid var(--color-sand);
-    border-radius: 1rem;
-    padding: 1.5rem;
+  .eyebrow-bright {
+    color: var(--color-accent-bright);
   }
 
   .link-accent {
@@ -363,7 +363,4 @@ h1 {
   background-color: #141b18;
   border-color: var(--color-sand);
   color: var(--color-ink);
-}
-.dark .panel {
-  background-color: #141b18;
 }

@@ -1,6 +1,6 @@
 export const site = {
   name: "Kora Desk",
-  tagline: "Run your business from WhatsApp, without doing the paperwork.",
+  tagline: "Your shop, organized from WhatsApp.",
   description:
     "Kora Desk gives small businesses in Africa a team of AI agents that run their back office on WhatsApp: orders, payments, stock, and invoices, with a human approving anything that moves money.",
   url: "https://koradesk.com",
@@ -63,7 +63,7 @@ export const plans = [
     includes: [
       "Orders + Payments agents",
       "1 WhatsApp number",
-      "500 conversations / month",
+      "300 conversations / month",
       "14-day free pilot",
     ],
   },
@@ -77,7 +77,7 @@ export const plans = [
     includes: [
       "All four agents",
       "3 WhatsApp numbers",
-      "3,000 conversations / month",
+      "1,200 conversations / month",
       "Integrations and accountant sharing",
     ],
   },

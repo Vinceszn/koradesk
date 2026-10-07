@@ -17,8 +17,8 @@ const articles = (await getCollection("help")).sort((a, b) => a.data.title.local
       {
         articles.map((a) => (
           <li class="help-item rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:border-ink" data-text={`${a.data.title} ${a.data.description} ${a.data.category}`.toLowerCase()}>
-            <p class="text-sm font-semibold text-accent">{a.data.category}</p>
-            <a href={`/resources/help/${a.id}`} class="mt-1 block text-2xl text-ink transition-colors hover:text-accent">
+            <p class="eyebrow">{a.data.category}</p>
+            <a href={`/resources/help/${a.id}`} class="block mt-1 text-2xl text-ink transition-colors hover:text-accent">
               {a.data.title}
             </a>
             <p class="mt-1 text-muted">{a.data.description}</p>

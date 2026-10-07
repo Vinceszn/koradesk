@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import AgentIcon from "../components/AgentIcon.astro";
 import CheckIcon from "../components/CheckIcon.astro";
 import DemoPhone from "../components/DemoPhone.astro";
 import Faq from "../components/Faq.astro";
@@ -246,6 +247,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
                 i % 2 === 1 && "sm:mt-10",
               ]}
             >
+              <div class="mb-4"><AgentIcon slug={agent.slug} /></div>
               <h3 class="text-2xl">{agent.name}</h3>
               <p class="mt-2 text-muted">{agent.job}</p>
               <p class="mt-4 text-sm text-muted">{agent.checkpoint}</p>
@@ -315,7 +317,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <!-- Trust band -->
   <section class="bg-ink py-16 text-white">
     <div class="mx-auto max-w-6xl px-4">
-      <p class="text-sm font-semibold uppercase tracking-widest text-accent-bright">Trust</p>
+      <p class="eyebrow eyebrow-bright">Trust</p>
       <h2 class="mt-3 max-w-2xl text-3xl">You <span class="underline decoration-accent-bright decoration-[3px] underline-offset-[6px]">approve money moves</span>. Everything is logged. You can undo.</h2>
       <p class="mt-4 max-w-2xl text-sand">
         The agent never pays a supplier, never issues a refund, and never writes off a debt without you. Full audit trail. 24-hour undo window.
