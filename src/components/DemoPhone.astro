@@ -245,6 +245,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
   let timers = [];
   let scenario = "orders";
   let currentAct = 0;
+  let doneCount = 0;
   let playing = false;
   let moved = false;
   let confirmed = false;
@@ -618,9 +619,9 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
       btn.setAttribute("aria-pressed", String(i === currentAct));
       const num = document.createElement("span");
       num.className = "inline-flex mt-0.5 h-7 w-7 shrink-0 items-center justify-center text-xs font-bold rounded-full text-white";
-      num.classList.add(i < currentAct ? "bg-accent" : "bg-ink");
+      num.classList.add(i < doneCount ? "bg-accent" : "bg-ink");
       num.setAttribute("aria-hidden", "true");
-      if (i < currentAct) {
+      if (i < doneCount) {
         num.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 5"/></svg>';
       } else {
         num.textContent = String(i + 1);
@@ -766,6 +767,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
   async function renderUpTo(sc, act) {
     scenario = sc;
     currentAct = act;
+    doneCount = act + 1;
     setContact(sc);
     for (let a = 0; a <= act; a += 1) {
       await appendAct(sc, a, false);
@@ -800,6 +802,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     const maxAct = stepsFor(scenario).length - 1;
     for (let a = 0; a <= maxAct; a += 1) {
       currentAct = a;
+      doneCount = a;
       await appendAct(scenario, a, true);
       if (!playing) break;
       paintTabs();
@@ -809,6 +812,7 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     }
     playing = false;
     if (playBtn) playBtn.removeAttribute("disabled");
+    doneCount = maxAct + 1;
     paintTabs();
     paintSteps();
   }
@@ -840,8 +844,10 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     cancelPending();
     const id = runId;
     currentAct = 2;
+    doneCount = 2;
     addText("them", "YES", true, false);
     ordersFinale(id, true).then(() => {
+      doneCount = 3;
       paintTabs();
       paintSteps();
     });
@@ -870,8 +876,10 @@ const contactsMeta = scenarios.map((s) => ({ id: s.id, contact: s.contact, initi
     cancelPending();
     const id = runId;
     currentAct = 1;
+    doneCount = 1;
     addText("them", "Approve reorder", true, false);
     stockApproval(id, true).then(() => {
+      doneCount = 2;
       paintTabs();
       paintSteps();
     });
