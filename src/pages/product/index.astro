@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import AgentIcon from "../../components/AgentIcon.astro";
 import PageHero from "../../components/PageHero.astro";
 import { agents } from "../../data/site";
 ---
@@ -16,7 +15,7 @@ import { agents } from "../../data/site";
       {
         agents.map((agent) => (
           <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]">
-            <div class="mb-1"><AgentIcon slug={agent.slug} /></div>
+            <img src={`/brand/agent-${agent.slug}.png`} alt="" width="44" height="44" loading="lazy" class="mb-1 h-11 w-11" />
             <h2 class="mt-4 text-2xl">{agent.name}</h2>
             <p class="mt-3 text-muted">{agent.job}</p>
             <p class="mt-3 text-sm text-muted">{agent.checkpoint}</p>
