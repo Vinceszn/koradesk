@@ -1,377 +1,768 @@
 ---
-const demos = [
+const conversations = [
   {
     id: "orders",
     name: "Orders",
-    result: "Order drafted",
-    caption:
-      "A voice note becomes an itemised order. Check the draft before it goes out.",
-    incoming:
-      "Abeg, send 3 bags of rice and 2 cartons of noodles. Deliver tomorrow morning.",
-    label: "Customer voice note · transcript",
-    rows: [
-      ["Rice · 50kg × 3", "₦168,000"],
-      ["Noodles · carton × 2", "₦24,500"],
+    prompt: "Reply YES to confirm this sample order.",
+    replyPattern: "yes|confirm",
+    replyHint:
+      "Reply YES, or tap the suggested reply, to confirm this sample order.",
+    messages: [
+      {
+        from: "owner",
+        kind: "voice",
+        text: "Abeg, send 3 bags of rice and 2 cartons of noodles. Deliver tomorrow morning.",
+        forwarded: "Forwarded from Chinedu Stores",
+        time: "9:41",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "I heard 3 bags of 50kg rice and 2 cartons of noodles, for delivery tomorrow morning. Let me use your price list.",
+        time: "9:41",
+      },
+      {
+        from: "kora",
+        kind: "card",
+        title: "Order draft · Chinedu Stores",
+        rows: [
+          ["Rice · 50kg × 3", "₦168,000"],
+          ["Noodles · carton × 2", "₦24,500"],
+        ],
+        totalLabel: "Total",
+        total: "₦192,500",
+        text: "Shall I prepare the invoice? Nothing is confirmed until you say so.",
+        time: "9:42",
+      },
+      {
+        from: "owner",
+        kind: "text",
+        text: "YES, confirm the order.",
+        replyLabel: "YES, confirm order",
+        time: "9:42",
+      },
+      {
+        from: "kora",
+        kind: "document",
+        title: "Invoice KD-1840.pdf",
+        text: "Invoice prepared for ₦192,500, with delivery tomorrow morning. Your order record is updated.",
+        time: "9:42",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "That’s this one sorted. In this sample, no invoice or message is sent to a real customer.",
+        time: "9:42",
+      },
     ],
-    totalLabel: "Order total",
-    total: "₦192,500",
-    note: "Draft only · waiting for confirmation",
-    reply:
-      "Your order is drafted: ₦192,500. Please confirm the items and delivery time.",
-    next: "Confirm sample order",
-    final: "Sample order confirmed",
-    finalNote: "Invoice prepared · no real order was placed",
   },
   {
     id: "payments",
     name: "Payments",
-    result: "Payment matched",
-    caption:
-      "A bank alert is matched to an open invoice. The shop gets a clear record.",
-    incoming:
-      "I have sent the ₦86,500 for invoice KD-1839. Please confirm receipt.",
-    label: "Customer message",
-    rows: [
-      ["Open invoice", "KD-1839"],
-      ["Transfer received", "₦86,500"],
+    prompt: "",
+    replyPattern: "",
+    replyHint: "",
+    messages: [
+      {
+        from: "owner",
+        kind: "text",
+        text: "₦86,500 just landed. Can you check which invoice it belongs to?",
+        time: "10:03",
+      },
+      {
+        from: "owner",
+        kind: "alert",
+        title: "Forwarded bank alert",
+        text: "GTBank · Credit: ₦86,500\nReference: KD-1839",
+        time: "10:03",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "I’m checking the amount and reference against your open invoices.",
+        time: "10:03",
+      },
+      {
+        from: "kora",
+        kind: "card",
+        title: "Payment matched",
+        rows: [
+          ["Customer", "Chinedu Stores"],
+          ["Invoice", "KD-1839"],
+          ["Amount", "₦86,500"],
+        ],
+        totalLabel: "Invoice balance",
+        total: "₦0",
+        text: "The amount and reference match. This sample invoice is now marked paid.",
+        time: "10:04",
+      },
+      {
+        from: "kora",
+        kind: "document",
+        title: "Receipt KD-1839.pdf",
+        text: "Here’s the sample receipt. The payment is recorded in the books too. No real bank is connected to this demo.",
+        time: "10:04",
+      },
     ],
-    totalLabel: "Amount matched",
-    total: "₦86,500",
-    note: "Matching example · no bank connection",
-    reply:
-      "₦86,500 matched to invoice KD-1839. Receipt prepared and books updated.",
-    next: "View sample receipt",
-    final: "Receipt ready",
-    finalNote: "Invoice KD-1839 · marked paid in this demo",
   },
   {
     id: "stock",
     name: "Stock",
-    result: "Reorder drafted",
-    caption:
-      "Low stock becomes a suggested reorder. The supplier waits for your approval.",
-    incoming:
-      "We have only 4 cartons of noodles left. Can you check what we need to order?",
-    label: "Shop staff message",
-    rows: [
-      ["Noodles in stock", "4 cartons"],
-      ["Suggested reorder", "10 cartons"],
+    prompt: "Approve the sample reorder to continue.",
+    replyPattern: "yes|approve|confirm",
+    replyHint:
+      "Reply APPROVE, or tap the suggested reply, to continue this sample.",
+    messages: [
+      {
+        from: "owner",
+        kind: "text",
+        text: "How many cartons of noodles do we have left?",
+        time: "14:18",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "4 cartons. That’s below your stock limit. I’ve drafted a reorder for you to check.",
+        time: "14:18",
+      },
+      {
+        from: "kora",
+        kind: "card",
+        title: "Reorder draft",
+        rows: [
+          ["Current stock", "4 cartons"],
+          ["Suggested order", "10 cartons"],
+        ],
+        totalLabel: "After delivery",
+        total: "14 cartons",
+        text: "Approve this reorder? The supplier has not been contacted.",
+        time: "14:19",
+      },
+      {
+        from: "owner",
+        kind: "text",
+        text: "Approve the 10 cartons.",
+        replyLabel: "Approve 10 cartons",
+        time: "14:19",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "Sample reorder approved. In your shop, the supplier notification would follow this approval. No supplier is contacted here.",
+        time: "14:19",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "Stock stays at 4 until a delivery is recorded. Approving a reorder doesn’t change what’s on the shelf.",
+        time: "14:19",
+      },
     ],
-    totalLabel: "After delivery",
-    total: "14 cartons",
-    note: "Supplier has not been contacted",
-    reply:
-      "Noodles are below your stock limit. A reorder for 10 cartons is ready for your approval.",
-    next: "Approve sample reorder",
-    final: "Sample reorder approved",
-    finalNote: "Demo only · no supplier was contacted",
   },
   {
     id: "books",
     name: "Books",
-    result: "Day summarised",
-    caption:
-      "The day's orders and payments become a simple summary for you and your accountant.",
-    incoming:
-      "Shop is closed. Please send today's sales and show me what is still unpaid.",
-    label: "Shop owner message",
-    rows: [
-      ["Sales today", "₦286,500"],
-      ["Payments received", "₦200,000"],
+    prompt: "Ask for the sample report to continue.",
+    replyPattern: "yes|send|show|report|summary",
+    replyHint:
+      "Reply SEND REPORT, or tap the suggested reply, to see the sample export.",
+    messages: [
+      {
+        from: "owner",
+        kind: "text",
+        text: "Shop is closed. How did we do today?",
+        time: "18:02",
+      },
+      {
+        from: "kora",
+        kind: "card",
+        title: "Today at a glance",
+        rows: [
+          ["Sales", "₦286,500"],
+          ["Payments received", "₦200,000"],
+        ],
+        totalLabel: "Still unpaid",
+        total: "₦86,500",
+        text: "One invoice is still open. Want the report for your accountant?",
+        time: "18:02",
+      },
+      {
+        from: "owner",
+        kind: "text",
+        text: "Yes, send the report.",
+        replyLabel: "Send sample report",
+        time: "18:03",
+      },
+      {
+        from: "kora",
+        kind: "document",
+        title: "Daily summary · sample",
+        text: "Your sales, payments, and outstanding balance are ready for review. Your accountant checks the figures before any filing.",
+        time: "18:03",
+      },
+      {
+        from: "kora",
+        kind: "text",
+        text: "All done for today. This is an illustrative report; nothing is filed or sent from this demo.",
+        time: "18:03",
+      },
     ],
-    totalLabel: "Still unpaid",
-    total: "₦86,500",
-    note: "Illustrative figures · accountant reviews before filing",
-    reply:
-      "Your day summary is ready. ₦86,500 is still unpaid. Your accountant can review the books.",
-    next: "View sample summary",
-    final: "Summary ready for review",
-    finalNote: "Nothing is filed or sent from this demo",
   },
 ];
 ---
 
 <section
-  class="desk-demo"
-  aria-label="Interactive Kora Desk sample"
+  class="conversation-demo"
   data-desk-demo
-  data-stage="0"
+  aria-label="Interactive WhatsApp conversation demo"
 >
-  <div class="desk-topline">
-    <span class="desk-dot" aria-hidden="true"></span>
-    <span>Kora Desk</span>
-    <span class="desk-sample">Interactive sample</span>
-  </div>
-  <div class="desk-tabs" role="group" aria-label="Choose an agent">
-    {demos.map((demo, i) => (
+  <div
+    class="conversation-agents"
+    role="group"
+    aria-label="Choose an agent conversation"
+  >
+    {conversations.map((conversation, i) => (
       <button
         type="button"
-        data-agent={demo.id}
+        data-agent={conversation.id}
         aria-pressed={i === 0 ? "true" : "false"}
-        class="desk-tab"
       >
         <img
-          src={`/brand/agent-${demo.id}.png`}
+          src={`/brand/agent-${conversation.id}.png`}
           alt=""
-          width="28"
-          height="28"
+          width="30"
+          height="30"
         />
-        <span>{demo.name}</span>
+        <span>{conversation.name}</span>
       </button>
     ))}
   </div>
-  <div class="demo-story" role="group" aria-label="Choose a sample step">
-    <button type="button" data-demo-step="0" aria-pressed="true">
-      <span>1</span>Message
-    </button>
-    <button type="button" data-demo-step="1" aria-pressed="false">
-      <span>2</span>Draft
-    </button>
-    <button type="button" data-demo-step="2" aria-pressed="false">
-      <span>3</span>Result
-    </button>
-  </div>
-  <div class="desk-body">
-    <div class="desk-chat-label">
-      <span class="shop-avatar" aria-hidden="true">
-        CS
+  <div class="conversation-phone">
+    <div class="phone-status" aria-hidden="true">
+      <span>9:41</span>
+      <span class="phone-speaker"></span>
+      <span>LTE ▰</span>
+    </div>
+    <div class="conversation-header">
+      <span aria-hidden="true" class="chat-back">
+        ‹
       </span>
+      <img src="/brand/app-icon.png" width="36" height="36" alt="" />
       <div>
-        <strong>Chinedu Stores</strong>
-        <span>Illustrative WhatsApp conversation</span>
+        <strong>Kora Desk</strong>
+        <span data-presence>Orders agent · online</span>
       </div>
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.6"
-        aria-hidden="true"
-      >
-        <path d="M20 11.5a8.5 8.5 0 0 1-12 7.7L3 21l1.8-5A8.5 8.5 0 1 1 20 11.5Z" />
-      </svg>
-    </div>
-    <div class="desk-incoming">
-      <span data-incoming-label>{demos[0].label}</span>
-      <p data-incoming>{demos[0].incoming}</p>
-      <span class="message-time">9:41 AM</span>
-    </div>
-    <div class="desk-connector" aria-hidden="true" hidden>
-      <svg width="22" height="32" viewBox="0 0 22 32" fill="none">
-        <path
-          d="M11 1v26m-5-5 5 5 5-5"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span>Kora takes it from here</span>
-    </div>
-    <div class="desk-receipt" hidden>
-      <div class="receipt-heading">
-        <span class="receipt-agent" data-receipt-agent>
-          Orders agent
-        </span>
-        <span class="receipt-state" data-result>
-          {demos[0].result}
-        </span>
-      </div>
-      <div class="receipt-rows" data-receipt-rows>
-        {demos[0].rows.map((row) => (
-          <div>
-            <span>{row[0]}</span>
-            <strong>{row[1]}</strong>
-          </div>
-        ))}
-      </div>
-      <div class="receipt-total">
-        <span data-total-label>{demos[0].totalLabel}</span>
-        <strong data-total>{demos[0].total}</strong>
-      </div>
-      <p class="receipt-note" data-receipt-note>
-        {demos[0].note}
-      </p>
-    </div>
-    <p class="desk-reply" data-reply hidden></p>
-    <div class="demo-approved" data-approved hidden>
-      <svg
-        width="28"
-        height="28"
-        viewBox="0 0 28 28"
-        fill="none"
-        aria-hidden="true"
-      >
-        <circle
-          cx="14"
-          cy="14"
-          r="12"
-          stroke="currentColor"
-          stroke-width="1.6"
-        />
-        <path
-          d="m8 14 4 4 8-9"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <span>
-        Sample complete.
-        <br />
-        <strong>Your shop. Your say.</strong>
+      <span class="chat-header-mark" aria-hidden="true">
+        ⋮
       </span>
     </div>
-    <button type="button" class="desk-action" data-demo-next>
-      Draft this order
-      <span aria-hidden="true">↗</span>
-    </button>
-    <p class="desk-feedback" data-feedback role="status" aria-live="polite">
-      Start with a customer message. Tap to see what Kora prepares.
-    </p>
+    <div
+      class="conversation-viewport"
+      data-chat-viewport
+      tabindex="0"
+      aria-label="Sample chat history"
+    >
+      <p class="conversation-day">Today</p>
+      <p class="conversation-disclaimer">
+        Illustrative conversation. No real messages or money move.
+      </p>
+      <div
+        class="conversation-messages"
+        data-messages
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+        aria-label="Conversation between a shop owner and Kora Desk"
+      ></div>
+      <div class="typing-bubble" data-typing hidden aria-label="Kora is typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="conversation-reply-area">
+      <button type="button" class="suggested-reply" data-quick-reply hidden>
+        YES, confirm order
+      </button>
+      <form class="conversation-composer" data-reply-form>
+        <label class="conversation-input-label">
+          <span class="sr-only">Your sample reply</span>
+          <input
+            type="text"
+            data-reply-input
+            placeholder="Play the conversation to begin"
+            autocomplete="off"
+            disabled
+          />
+        </label>
+        <button type="submit" data-send aria-label="Send sample reply" disabled>
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="m3 3 19 9-19 9 3-8 10-1-10-1-3-8Z" />
+          </svg>
+        </button>
+      </form>
+    </div>
   </div>
-  <div class="desk-bottom">
-    <span>
-      <svg
-        width="15"
-        height="15"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.8"
-        aria-hidden="true"
-      >
-        <rect x="5" y="10" width="14" height="11" rx="2" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-      </svg>
-      You stay in control.
-    </span>
-    <button type="button" data-demo-reset>
-      Reset sample <span aria-hidden="true">↺</span>
+  <div class="conversation-playback">
+    <button type="button" class="btn btn-primary" data-play>
+      Play conversation <span aria-hidden="true">▶</span>
+    </button>
+    <button type="button" class="conversation-reset" data-demo-reset>
+      Replay <span aria-hidden="true">↺</span>
     </button>
   </div>
+  <div class="conversation-stepping">
+    <button type="button" data-previous disabled>
+      ← Previous message
+    </button>
+    <button type="button" data-next>
+      Next message →
+    </button>
+  </div>
+  <p
+    class="conversation-feedback"
+    data-feedback
+    role="status"
+    aria-live="polite"
+  >
+    Press play. Messages arrive one by one; you can reply when Kora asks.
+  </p>
+  <p class="conversation-footnote">
+    Silent demo · sample data · you control playback
+  </p>
   <script
     type="application/json"
     data-demo-data
-    set:html={JSON.stringify(demos)}
+    set:html={JSON.stringify(conversations)}
   />
+  <noscript>
+    <p>
+      Enable JavaScript to play the chat. A customer sends a voice note, Kora
+      drafts an order, and the owner confirms before an invoice is prepared.
+    </p>
+  </noscript>
 </section>
 <script>
-  document.querySelectorAll<HTMLElement>("[data-desk-demo]").forEach((root) => {
-    const data = JSON.parse(
-      root.querySelector("[data-demo-data]")!.textContent!,
-    );
-    let selected = data[0];
-    let stage = 0;
-    const starts: Record<string, string> = {
-      orders: "Draft this order",
-      payments: "Match this payment",
-      stock: "Draft a reorder",
-      books: "Summarise the day",
-    };
-    const next = root.querySelector<HTMLButtonElement>("[data-demo-next]")!;
-    const reply = root.querySelector<HTMLElement>("[data-reply]")!;
-    function setText(selector: string, text: string) {
-      root.querySelector(selector)!.textContent = text;
-    }
-    function render() {
-      const complete = stage === 2;
-      root.dataset.stage = String(stage);
-      root
-        .querySelectorAll<HTMLElement>(".desk-receipt,.desk-connector")
-        .forEach((el) => (el.hidden = stage === 0));
-      root.querySelector<HTMLElement>("[data-approved]")!.hidden = !complete;
-      root
-        .querySelectorAll<HTMLButtonElement>("[data-demo-step]")
-        .forEach((button) =>
-          button.setAttribute(
-            "aria-pressed",
-            String(Number(button.dataset.demoStep) === stage),
-          ),
+  type Message = {
+    from: string;
+    kind: string;
+    text: string;
+    time: string;
+    forwarded?: string;
+    title?: string;
+    rows?: string[][];
+    total?: string;
+    totalLabel?: string;
+    replyLabel?: string;
+  };
+  type Conversation = {
+    id: string;
+    name: string;
+    prompt: string;
+    replyPattern: string;
+    replyHint: string;
+    messages: Message[];
+  };
+  document
+    .querySelectorAll<HTMLElement>("[data-desk-demo]")
+    .forEach((root, instance) => {
+      const conversations: Conversation[] = JSON.parse(
+        root.querySelector("[data-demo-data]")!.textContent!,
+      );
+      const messages = root.querySelector<HTMLElement>("[data-messages]")!;
+      const viewport = root.querySelector<HTMLElement>("[data-chat-viewport]")!;
+      const typing = root.querySelector<HTMLElement>("[data-typing]")!;
+      const presence = root.querySelector<HTMLElement>("[data-presence]")!;
+      const play = root.querySelector<HTMLButtonElement>("[data-play]")!;
+      const previous =
+        root.querySelector<HTMLButtonElement>("[data-previous]")!;
+      const next = root.querySelector<HTMLButtonElement>("[data-next]")!;
+      const quick =
+        root.querySelector<HTMLButtonElement>("[data-quick-reply]")!;
+      const input = root.querySelector<HTMLInputElement>("[data-reply-input]")!;
+      const send = root.querySelector<HTMLButtonElement>("[data-send]")!;
+      const feedback = root.querySelector<HTMLElement>("[data-feedback]")!;
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let selected = conversations[0];
+      let cursor = 0;
+      let running = false;
+      let awaiting = false;
+      let timer: ReturnType<typeof setTimeout> | undefined;
+      function cancel() {
+        if (timer !== undefined) window.clearTimeout(timer);
+        timer = undefined;
+        typing.hidden = true;
+      }
+      function status(text: string) {
+        feedback.textContent = text;
+      }
+      function sync() {
+        const finished = cursor >= selected.messages.length;
+        root.dataset.selected = selected.id;
+        root.dataset.playback = finished
+          ? "finished"
+          : awaiting
+            ? "awaiting-reply"
+            : running
+              ? "playing"
+              : cursor <= 1
+                ? "ready"
+                : "paused";
+        root.dataset.messageCount = String(cursor);
+        root.dataset.complete = String(finished);
+        root
+          .querySelectorAll<HTMLButtonElement>("[data-agent]")
+          .forEach((button) =>
+            button.setAttribute(
+              "aria-pressed",
+              String(button.dataset.agent === selected.id),
+            ),
+          );
+        play.textContent = finished
+          ? "Replay conversation ↺"
+          : running
+            ? "Pause conversation Ⅱ"
+            : awaiting
+              ? "Waiting for your reply"
+              : cursor <= 1
+                ? "Play conversation ▶"
+                : "Resume conversation ▶";
+        play.disabled = awaiting;
+        previous.disabled = cursor <= 1;
+        next.disabled = finished;
+        quick.hidden = !awaiting;
+        quick.textContent = selected.messages[cursor]?.replyLabel || "Reply";
+        input.disabled = !awaiting;
+        input.placeholder = awaiting
+          ? selected.id === "orders"
+            ? "Type YES…"
+            : selected.id === "stock"
+              ? "Type APPROVE…"
+              : "Type SEND REPORT…"
+          : finished
+            ? "Sample conversation complete"
+            : "Reply when Kora asks";
+        send.disabled = !awaiting || !input.value.trim();
+        presence.textContent = !typing.hidden
+          ? "typing…"
+          : `${selected.name} agent · online`;
+      }
+      function bubble(message: Message, index: number) {
+        const article = document.createElement("article");
+        article.className = `chat-bubble chat-${message.from}`;
+        article.dataset.messageIndex = String(index);
+        article.setAttribute(
+          "aria-label",
+          message.from === "owner" ? "Shop owner" : "Kora Desk",
         );
+        if (message.forwarded) {
+          const label = document.createElement("p");
+          label.className = "chat-forwarded";
+          label.textContent = `↪ ${message.forwarded}`;
+          article.append(label);
+        }
+        if (message.kind === "voice") {
+          const voice = document.createElement("div");
+          voice.className = "chat-voice";
+          const mic = document.createElement("span");
+          mic.className = "voice-microphone";
+          mic.setAttribute("aria-hidden", "true");
+          mic.innerHTML =
+            '<svg width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>';
+          const wave = document.createElement("span");
+          wave.className = "voice-wave";
+          wave.setAttribute("aria-hidden", "true");
+          for (let n = 0; n < 24; n++) {
+            const bar = document.createElement("i");
+            bar.style.height = `${5 + Math.round(Math.abs(Math.sin(n * 1.3)) * 18)}px`;
+            wave.append(bar);
+          }
+          const time = document.createElement("span");
+          time.textContent = "0:12";
+          voice.append(mic, wave, time);
+          article.append(voice);
+          const transcript = document.createElement("p");
+          transcript.className = "voice-transcript";
+          transcript.id = `kora-${instance}-transcript-${index}`;
+          transcript.hidden = true;
+          transcript.textContent = message.text;
+          const toggle = document.createElement("button");
+          toggle.type = "button";
+          toggle.className = "transcript-toggle";
+          toggle.textContent = "Read transcript";
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-controls", transcript.id);
+          toggle.addEventListener("click", () => {
+            transcript.hidden = !transcript.hidden;
+            toggle.setAttribute("aria-expanded", String(!transcript.hidden));
+            toggle.textContent = transcript.hidden
+              ? "Read transcript"
+              : "Hide transcript";
+          });
+          article.append(toggle, transcript);
+        } else {
+          if (message.title) {
+            const title = document.createElement("strong");
+            title.className = `chat-card-title ${message.kind === "document" ? "chat-document" : ""}`;
+            title.textContent = message.title;
+            article.append(title);
+          }
+          if (message.rows) {
+            const rows = document.createElement("dl");
+            rows.className = "chat-card-rows";
+            message.rows.forEach((row) => {
+              const line = document.createElement("div");
+              const key = document.createElement("dt");
+              key.textContent = row[0];
+              const value = document.createElement("dd");
+              value.textContent = row[1];
+              line.append(key, value);
+              rows.append(line);
+            });
+            const total = document.createElement("div");
+            total.className = "chat-card-total";
+            const label = document.createElement("span");
+            label.textContent = message.totalLabel!;
+            const amount = document.createElement("strong");
+            amount.textContent = message.total!;
+            total.append(label, amount);
+            article.append(rows, total);
+          }
+          const text = document.createElement("p");
+          text.textContent = message.text;
+          article.append(text);
+        }
+        const meta = document.createElement("div");
+        meta.className = "chat-message-meta";
+        const stamp = document.createElement("span");
+        stamp.textContent = message.time;
+        meta.append(stamp);
+        if (message.from === "owner") {
+          const ticks = document.createElement("span");
+          ticks.dataset.ticks = "sent";
+          ticks.textContent = "✓";
+          ticks.setAttribute("aria-label", "Sent");
+          meta.append(ticks);
+        }
+        article.append(meta);
+        return article;
+      }
+      function append() {
+        const pinned =
+          viewport.scrollHeight - viewport.scrollTop - viewport.clientHeight <
+          80;
+        const message = selected.messages[cursor];
+        if (message.from === "kora")
+          messages
+            .querySelectorAll<HTMLElement>("[data-ticks]")
+            .forEach((ticks) => {
+              ticks.textContent = "✓✓";
+              ticks.dataset.ticks = "read";
+              ticks.setAttribute("aria-label", "Read");
+            });
+        messages.append(bubble(message, cursor));
+        cursor++;
+        if (pinned) viewport.scrollTop = viewport.scrollHeight;
+      }
+      function paintHistory() {
+        messages.replaceChildren();
+        const count = cursor;
+        cursor = 0;
+        while (cursor < count) append();
+      }
+      function pause(text = "Paused. Resume when you’re ready.") {
+        running = false;
+        cancel();
+        status(text);
+        sync();
+      }
+      function schedule() {
+        cancel();
+        if (!running) return;
+        if (cursor >= selected.messages.length) {
+          running = false;
+          awaiting = false;
+          status("Conversation complete. Replay it or choose another agent.");
+          sync();
+          return;
+        }
+        if (selected.messages[cursor].replyLabel) {
+          running = false;
+          awaiting = true;
+          status(selected.prompt);
+          sync();
+          return;
+        }
+        if (reduced.matches) {
+          append();
+          sync();
+          schedule();
+          return;
+        }
+        typing.hidden = selected.messages[cursor].from !== "kora";
+        sync();
+        if (!typing.hidden) viewport.scrollTop = viewport.scrollHeight;
+        timer = window.setTimeout(
+          () => {
+            timer = undefined;
+            typing.hidden = true;
+            if (!running) return;
+            append();
+            sync();
+            schedule();
+          },
+          selected.messages[cursor].from === "kora" ? 1550 : 1050,
+        );
+      }
+      function reset(start = false) {
+        cancel();
+        running = false;
+        awaiting = false;
+        cursor = 0;
+        messages.replaceChildren();
+        input.value = "";
+        input.removeAttribute("aria-invalid");
+        append();
+        status("Press play. Messages arrive one by one; reply when Kora asks.");
+        sync();
+        if (start) {
+          running = true;
+          schedule();
+        }
+      }
+      function submitReply() {
+        if (!awaiting) return;
+        const focusWasInReply = [input, send, quick].includes(
+          document.activeElement as HTMLInputElement,
+        );
+        cancel();
+        awaiting = false;
+        input.value = "";
+        input.removeAttribute("aria-invalid");
+        append();
+        running = true;
+        status(
+          "Your sample reply is sent. Kora is preparing the next message.",
+        );
+        sync();
+        if (focusWasInReply) play.focus({ preventScroll: true });
+        schedule();
+      }
+      play.addEventListener("click", () => {
+        if (running) {
+          pause();
+          return;
+        }
+        if (cursor >= selected.messages.length) {
+          reset(true);
+          return;
+        }
+        running = true;
+        status("Playing the sample conversation…");
+        sync();
+        schedule();
+      });
+      root
+        .querySelector("[data-demo-reset]")!
+        .addEventListener("click", () => reset(true));
       root
         .querySelectorAll<HTMLButtonElement>("[data-agent]")
         .forEach((button) =>
-          button.setAttribute(
-            "aria-pressed",
-            String(button.dataset.agent === selected.id),
-          ),
+          button.addEventListener("click", () => {
+            selected = conversations.find(
+              (conversation) => conversation.id === button.dataset.agent,
+            )!;
+            reset();
+          }),
         );
-      root.dataset.selected = selected.id;
-      setText("[data-incoming-label]", selected.label);
-      setText("[data-incoming]", selected.incoming);
-      setText("[data-receipt-agent]", `${selected.name} agent`);
-      setText("[data-result]", complete ? selected.final : selected.result);
-      const rows = root.querySelector("[data-receipt-rows]")!;
-      rows.replaceChildren(
-        ...selected.rows.map((row: string[]) => {
-          const line = document.createElement("div");
-          const label = document.createElement("span");
-          const value = document.createElement("strong");
-          label.textContent = row[0];
-          value.textContent = row[1];
-          line.append(label, value);
-          return line;
-        }),
-      );
-      setText("[data-total-label]", selected.totalLabel);
-      setText("[data-total]", selected.total);
-      setText(
-        "[data-receipt-note]",
-        complete ? selected.finalNote : selected.note,
-      );
-      reply.textContent = selected.reply;
-      reply.hidden = !complete;
-      next.replaceChildren(
-        document.createTextNode(
-          complete
-            ? "Try this sample again"
-            : stage === 0
-              ? starts[selected.id]
-              : selected.next,
-        ),
-      );
-      const arrow = document.createElement("span");
-      arrow.setAttribute("aria-hidden", "true");
-      arrow.textContent = complete ? "↺" : "↗";
-      next.append(arrow);
-      setText(
-        "[data-feedback]",
-        complete
-          ? selected.finalNote
-          : stage === 0
-            ? "Start with the message. Tap to see what Kora prepares."
-            : selected.caption,
-      );
-      root.dataset.complete = String(complete);
-    }
-    root.querySelectorAll<HTMLButtonElement>("[data-agent]").forEach((button) =>
-      button.addEventListener("click", () => {
-        selected = data.find(
-          (item: { id: string }) => item.id === button.dataset.agent,
+      previous.addEventListener("click", () => {
+        cancel();
+        running = false;
+        cursor = Math.max(1, cursor - 1);
+        awaiting = !!selected.messages[cursor]?.replyLabel;
+        paintHistory();
+        status(
+          awaiting
+            ? selected.prompt
+            : "Earlier message. Use next or resume to continue.",
         );
-        stage = 0;
-        render();
-      }),
-    );
-    next.addEventListener("click", () => {
-      stage = (stage + 1) % 3;
-      render();
-    });
-    root
-      .querySelectorAll<HTMLButtonElement>("[data-demo-step]")
-      .forEach((button) =>
-        button.addEventListener("click", () => {
-          stage = Number(button.dataset.demoStep);
-          render();
-        }),
+        sync();
+      });
+      next.addEventListener("click", () => {
+        cancel();
+        running = false;
+        if (cursor < selected.messages.length) append();
+        awaiting = !!selected.messages[cursor]?.replyLabel;
+        status(
+          cursor >= selected.messages.length
+            ? "Conversation complete. Replay it or choose another agent."
+            : awaiting
+              ? selected.prompt
+              : "Next message shown. You can continue at your own pace.",
+        );
+        sync();
+      });
+      quick.addEventListener("click", submitReply);
+      input.addEventListener("input", () => {
+        input.removeAttribute("aria-invalid");
+        send.disabled = !awaiting || !input.value.trim();
+      });
+      root
+        .querySelector("[data-reply-form]")!
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!awaiting || !input.value.trim()) return;
+          if (
+            !new RegExp(`\\b(?:${selected.replyPattern})\\b`, "i").test(
+              input.value.trim(),
+            )
+          ) {
+            input.setAttribute("aria-invalid", "true");
+            status(selected.replyHint);
+            input.focus();
+            return;
+          }
+          submitReply();
+        });
+      const onVisibility = () => {
+        if (document.hidden && running)
+          pause("Paused while this tab is hidden. Resume when you’re ready.");
+      };
+      const onReduced = () => {
+        if (running) {
+          cancel();
+          schedule();
+        }
+      };
+      document.addEventListener("visibilitychange", onVisibility);
+      reduced.addEventListener("change", onReduced);
+      const observer =
+        "IntersectionObserver" in window
+          ? new IntersectionObserver((entries) => {
+              if (entries.every((entry) => !entry.isIntersecting) && running)
+                pause(
+                  "Paused while the demo is off screen. Resume when you’re ready.",
+                );
+            })
+          : null;
+      observer?.observe(root);
+      window.addEventListener(
+        "pagehide",
+        () => {
+          running = false;
+          cancel();
+          observer?.disconnect();
+          document.removeEventListener("visibilitychange", onVisibility);
+          reduced.removeEventListener("change", onReduced);
+        },
+        { once: true },
       );
-    root.querySelector("[data-demo-reset]")!.addEventListener("click", () => {
-      stage = 0;
-      render();
+      reset();
     });
-    render();
-  });
 </script>

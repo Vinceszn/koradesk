@@ -34,17 +34,19 @@ The pilot form saves a tab-scoped draft and hands off to WhatsApp after review. 
 
 The original playful brand system is retained: Nunito headlines, colourful
 agent artwork, crossed-out paperwork, moving benefits, and tilted cards.
-`HeroDesk` powers the three-stage sample inside `DemoPhone` on the homepage and
-walkthrough. Its message, draft, and result states are reversible. The benefit
+`HeroDesk` plays a WhatsApp-style conversation inside `DemoPhone` on the homepage
+and walkthrough. Messages arrive in sequence, Kora types before replying, and
+orders/stock pause for an owner reply inside the composer. Playback can pause,
+resume, replay, and move one message at a time. The benefit
 strips include user pause, off-screen/hidden-tab suspension, and reduced motion.
 
-Shared colour/type tokens remain in `global.css`; demo and form refinements live
-in `refresh.css`. Annual prices show their actual yearly charge. Pilot drafts
+Shared colour/type tokens remain in `global.css`; conversation styling lives in `conversation.css`; form refinements live in
+`refresh.css`. Annual prices show their actual yearly charge. Pilot drafts
 use `sessionStorage` until the tab closes and are sent only after the visitor
 chooses the WhatsApp handoff.
 
 Run `npm test` to build all 41 routes and exercise the built HTML/scripts in DOM
-simulation. Ten checks cover sample progression and isolation, motion controls,
-billing/calculator updates, pilot validation/storage failures, safe draft review,
-navigation, and local destinations. Rendered browser QA remains separate.
+simulation. Fifteen checks cover timed playback and approval gates, transcript controls,
+pause/replay cancellation, instance isolation, hidden-tab and reduced-motion
+behaviour, typed replies, billing, pilot validation, and route integrity. Rendered browser QA remains separate.
 See `docs/ui-refresh.md` for the visual thesis, motion contract, and QA limits.

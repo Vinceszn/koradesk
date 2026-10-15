@@ -55,55 +55,221 @@ function page(route = "", setup = () => {}) {
   };
 }
 
-test("all four sample actions complete, reverse, and reset without stale agent content", () => {
+function clockFor(window) {
+  let now = 0,
+    sequence = 0;
+  const pending = new Map();
+  window.setTimeout = (callback, delay = 0) => {
+    const id = ++sequence;
+    pending.set(id, { at: now + Number(delay), callback });
+    return id;
+  };
+  window.clearTimeout = (id) => pending.delete(id);
+  return {
+    advance(ms) {
+      const end = now + ms;
+      let iterations = 0;
+      while (true) {
+        const next = [...pending.entries()]
+          .filter(([, job]) => job.at <= end)
+          .sort((a, b) => a[1].at - b[1].at)[0];
+        if (!next) break;
+        if (++iterations > 100) throw new Error("Runaway playback timer");
+        now = next[1].at;
+        pending.delete(next[0]);
+        next[1].callback();
+      }
+      now = end;
+    },
+    pending: () => pending.size,
+  };
+}
+
+test("all four chats can be stepped forward, reversed, replayed, and switched", () => {
   const p = page();
   const { doc } = p;
+  const root = doc.querySelector("[data-desk-demo]");
   for (const id of ["orders", "payments", "stock", "books", "orders"]) {
     doc.querySelector(`[data-agent="${id}"]`).click();
+    assert.equal(root.dataset.messageCount, "1");
     assert.equal(
       doc.querySelectorAll('[data-agent][aria-pressed="true"]').length,
       1,
     );
-    assert.equal(doc.querySelector("[data-reply]").hidden, true);
-    assert.equal(doc.querySelector(".desk-receipt").hidden, true);
-    doc.querySelector("[data-demo-next]").click();
-    assert.equal(doc.querySelector(".desk-receipt").hidden, false);
-    assert.equal(doc.querySelector("[data-reply]").hidden, true);
-    doc.querySelector("[data-demo-next]").click();
-    assert.equal(doc.querySelector("[data-reply]").hidden, false);
-    assert.equal(
-      doc.querySelector("[data-desk-demo]").dataset.complete,
-      "true",
-    );
-    doc.querySelector("[data-demo-next]").click();
-    assert.equal(doc.querySelector("[data-reply]").hidden, true);
-    doc.querySelector("[data-demo-next]").click();
+    for (let i = 0; i < 10 && root.dataset.complete !== "true"; i++)
+      doc.querySelector("[data-next]").click();
+    assert.equal(root.dataset.complete, "true");
+    assert.ok(doc.querySelectorAll(".chat-owner").length > 0);
+    assert.ok(doc.querySelectorAll(".chat-kora").length > 0);
+    doc.querySelector("[data-previous]").click();
+    assert.equal(root.dataset.complete, "false");
     doc.querySelector("[data-demo-reset]").click();
-    assert.equal(
-      doc.querySelector("[data-desk-demo]").dataset.complete,
-      "false",
-    );
+    assert.equal(root.dataset.messageCount, "1");
   }
   assert.deepEqual(p.errors, []);
   p.close();
 });
 
-test("two sample instances keep their selections and results isolated", () => {
+test("two conversation instances keep their messages and selection isolated", () => {
   const p = page("", (window) => {
     const root = window.document.querySelector("[data-desk-demo]");
     root.after(root.cloneNode(true));
   });
   const [first, second] = p.doc.querySelectorAll("[data-desk-demo]");
   first.querySelector('[data-agent="stock"]').click();
-  first.querySelector("[data-demo-next]").click();
-  first.querySelector("[data-demo-next]").click();
-  assert.equal(first.querySelector("[data-reply]").hidden, false);
-  assert.equal(second.querySelector("[data-reply]").hidden, true);
+  first.querySelector("[data-next]").click();
+  assert.equal(first.dataset.messageCount, "2");
+  assert.equal(second.dataset.messageCount, "1");
   assert.equal(
     second.querySelector('[data-agent="orders"]').getAttribute("aria-pressed"),
     "true",
   );
-  assert.match(second.querySelector("[data-total]").textContent, /192,500/);
+  assert.equal(
+    second.querySelector(".transcript-toggle").getAttribute("aria-expanded"),
+    "false",
+  );
+  const ids = [...p.doc.querySelectorAll("[id]")].map((el) => el.id);
+  assert.equal(ids.length, new Set(ids).size);
+  p.close();
+});
+
+test("timed playback shows typing, delivers messages in order, and waits for owner approval", () => {
+  let clock;
+  const p = page("", (window) => {
+    clock = clockFor(window);
+  });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  root.querySelector("[data-play]").click();
+  assert.equal(root.querySelector("[data-typing]").hidden, false);
+  clock.advance(1549);
+  assert.equal(root.dataset.messageCount, "1");
+  clock.advance(1);
+  assert.equal(root.dataset.messageCount, "2");
+  assert.equal(
+    root.querySelector("[data-ticks]").getAttribute("aria-label"),
+    "Read",
+  );
+  clock.advance(1550);
+  assert.equal(root.dataset.playback, "awaiting-reply");
+  assert.equal(root.dataset.messageCount, "3");
+  clock.advance(60000);
+  assert.equal(root.dataset.messageCount, "3");
+  assert.equal(clock.pending(), 0);
+  root.querySelector("[data-quick-reply]").click();
+  assert.equal(root.dataset.messageCount, "4");
+  clock.advance(3100);
+  assert.equal(root.dataset.playback, "finished");
+  assert.equal(root.dataset.messageCount, "6");
+  assert.match(
+    root.querySelector("[data-messages]").textContent,
+    /Invoice KD-1840/,
+  );
+  assert.equal(clock.pending(), 0);
+  p.close();
+});
+
+test("pause, replay, and agent switching cancel pending messages", () => {
+  let clock;
+  const p = page("", (window) => {
+    clock = clockFor(window);
+  });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  root.querySelector("[data-play]").click();
+  clock.advance(500);
+  root.querySelector("[data-play]").click();
+  clock.advance(10000);
+  assert.equal(root.dataset.messageCount, "1");
+  assert.equal(root.querySelector("[data-typing]").hidden, true);
+  root.querySelector("[data-play]").click();
+  root.querySelector("[data-demo-reset]").click();
+  clock.advance(1550);
+  assert.equal(root.dataset.messageCount, "2");
+  root.querySelector('[data-agent="payments"]').click();
+  clock.advance(60000);
+  assert.equal(root.dataset.messageCount, "1");
+  assert.doesNotMatch(
+    root.querySelector("[data-messages]").textContent,
+    /rice|noodles/,
+  );
+  root.querySelector("[data-play]").click();
+  clock.advance(10000);
+  assert.equal(root.dataset.playback, "finished");
+  assert.match(
+    root.querySelector("[data-messages]").textContent,
+    /Receipt KD-1839/,
+  );
+  p.close();
+});
+
+test("typed sample replies validate, continue the chat, and return focus to playback", () => {
+  let clock;
+  const p = page("", (window) => {
+    clock = clockFor(window);
+  });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  root.querySelector("[data-play]").click();
+  clock.advance(3100);
+  const input = root.querySelector("[data-reply-input]");
+  const form = root.querySelector("[data-reply-form]");
+  input.value = "wait";
+  input.dispatchEvent(new p.window.Event("input"));
+  form.dispatchEvent(new p.window.Event("submit", { cancelable: true }));
+  assert.equal(input.getAttribute("aria-invalid"), "true");
+  assert.equal(root.dataset.messageCount, "3");
+  input.value = "YES";
+  input.dispatchEvent(new p.window.Event("input"));
+  input.focus();
+  form.dispatchEvent(new p.window.Event("submit", { cancelable: true }));
+  assert.equal(root.dataset.messageCount, "4");
+  assert.equal(p.doc.activeElement, root.querySelector("[data-play]"));
+  assert.equal(input.disabled, true);
+  clock.advance(3100);
+  assert.equal(root.dataset.complete, "true");
+  p.close();
+});
+
+test("reduced motion skips timed effects while preserving approval and transcript controls", () => {
+  let clock;
+  const p = page("", (window) => {
+    clock = clockFor(window);
+    window.matchMedia = (query) => ({
+      matches: query.includes("prefers-reduced-motion"),
+      media: query,
+      addEventListener() {},
+      removeEventListener() {},
+    });
+  });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  const transcript = root.querySelector(".transcript-toggle");
+  transcript.click();
+  assert.equal(transcript.getAttribute("aria-expanded"), "true");
+  assert.equal(
+    p.doc.getElementById(transcript.getAttribute("aria-controls")).hidden,
+    false,
+  );
+  root.querySelector("[data-play]").click();
+  assert.equal(root.dataset.playback, "awaiting-reply");
+  assert.equal(clock.pending(), 0);
+  root.querySelector("[data-quick-reply]").click();
+  assert.equal(root.dataset.complete, "true");
+  assert.equal(root.querySelector("[data-typing]").hidden, true);
+  assert.equal(clock.pending(), 0);
+  p.close();
+});
+
+test("hidden tabs pause conversation playback without appending background messages", () => {
+  let clock;
+  const p = page("", (window) => {
+    clock = clockFor(window);
+  });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  root.querySelector("[data-play]").click();
+  Object.defineProperty(p.doc, "hidden", { configurable: true, value: true });
+  p.doc.dispatchEvent(new p.window.Event("visibilitychange"));
+  clock.advance(20000);
+  assert.equal(root.dataset.messageCount, "1");
+  assert.notEqual(root.dataset.playback, "playing");
+  assert.equal(clock.pending(), 0);
   p.close();
 });
 

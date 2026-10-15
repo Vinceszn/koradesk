@@ -2,6 +2,7 @@
 @import "@fontsource-variable/nunito/index.css";
 @import "tailwindcss";
 @import "./refresh.css";
+@import "./conversation.css";
 
 /*
  * Kora Desk design system — "modern & minimal"
