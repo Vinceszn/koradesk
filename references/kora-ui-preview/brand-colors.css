@@ -1,0 +1,22 @@
+/* Kora logo accents — emerald, yellow, pink, violet */
+:root {--brand-emerald:#006c50;--brand-gold:#876000;--brand-rose:#ad315e;--brand-violet:#7040c6;}
+.brand-emerald{--brand-color:var(--brand-emerald);--brand-tint:#f0faf6;--brand-edge:#83d5b8;}
+.brand-gold{--brand-color:var(--brand-gold);--brand-tint:#fffbeb;--brand-edge:#edcf63;}
+.brand-rose{--brand-color:var(--brand-rose);--brand-tint:#fff3f6;--brand-edge:#f0adc1;}
+.brand-violet{--brand-color:var(--brand-violet);--brand-tint:#f7f3ff;--brand-edge:#c4a7ed;}
+.brand-functions .brand-function {position:relative;border-top:3px solid var(--brand-edge);background:linear-gradient(145deg,var(--brand-tint),#fff 72%);}
+.brand-function-art{display:block;width:88px;height:88px;object-fit:contain;margin:0 0 18px;}
+.brand-function > span:last-child {color:var(--brand-color);}
+.brand-step{color:var(--brand-color);min-width:1.65em;font-variant-numeric:tabular-nums;}
+.brand-step::after{content:'';display:block;width:22px;height:3px;margin-top:10px;border-radius:2px;background:var(--brand-color);opacity:.45;}
+.dark {--brand-emerald:#63deb1;--brand-gold:#f5d15b;--brand-rose:#f3a2bf;--brand-violet:#c3a5ff;}
+.dark .brand-emerald {--brand-tint:#10271f;--brand-edge:#2a7c61;}
+.dark .brand-gold {--brand-tint:#292512;--brand-edge:#8c762d;}
+.dark .brand-rose {--brand-tint:#2e1d26;--brand-edge:#94526b;}
+.dark .brand-violet {--brand-tint:#241d34;--brand-edge:#705196;}
+.dark .brand-functions .brand-function {background:linear-gradient(145deg,var(--brand-tint),#101a15 85%);}
+@media(max-width:639px){.brand-function-art{width:76px;height:76px;margin-bottom:16px;}}
+
+[data-agent="whatsapp"] > span:first-child{color:var(--brand-emerald);}
+[data-agent="website"] > span:first-child{color:var(--brand-rose);}
+[data-agent="instore"] > span:first-child{color:var(--brand-violet);}
