@@ -1,60 +1,72 @@
-# Kora Desk UI refresh
+# Kora Desk creative refresh
 
-## Direction
+## Visual thesis
 
-A calm shop ledger: warm off-white, forest green, precise Inter typography,
-editable agent symbols, and a message becoming an organised record. The live
-sample is the signature interaction, next to the primary pilot action.
+A playful, capable shop companion: preserve the original white canvas, Nunito
+headlines, colourful dimensional agent artwork, crossed-out paperwork, tilted
+cards, and moving benefit strips. The signature interaction turns a WhatsApp
+message into an organised draft and an owner-controlled result.
 
-The original Astro/Tailwind static architecture, routes, contact configuration,
-pricing amounts, and WhatsApp handoff remain in place. There is no new framework,
-renderer, animation library, remote image requirement, or background animation.
+The original Astro/Tailwind architecture, routes, contact configuration, pricing
+amounts, and static WhatsApp handoff remain. The original brand artwork is reused
+rather than replaced with a second icon language. No renderer or motion library
+was added.
 
-## Changes
+## What changes for visitors
 
-- Product sample moved into the hero; four scenarios can be completed, reversed,
-  and reset. Static initial data remains visible without script execution.
-- Scrolling marquees replaced with benefits, an agent directory, setup steps,
-  owner-approval explanation, pricing, and FAQs.
-- Shared light/dark tokens, button shape, forms, headings, and editable SVG
-  symbols form one visual system. The second font family is no longer loaded.
-- Annual prices disclose the total charged once yearly as well as the monthly
-  equivalent. The time-value calculator follows the selected billing period.
-  Unused inputs and the misleading recurring-cost "payback" output were removed.
-- Pilot form labels/errors are explicitly associated; invalid submission focuses
-  the first problem. Drafts use tab-scoped storage with visible failure feedback.
-  Confirmation copy describes an unsent draft until the visitor sends WhatsApp.
-- Mobile navigation is an inline disclosure, closes on Escape with focus return,
-  and resets when moving to desktop. Cookie notice is a non-modal region.
+- The original expressive homepage leads again. A primary free-pilot action and
+  a demo shortcut now sit directly below its explanation.
+- Benefit strips have a pause/resume button. They stop off screen, when the tab
+  is hidden, on page exit, and under reduced motion.
+- The phone demo has three explicit, reversible stages for each agent: message,
+  draft, result. The receipt is hidden until requested. No real message, order,
+  supplier action, bank connection, or money movement occurs.
+- The handset has restrained CSS depth that settles on hover/keyboard focus,
+  familiar WhatsApp colours, original agent artwork, and larger text. SVG path
+  reveals explain the progression; the completion stamp is tied to completion.
+- Annual pricing shows the actual yearly charge and the monthly equivalent.
+  The time-value calculator follows billing selection. Its unused inputs and
+  misleading recurring-cost payback output were removed.
+- Pilot errors are associated with fields, focus moves to the first error, and
+  tab storage failure is visible. The review page describes an unsent draft and
+  asks the visitor to send it in WhatsApp.
+- Mobile navigation closes on Escape with focus return. Cookie choice remains
+  a non-modal region. Contrast and shared button typography fixes are retained.
 
-## Motion
+## Motion contract
 
-Only the sample reply enters on a user action (opacity and 7px translation,
-280ms ease-out). It ends immediately, owns no timers or idle render loop, and is
-static under reduced motion. Native button/link focus and touch interactions
-use the same state changes. Hover arrows move 2px, with reduced-motion overrides.
+- Crossing out paperwork: a 450ms SVG stroke reveal on entry; final static line
+  under reduced motion; no action waits for the reveal.
+- Benefit strips: 48s/60s linear loops, visible only while on screen; user pause
+  and hover pause, document visibility and reduced-motion changes supported.
+  Intersection/media/visibility listeners stop on page exit.
+- Message to receipt: a 280ms opacity/7px translation and 300ms connector reveal
+  on user selection. No timer or idle rendering is needed. Switching agent or
+  returning to a prior stage immediately replaces the old state.
+- Result: a 250ms check-stroke reveal and static approval stamp. Always resettable.
+- Handset: 250ms CSS depth transition on hover/focus within a stationary wrapper.
+  Flat on mobile and under reduced motion; native scrolling remains intact.
 
-## Validation
+## Verification and limits
 
-- `npm test`: builds 41 routes and runs nine integration checks against the
-  actual built HTML/scripts in jsdom. No browser rendering is implied.
-- Checked 32 text/control color pairs using the creative-ui `contrast.py`
-  luminance functions: text >=4.5:1 and input borders >=3:1. This covers new
-  palettes, both themes, placeholder/error colors, fixed demo and trust surfaces.
-- Responsive arithmetic: 360px gives a 328px content container; sample tabs use
-  four equal `minmax(0,1fr)` columns and receipt rows can wrap. The hero stacks
-  below 900px; content/agent sections recompose below 640px. Pricing retains
-  the existing 768px three-column breakpoint. No fixed-width canvas or imagery.
-- Rendered desktop/mobile screenshots, actual text bounds, browser keyboard
-  traversal, and performance profiling remain to be checked in a browser.
-  The managed environment has no supported control-browser skill, so no preview
-  server or substitute browser automation was started. A numeric creative-ui
-  score is withheld until rendered QA can support it.
+`npm test` builds 41 routes and runs ten checks against built HTML/scripts in
+jsdom: four-agent progression/reset, instance isolation, annual billing and
+calculator reversal, pilot validation, tab storage failure, safe draft review,
+navigation/theme/cookie controls, route/label/ID integrity, and ticker pause and
+reduced-motion handling. DOM simulation does not verify rendered bounds.
 
-## Review before release
+Measured text/control colour pairs were checked with the creative-ui contrast
+utility. The active tab now has a dark-green border/underline instead of the
+previous 1.73:1 pastel border. Important sample text was enlarged; device labels
+are 12px and message text is 14.4px at the default root size.
 
-Review 360, 768, 900, 1280, and wide desktop widths, one pixel either side of
-640/768/900/1024/1100/1440, and intermediate widths. Check both themes, keyboard
-focus, all agent samples, annual billing reversal, pilot error correction, and
-WhatsApp handoff. Existing contact details and product capability statements
-come from the repository and need the product owner's factual verification.
+At 360px the phone section has a 328px container; phone padding and border leave
+room for four equal agent buttons. Receipt rows wrap rather than clip. Actual
+rendered widths, screenshots, browser keyboard traversal, dark-theme appearance,
+and performance still need visual verification. No numerical visual score is
+claimed. The private hosted preview showed a sign-in wall in the review browser.
+
+Before release, check 360/768/1280 and wide desktop, either side of the responsive
+breakpoints, reduced motion, all agent stages, annual billing reversal, and the
+WhatsApp draft handoff. Product capability claims and contact details are
+inherited from the repository and remain the owner's factual source of truth.

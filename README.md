@@ -28,22 +28,23 @@ Then open the URL Astro prints (usually `http://localhost:4321`).
 - Demo booking and partner enquiry via WhatsApp/email handoff, cookie consent banner
 - Tap-through WhatsApp demo (no autoplay, respects reduced motion)
 
-Forms keep a `localStorage` copy and hand off to WhatsApp or email compose, so the static site takes real enquiries without a backend.
+The pilot form saves a tab-scoped draft and hands off to WhatsApp after review. Other enquiry forms use WhatsApp or email compose. No backend submission is implied.
 
 ## UI refresh
 
-The homepage uses the `HeroDesk` interactive sample and the reusable, editable
-`AgentSymbol` SVG set. The walkthrough uses the same sample component. Theme
-and shared component tokens remain in `global.css`; composition rules live in
-`refresh.css`. Inter is now used for both text and display type, reducing the
-font families shipped by each page.
+The original playful brand system is retained: Nunito headlines, colourful
+agent artwork, crossed-out paperwork, moving benefits, and tilted cards.
+`HeroDesk` powers the three-stage sample inside `DemoPhone` on the homepage and
+walkthrough. Its message, draft, and result states are reversible. The benefit
+strips include user pause, off-screen/hidden-tab suspension, and reduced motion.
 
-Run `npm test` to build all routes and exercise the built HTML/scripts in a DOM
-simulation. These checks cover agent scenarios, billing, calculator updates,
-pilot validation and storage failures, the WhatsApp review handoff, inline
-navigation, and local route integrity. They do not replace rendered browser QA.
+Shared colour/type tokens remain in `global.css`; demo and form refinements live
+in `refresh.css`. Annual prices show their actual yearly charge. Pilot drafts
+use `sessionStorage` until the tab closes and are sent only after the visitor
+chooses the WhatsApp handoff.
 
-Pilot drafts are stored in `sessionStorage` until the tab closes. The review page
-clearly asks the visitor to send the request in WhatsApp; no backend submission
-or automatic message sending is implied. No production account or payment
-integration has been added.
+Run `npm test` to build all 41 routes and exercise the built HTML/scripts in DOM
+simulation. Ten checks cover sample progression and isolation, motion controls,
+billing/calculator updates, pilot validation/storage failures, safe draft review,
+navigation, and local destinations. Rendered browser QA remains separate.
+See `docs/ui-refresh.md` for the visual thesis, motion contract, and QA limits.

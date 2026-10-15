@@ -1,4 +1,5 @@
 @import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/nunito/index.css";
 @import "tailwindcss";
 @import "./refresh.css";
 
@@ -10,8 +11,8 @@
  */
 @theme {
   --color-ink: #0b1210;
-  --color-paper: #f9f9f2;
-  --color-surface: #efefe6;
+  --color-paper: #ffffff;
+  --color-surface: #f5f5f3;
   --color-sand: #e6e7e3;
   --color-muted: #59635c;
   --color-accent: #126347;
@@ -38,7 +39,7 @@
     "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --font-display:
-    "Inter Variable", ui-sans-serif, system-ui,
+    "Nunito Variable", "Inter Variable", ui-sans-serif, system-ui,
     sans-serif;
 
   --shadow-soft: 0 1px 2px rgb(17 20 19 / 0.06), 0 24px 48px -24px rgb(17 20 19 / 0.22);
@@ -134,7 +135,7 @@ h1 {
     gap: 0.5rem;
     min-height: 2.75rem;
     padding: 0.625rem 1.375rem;
-    border-radius: 0.625rem;
+    border-radius: 999px;
     border: 1px solid transparent;
     font-size: 0.875rem;
     font-weight: 600;

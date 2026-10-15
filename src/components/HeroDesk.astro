@@ -1,5 +1,4 @@
 ---
-import AgentSymbol from "./AgentSymbol.astro";
 const demos = [
   {
     id: "orders",
@@ -96,10 +95,11 @@ const demos = [
   class="desk-demo"
   aria-label="Interactive Kora Desk sample"
   data-desk-demo
+  data-stage="0"
 >
   <div class="desk-topline">
     <span class="desk-dot" aria-hidden="true"></span>
-    <span>A little less admin.</span>
+    <span>Kora Desk</span>
     <span class="desk-sample">Interactive sample</span>
   </div>
   <div class="desk-tabs" role="group" aria-label="Choose an agent">
@@ -110,10 +110,26 @@ const demos = [
         aria-pressed={i === 0 ? "true" : "false"}
         class="desk-tab"
       >
-        <AgentSymbol agent={demo.id} size={19} />
+        <img
+          src={`/brand/agent-${demo.id}.png`}
+          alt=""
+          width="28"
+          height="28"
+        />
         <span>{demo.name}</span>
       </button>
     ))}
+  </div>
+  <div class="demo-story" role="group" aria-label="Choose a sample step">
+    <button type="button" data-demo-step="0" aria-pressed="true">
+      <span>1</span>Message
+    </button>
+    <button type="button" data-demo-step="1" aria-pressed="false">
+      <span>2</span>Draft
+    </button>
+    <button type="button" data-demo-step="2" aria-pressed="false">
+      <span>3</span>Result
+    </button>
   </div>
   <div class="desk-body">
     <div class="desk-chat-label">
@@ -141,7 +157,7 @@ const demos = [
       <p data-incoming>{demos[0].incoming}</p>
       <span class="message-time">9:41 AM</span>
     </div>
-    <div class="desk-connector" aria-hidden="true">
+    <div class="desk-connector" aria-hidden="true" hidden>
       <svg width="22" height="32" viewBox="0 0 22 32" fill="none">
         <path
           d="M11 1v26m-5-5 5 5 5-5"
@@ -153,7 +169,7 @@ const demos = [
       </svg>
       <span>Kora takes it from here</span>
     </div>
-    <div class="desk-receipt">
+    <div class="desk-receipt" hidden>
       <div class="receipt-heading">
         <span class="receipt-agent" data-receipt-agent>
           Orders agent
@@ -179,12 +195,41 @@ const demos = [
       </p>
     </div>
     <p class="desk-reply" data-reply hidden></p>
+    <div class="demo-approved" data-approved hidden>
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 28 28"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle
+          cx="14"
+          cy="14"
+          r="12"
+          stroke="currentColor"
+          stroke-width="1.6"
+        />
+        <path
+          d="m8 14 4 4 8-9"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>
+        Sample complete.
+        <br />
+        <strong>Your shop. Your say.</strong>
+      </span>
+    </div>
     <button type="button" class="desk-action" data-demo-next>
-      {demos[0].next}
+      Draft this order
       <span aria-hidden="true">↗</span>
     </button>
     <p class="desk-feedback" data-feedback role="status" aria-live="polite">
-      {demos[0].caption}
+      Start with a customer message. Tap to see what Kora prepares.
     </p>
   </div>
   <div class="desk-bottom">
@@ -219,13 +264,33 @@ const demos = [
       root.querySelector("[data-demo-data]")!.textContent!,
     );
     let selected = data[0];
-    let complete = false;
+    let stage = 0;
+    const starts: Record<string, string> = {
+      orders: "Draft this order",
+      payments: "Match this payment",
+      stock: "Draft a reorder",
+      books: "Summarise the day",
+    };
     const next = root.querySelector<HTMLButtonElement>("[data-demo-next]")!;
     const reply = root.querySelector<HTMLElement>("[data-reply]")!;
     function setText(selector: string, text: string) {
       root.querySelector(selector)!.textContent = text;
     }
     function render() {
+      const complete = stage === 2;
+      root.dataset.stage = String(stage);
+      root
+        .querySelectorAll<HTMLElement>(".desk-receipt,.desk-connector")
+        .forEach((el) => (el.hidden = stage === 0));
+      root.querySelector<HTMLElement>("[data-approved]")!.hidden = !complete;
+      root
+        .querySelectorAll<HTMLButtonElement>("[data-demo-step]")
+        .forEach((button) =>
+          button.setAttribute(
+            "aria-pressed",
+            String(Number(button.dataset.demoStep) === stage),
+          ),
+        );
       root
         .querySelectorAll<HTMLButtonElement>("[data-agent]")
         .forEach((button) =>
@@ -261,7 +326,11 @@ const demos = [
       reply.hidden = !complete;
       next.replaceChildren(
         document.createTextNode(
-          complete ? "Try this sample again" : selected.next,
+          complete
+            ? "Try this sample again"
+            : stage === 0
+              ? starts[selected.id]
+              : selected.next,
         ),
       );
       const arrow = document.createElement("span");
@@ -270,7 +339,11 @@ const demos = [
       next.append(arrow);
       setText(
         "[data-feedback]",
-        complete ? selected.finalNote : selected.caption,
+        complete
+          ? selected.finalNote
+          : stage === 0
+            ? "Start with the message. Tap to see what Kora prepares."
+            : selected.caption,
       );
       root.dataset.complete = String(complete);
     }
@@ -279,17 +352,26 @@ const demos = [
         selected = data.find(
           (item: { id: string }) => item.id === button.dataset.agent,
         );
-        complete = false;
+        stage = 0;
         render();
       }),
     );
     next.addEventListener("click", () => {
-      complete = !complete;
+      stage = (stage + 1) % 3;
       render();
     });
+    root
+      .querySelectorAll<HTMLButtonElement>("[data-demo-step]")
+      .forEach((button) =>
+        button.addEventListener("click", () => {
+          stage = Number(button.dataset.demoStep);
+          render();
+        }),
+      );
     root.querySelector("[data-demo-reset]")!.addEventListener("click", () => {
-      complete = false;
+      stage = 0;
       render();
     });
+    render();
   });
 </script>

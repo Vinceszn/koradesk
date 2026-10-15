@@ -28,6 +28,15 @@ function page(route = "", setup = () => {}) {
     addEventListener() {},
     removeEventListener() {},
   });
+  window.IntersectionObserver = class {
+    constructor(callback) {
+      this.callback = callback;
+    }
+    observe(target) {
+      this.callback([{ target, isIntersecting: true }]);
+    }
+    disconnect() {}
+  };
   setup(window);
   for (const script of window.document.scripts) {
     if (script.type && script.type !== "module") continue;
@@ -56,6 +65,10 @@ test("all four sample actions complete, reverse, and reset without stale agent c
       1,
     );
     assert.equal(doc.querySelector("[data-reply]").hidden, true);
+    assert.equal(doc.querySelector(".desk-receipt").hidden, true);
+    doc.querySelector("[data-demo-next]").click();
+    assert.equal(doc.querySelector(".desk-receipt").hidden, false);
+    assert.equal(doc.querySelector("[data-reply]").hidden, true);
     doc.querySelector("[data-demo-next]").click();
     assert.equal(doc.querySelector("[data-reply]").hidden, false);
     assert.equal(
@@ -82,6 +95,7 @@ test("two sample instances keep their selections and results isolated", () => {
   });
   const [first, second] = p.doc.querySelectorAll("[data-desk-demo]");
   first.querySelector('[data-agent="stock"]').click();
+  first.querySelector("[data-demo-next]").click();
   first.querySelector("[data-demo-next]").click();
   assert.equal(first.querySelector("[data-reply]").hidden, false);
   assert.equal(second.querySelector("[data-reply]").hidden, true);
@@ -292,4 +306,31 @@ test("built routes keep one main heading, unique IDs, labelled fields, and worki
       );
     }
   }
+});
+
+test("moving benefit strips can pause and resume, and reduced motion disables them", () => {
+  const p = page();
+  const hero = p.doc.querySelector("[data-creative-hero]");
+  const button = hero.querySelector("[data-ticker-pause]");
+  assert.equal(hero.dataset.moving, "true");
+  button.click();
+  assert.equal(hero.dataset.moving, "false");
+  assert.equal(button.getAttribute("aria-pressed"), "true");
+  button.click();
+  assert.equal(hero.dataset.moving, "true");
+  p.close();
+  const reduced = page("", (window) => {
+    window.matchMedia = (query) => ({
+      matches: query.includes("prefers-reduced-motion"),
+      media: query,
+      addEventListener() {},
+      removeEventListener() {},
+    });
+  });
+  assert.equal(
+    reduced.doc.querySelector("[data-creative-hero]").dataset.moving,
+    "false",
+  );
+  assert.equal(reduced.doc.querySelector("[data-ticker-pause]").hidden, true);
+  reduced.close();
 });
