@@ -1,9 +1,9 @@
 ---
-title: The 14-day pilot
-description: No card. A live number. A person on support.
-category: Getting started
+title: "How to express interest in the founding pilot"
+description: "Tell us about the business before agreeing access and timing."
+category: "Getting started"
 ---
 
-Fill in your name, business, type, and WhatsApp number. We confirm the number, load a price list, and watch the first orders with you.
+The interest form prepares a local draft. Review it and choose whether to send the message. Nothing is submitted merely by saving the draft.
 
-You can stop any day. Nothing is billed unless you choose a plan after the pilot. The pilot covers up to 100 conversations — plenty for two real weeks of trade.
+The pilot is in preparation. Scope, price, access and timing need to be agreed before live trading. Start with one stock location and countable products.

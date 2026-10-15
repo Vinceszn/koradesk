@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CheckIcon from "../components/CheckIcon.astro";
-import ChannelDemo from "../components/ChannelDemo.astro";
+import DemoPhone from "../components/DemoPhone.astro";
+import ArtButton from "../components/ArtButton.astro";
+import CommerceArtwork from "../components/CommerceArtwork.astro";
 import Faq from "../components/Faq.astro";
 import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
 ---
 
-<BaseLayout title="Kora ecosystem · concept preview" description={site.description}>
+<BaseLayout title="Commerce ecosystem preview" description={site.description}>
   <Fragment slot="head">
     <script
       type="application/ld+json"
@@ -33,12 +35,12 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
           <span class="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60"></span>
           <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
         </span>
-        Now onboarding founding shops in Lagos
+        Building with Nigeria’s next founding merchants
       </p>
       <h1 class="mx-auto mt-6 max-w-3xl text-5xl font-bold leading-[1.04] tracking-tighter md:text-6xl">
-        You didn&rsquo;t start a shop to do
+        More sales. Less
         <span class="relative inline-block">
-          paperwork.
+          wahala.
           <svg
             class="absolute -left-2 top-1/2 h-3 w-[calc(100%+1rem)] -translate-y-1/2 -rotate-2 md:h-4"
             viewBox="0 0 200 12"
@@ -56,23 +58,20 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
         </span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-muted md:text-xl">
-        Kora Desk does the copying, matching, and counting inside WhatsApp. You
-        approve anything that moves money.
+        Your stock, orders and payments—connected across your website, WhatsApp and shop counter. One business, however you sell.
       </p>
       <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-        <a class="btn btn-primary" href="/pilot">
-          Start your free pilot <span aria-hidden="true">↗</span>
-        </a>
+        <ArtButton href="/pilot" label="Build with Kora" />
         <a class="btn btn-ghost" href="#demo">
-          Try the three-channel demo <span aria-hidden="true">↓</span>
+          Watch a sale happen <span aria-hidden="true">↓</span>
         </a>
       </div>
       <p class="mt-4 text-sm text-muted">
-        Free 14-day pilot · No card · Human onboarding
+        Product preview · Founding pilot in preparation · No payment taken here
       </p>
       <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
         <p class="text-xs font-semibold uppercase tracking-widest text-muted">
-          Crossed out, every evening:
+          Less of this:
         </p>
         <button
           type="button"
@@ -85,8 +84,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       </div>
     </div>
     <p class="sr-only">
-      Kora drafts orders, matches payments, updates stock, and summarises your
-      books, so you can spend more time with customers.
+      Kora is being built to connect inventory, orders, payments and receipts across a website, WhatsApp and the shop counter.
     </p>
     <div class="mt-4 space-y-3" aria-hidden="true">
       <div class="ticker">
@@ -95,37 +93,37 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Copying voice notes into ledgers
+                Copying the same order twice
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Hunting unmatched transfers
+                Guessing who paid
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Friday stock counts
+                Three different stock lists
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Chasing &ldquo;who paid?&rdquo;
+                Selling the last item twice
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Rewriting price lists
+                Updating prices everywhere
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Month-end cleanup
+                Hunting for receipts
               </span>
             </div>
           </div>
@@ -133,44 +131,44 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Copying voice notes into ledgers
+                Copying the same order twice
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Hunting unmatched transfers
+                Guessing who paid
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Friday stock counts
+                Three different stock lists
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Chasing &ldquo;who paid?&rdquo;
+                Selling the last item twice
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Rewriting price lists
+                Updating prices everywhere
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="ink" />
               <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
-                Month-end cleanup
+                Hunting for receipts
               </span>
             </div>
           </div>
         </div>
       </div>
       <p class="text-center text-xs font-semibold uppercase tracking-widest text-accent">
-        Handed back:
+        More of this:
       </p>
       <div class="ticker">
         <div class="ticker-track reverse">
@@ -178,31 +176,31 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Serve the person in front of you
+                One catalogue, every channel
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Close the shop at 6pm
+                Stock you can account for
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Count cash, not chats
+                Payments tied to orders
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                One WhatsApp number for everything
+                Your own online storefront
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Books that balance themselves
+                Receipts with your name on them
               </span>
             </div>
           </div>
@@ -210,31 +208,31 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Serve the person in front of you
+                One catalogue, every channel
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Close the shop at 6pm
+                Stock you can account for
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Count cash, not chats
+                Payments tied to orders
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                One WhatsApp number for everything
+                Your own online storefront
               </span>
             </div>
             <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
               <CheckIcon tone="accent" />
               <span class="text-sm font-semibold text-ink">
-                Books that balance themselves
+                Receipts with your name on them
               </span>
             </div>
           </div>
@@ -243,7 +241,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
     </div>
     <div class="mx-auto max-w-4xl px-4 pb-16 pt-10 text-center md:pb-20">
       <p class="text-sm text-muted">
-        A guided 14-day pilot, with a real person to help you get started.
+        A commerce platform for online sellers, physical shops and businesses doing both.
       </p>
       <p class="mt-4">
         <a
@@ -314,69 +312,64 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
     }
   </style>
 
-  <section id="demo" class="agent-section"><div class="kora-container home-section setup-section"><div>
-<p class="eyebrow">One shop. Three ways to sell.</p><h2>Website.<br/>WhatsApp.<br/>Walk-ins.<br/><span class="text-accent">All together.</span></h2>
-<p class="setup-intro">Watch three pairs sell across three channels. Same shop, same stock. Kora keeps count.</p>
-<p class="text-sm text-muted">Pick a chapter and press play. Reply inside the chat to move the order along.</p>
-<p class="text-sm text-muted mt-4">A preview of the Kora ecosystem we’re planning. Sample data; no live store, bank connection or messages.</p>
-</div><div class="phone-demo"><ChannelDemo /></div></div></section>
+  <DemoPhone anchorId="demo" />
 
   <section class="border-b border-sand bg-paper">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-5 text-sm text-muted">
       <p class="flex items-center gap-2">
         <CheckIcon tone="plain" />
-        No app to install
+        One shared catalogue
       </p>
       <p class="flex items-center gap-2">
         <CheckIcon tone="plain" />
-        Works on slow networks
+        Stock reserved per order
       </p>
       <p class="flex items-center gap-2">
         <CheckIcon tone="plain" />
-        You approve money moves
+        Provider-verified payments
       </p>
     </div>
   </section>
 
   <!-- The daily mess -->
   <section class="mx-auto max-w-6xl px-4 py-16">
-    <p class="eyebrow">The 9pm pile-up</p>
-    <h2 class="mt-3 text-3xl md:text-4xl">The daily wahala, in three lines</h2>
+    <p class="eyebrow">The gaps between channels</p>
+    <h2 class="mt-3 text-3xl md:text-4xl">Your business grew. The scattered lists stayed.</h2>
     <div class="mt-8 grid gap-4 md:grid-cols-3">
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
         <p class="text-xs font-semibold uppercase tracking-widest text-muted">
-          Surulere · 9:14 PM
+          WhatsApp + website
         </p>
-        <h3 class="mt-2 text-xl">Missed orders</h3>
+        <h3 class="mt-2 text-xl">Orders in too many places</h3>
         <p class="mt-2 text-muted">
-          Voice notes pile up while you serve the person in front of you.
+          A website checkout here. A WhatsApp request there. A counter sale someone forgot to write down.
         </p>
         <p class="mt-4 text-sm font-semibold text-accent">
-          Fix: the Orders agent drafts every request as it arrives.
+          The plan: one order record, whatever the channel.
         </p>
       </article>
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:rotate-1">
         <p class="text-xs font-semibold uppercase tracking-widest text-muted">
-          Agege · 9:41 PM
+          Payments + receipts
         </p>
         <h3 class="mt-2 text-xl">Unmatched payments</h3>
         <p class="mt-2 text-muted">
-          Alerts and screenshots sit in chat. You guess who paid.
+          A screenshot arrives, but the invoice is still open. You need confirmation from the payment provider.
         </p>
         <p class="mt-4 text-sm font-semibold text-accent">
-          Fix: Payments matches transfers to open invoices.
+          The plan: verify the payment, then prepare the receipt.
         </p>
       </article>
       <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
         <p class="text-xs font-semibold uppercase tracking-widest text-muted">
-          Yaba · Friday 6:02 PM
+          Shelf + storefront
         </p>
         <h3 class="mt-2 text-xl">Stock that never adds up</h3>
         <p class="mt-2 text-muted">
-          The shelf and the book disagree by Friday.
+          Your website says available. Your staff just sold the last one. Your customer is already paying.
         </p>
         <p class="mt-4 text-sm font-semibold text-accent">
-          Fix: Stock updates from sales and deliveries, then flags odd gaps.
+          The plan: a shared stock record with order reservations.
         </p>
       </article>
     </div>
@@ -385,9 +378,9 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <!-- Four agents -->
   <section class="border-y border-sand bg-surface py-16">
     <div class="mx-auto max-w-6xl px-4">
-      <p class="eyebrow">Four specialists, zero new apps</p>
+      <p class="eyebrow">One commerce core</p>
       <h2 class="mt-3 text-3xl md:text-4xl">
-        Four agents. One WhatsApp number.
+        Everything a sale needs, connected.
       </h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
         {agents.map((agent, i) => (
@@ -418,11 +411,15 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
     </div>
   </section>
 
+  <section class="mx-auto max-w-6xl px-4 py-16 commerce-art-grid" aria-label="The Kora commerce foundation">
+    <CommerceArtwork kind="inventory" title="One stock list. No matter where you sell." description="Variants, reservations and stock history form the first release. Know what’s available before promising it to a customer." href="/product/stock" label="Explore inventory" />
+    <CommerceArtwork kind="storefront" title="Your shop deserves its own address." description="A Kora-powered storefront is the next chapter: your catalogue and checkout connected to the same inventory and order records." href="/product/storefront" label="See the storefront plan" />
+  </section>
   <!-- How it works -->
   <section class="mx-auto max-w-6xl px-4 py-16">
     <h2 class="text-3xl md:text-4xl">How it works</h2>
     <p class="mt-3 max-w-2xl text-muted">
-      No onboarding webinar. No 40-page manual.
+      Start with products and stock. Add the ways your customers buy.
     </p>
     <ol class="mt-8 border-t border-sand">
       <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
@@ -433,10 +430,9 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
           01
         </p>
         <div>
-          <h3 class="text-xl">Connect your number</h3>
+          <h3 class="text-xl">Set up your catalogue</h3>
           <p class="mt-2 max-w-2xl text-muted">
-            We link the WhatsApp line customers already use. No app for them to
-            install.
+            Add products, sizes, colours and prices. Confirm the opening stock at your first location.
           </p>
         </div>
       </li>
@@ -448,10 +444,9 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
           02
         </p>
         <div>
-          <h3 class="text-xl">Tell it your prices</h3>
+          <h3 class="text-xl">Bring orders together</h3>
           <p class="mt-2 max-w-2xl text-muted">
-            Share a price list, even a photo of a handwritten sheet. You can
-            correct it any time.
+            Create orders against that catalogue. The backend checks availability and reserves the right variants.
           </p>
         </div>
       </li>
@@ -463,9 +458,9 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
           03
         </p>
         <div>
-          <h3 class="text-xl">Approve the first few actions</h3>
+          <h3 class="text-xl">Close the loop</h3>
           <p class="mt-2 max-w-2xl text-muted">
-            Watch the log. Raise or lower limits. Undo for 24 hours.
+            Verify the payment, issue a branded receipt and record pickup or dispatch. Keep the full stock history.
           </p>
         </div>
       </li>
@@ -482,12 +477,10 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
     <div class="mx-auto max-w-6xl px-4">
       <p class="eyebrow">Early access</p>
       <h2 class="mt-3 text-3xl md:text-4xl">
-        Built with founding shops in Lagos
+        Help shape your next way to run a shop
       </h2>
       <p class="mt-3 max-w-2xl text-muted">
-        Kora Desk is live in a guided pilot. We onboard a few shops each week,
-        sit with you through the first 14 days, and shape the product around
-        what breaks.
+        We’re preparing a focused founding pilot for Nigerian merchants. First: inventory, orders, verified payments and receipts. Then: a connected storefront and WhatsApp automation.
       </p>
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
         {foundingPerks.map((perk) => (
@@ -499,10 +492,10 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       </div>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="/pilot" class="btn btn-primary">
-          Join the pilot
+          Express interest
         </a>
         <a href="/customers" class="btn btn-ghost">
-          How the 14 days run
+          Explore the pilot plan
         </a>
       </div>
     </div>
@@ -512,17 +505,8 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <section class="bg-ink py-16 text-white">
     <div class="mx-auto max-w-6xl px-4">
       <p class="eyebrow eyebrow-bright">Trust</p>
-      <h2 class="mt-3 max-w-2xl text-3xl">
-        You{" "}
-        <span class="underline decoration-accent-bright decoration-[3px] underline-offset-[6px]">
-          approve money moves
-        </span>
-        . Everything is logged. You can undo.
-      </h2>
-      <p class="mt-4 max-w-2xl text-sand">
-        The agent never pays a supplier, never issues a refund, and never writes
-        off a debt without you. Full audit trail. 24-hour undo window.
-      </p>
+      <h2 class="mt-3 max-w-2xl text-3xl">Every sale has a record. Every stock change has a reason.</h2>
+      <p class="mt-4 max-w-2xl text-sand">The backend is being designed around merchant permissions, verified payment events and an audit trail. Refunds and stock corrections need explicit actions; there’s no magic undo for a settled payment.</p>
       <a href="/trust" class="btn btn-on-dark mt-6">
         Trust &amp; security
       </a>
@@ -533,11 +517,10 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <section class="mx-auto max-w-6xl px-4 py-16">
     <h2 class="text-3xl">Simple prices in naira</h2>
     <p class="mt-3 max-w-2xl text-muted">
-      No hidden charges. No “DM for price” games.
+      A proposed starting point, ready to test with founding merchants.
     </p>
     <p class="mt-2 text-muted">
-      Starter from {naira(15000)} / month. Growth {naira(45000)}. 14-day pilot
-      free.
+      Pilot pricing proposed from {naira(5000)} / month. Scope and access are agreed before any billing.
     </p>
     <a class="btn btn-ghost mt-5" href="/pricing">
       See full pricing
@@ -556,14 +539,13 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
   <div class="awning" aria-hidden="true"></div>
   <section class="bg-ink py-16 text-white">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="text-4xl">Ready in two minutes</h2>
+      <h2 class="text-4xl">Your next chapter starts with one stock list.</h2>
       <p class="mt-3 text-sand">
-        Tell us your name, your shop, and your WhatsApp number. We set up the
-        pilot with you.
+        Tell us what you sell and where orders come from. Help us build the commerce tools your business actually needs.
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
         <a href="/pilot" class="btn btn-light">
-          Start free pilot
+          Explore the pilot
         </a>
         <a
           href={waLink("Hello, I want to start a Kora Desk pilot.", "home-cta")}
@@ -572,7 +554,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
           Talk on WhatsApp
         </a>
         <a href="/demo" class="btn btn-on-dark">
-          Book a 15-minute demo
+          Discuss your workflow
         </a>
       </div>
     </div>

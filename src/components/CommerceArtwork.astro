@@ -1,0 +1,8 @@
+---
+interface Props { kind: "inventory" | "storefront"; title: string; description: string; href: string; label: string; }
+const {kind,title,description,href,label}=Astro.props;
+---
+<article class="commerce-artwork">
+  <img src={`/brand/commerce/${kind}.webp`} width="720" height={kind === "inventory" ? "658" : "675"} alt="" loading="lazy" />
+  <div><p class="eyebrow">{kind === "inventory" ? "The foundation" : "The next chapter"}</p><h3>{title}</h3><p>{description}</p><a class="link-accent" href={href}>{label} →</a></div>
+</article>

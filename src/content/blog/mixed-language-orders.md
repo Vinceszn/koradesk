@@ -1,10 +1,10 @@
 ---
-title: Pidgin, Yoruba, and mixed-language orders
-description: Your customers will not switch to textbook English for your spreadsheet.
-pubDate: 2026-09-29
-minutes: 3
+title: "Understand the request. Confirm the product."
+description: "Local phrasing is normal; the catalogue still defines the unit."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Treat mixed messages as normal. “Send 2 bag rice, e go reach morning” is a complete order.
+“Two cartons” only works if everyone agrees what a carton contains. Give sellable packs clear names, SKUs and prices.
 
-If a word is a local unit (congo, derica, paint), put that unit on the price list. Guessing units is how you lose money.
+AI-assisted text or voice extraction should propose an order against that catalogue and ask about ambiguity. Language and accent support need testing with the merchants who will use it. The preview makes no claim of validated multilingual voice coverage.

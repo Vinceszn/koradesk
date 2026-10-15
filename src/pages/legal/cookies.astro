@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 ---
-
-<BaseLayout title="Cookie notice" description="Kora Desk uses essential cookies and optional analytics with consent.">
-  <article class="mx-auto max-w-3xl px-4 py-14 prose-kora">
-    <h1 class="text-4xl md:text-5xl">Cookie notice</h1>
-    <p>Essential cookies remember your cookie choice. They are required for that banner to stay dismissed.</p>
-    <p>Analytics cookies (Plausible or similar) load only if you tap “Accept analytics”. They count visits without advertising profiles.</p>
-    <p>The site works if you choose “Essential only”. You can change your mind by clearing this site’s storage in your browser.</p>
-  </article>
+<BaseLayout title="Browser storage, explained." description="The preview saves preferences and drafts locally; analytics collection is not implemented.">
+<PageHero eyebrow="Preview notice \u00b7 15 October 2026" title="Browser storage, explained." lede="The preview saves preferences and drafts locally; analytics collection is not implemented." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Preferences</h2>
+<p>Local storage remembers your theme and consent choice. The banner records a preference only; accepting it does not currently activate an analytics service.</p>
+<h2>Form drafts</h2>
+<p>Pilot interest uses session storage for this tab. Contact and demo requests use local storage. Clearing site data removes those local records.</p>
+<h2>External services</h2>
+<p>Following messaging, email or hosted-site links involves those services and their own storage and privacy behaviour. This notice describes the application source, not every hosting-layer mechanism.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

@@ -6,7 +6,7 @@ import { getCollection } from "astro:content";
 const articles = (await getCollection("help")).sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
-<BaseLayout title="Help centre" description="Answers for pilots, WhatsApp numbers, approvals, and billing.">
+<BaseLayout title="Help centre" description="Answers about the proposed pilot, stock controls, channel plans and pricing.">
   <PageHero eyebrow="Help" title="Find a short answer, then talk to a person if you need one" />
   <section class="mx-auto max-w-3xl px-4 py-14">
     <label class="block">

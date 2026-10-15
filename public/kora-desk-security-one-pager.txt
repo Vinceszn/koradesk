@@ -1,15 +1,9 @@
-Kora Desk — security one-pager
+KORA — PRODUCT PREVIEW
 
-You approve money. Refunds, write-offs, and large orders wait for a person.
+Kora is being designed to connect inventory, orders, payments and receipts across a merchant website, WhatsApp and the counter.
 
-Every action is logged in plain language. Most can be undone for 24 hours.
+This preview uses sample data; no live bank account, stock database or customer messaging is connected.
 
-Data for Nigerian shops is stored in West Africa. We collect only what the four agents need.
+Production controls to implement and test: tenant isolation, role permissions, signed provider events, server verification, atomic stock reservations, immutable movement history, backup recovery and delivery retries.
 
-Staff see what their role allows. Accountants see books only if invited. Support access is logged.
-
-Chats: 18 months unless you ask for longer. Backups: 30 days. You can export and delete.
-
-Incidents are told to affected customers in plain language.
-
-Questions: hello@koradesk.com. This summary is informational, not a compliance certificate.
+Hosting regions, subprocessors, retention and support arrangements must be confirmed before live merchant onboarding.

@@ -1,24 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { site } from "../../data/site";
+import PageHero from "../../components/PageHero.astro";
 ---
-
-<BaseLayout title="Privacy notice" description="How Kora Desk handles personal data.">
-  <article class="mx-auto max-w-3xl px-4 py-14 prose-kora">
-    <h1 class="text-4xl md:text-5xl">Privacy notice</h1>
-    <p class="text-sm text-muted">Last updated 6 October 2026.</p>
-    <h2>Who we are</h2>
-    <p>{site.name}, {site.address}. Email {site.email}.</p>
-    <h2>What we collect</h2>
-    <p>Name, business name, WhatsApp number, business type, and the messages needed to run Orders, Payments, Stock, and Books on a connected number. Optional analytics cookies if you consent.</p>
-    <h2>Why</h2>
-    <p>To run the service you asked for, to contact you about a pilot, and — only with consent — to understand which pages help owners decide.</p>
-    <h2>Lawful bases</h2>
-    <p>Contract, consent, and legitimate interests such as keeping a security log. In Nigeria this notice aligns with the NDPA.</p>
-    <h2>Sharing</h2>
-    <p>WhatsApp/Meta as the channel, payment APIs you connect, hosting providers in Africa, and an accountant you invite. We do not sell lists.</p>
-    <h2>Your rights</h2>
-    <p>Access, correction, deletion, and a portable export. Write to {site.email}.</p>
-    <p><a class="link-accent" href="/legal/data-processing">Data processing terms</a></p>
-  </article>
+<BaseLayout title="Privacy in this product preview." description="What this website stores locally and what still needs to be defined before the commerce service launches.">
+<PageHero eyebrow="Preview notice \u00b7 15 October 2026" title="Privacy in this product preview." lede="What this website stores locally and what still needs to be defined before the commerce service launches." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Forms and local drafts</h2>
+<p>The pilot-interest form stores your name, business type, business name and contact number in session storage in this tab. Reviewing a draft does not submit it. Sending through WhatsApp shares it with the recipient and that service. Contact and demo forms use local storage for drafts and open external communication tools.</p>
+<h2>Preferences</h2>
+<p>Theme and consent choices are saved in browser storage. No analytics collector is implemented in this source. The hosting service may process request and security information under its own policies.</p>
+<h2>Future merchant data</h2>
+<p>Live orders, customer records, payments, inventory and optional conversation processing require a published production privacy notice. Operator details, purposes, providers, retention, access requests and contact channels must be confirmed before onboarding live data.</p>
+<h2>Current limits</h2>
+<p>The preview does not connect to your personal chats, bank account or store. Do not enter payment credentials or sensitive customer records into the demonstration.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

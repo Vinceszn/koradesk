@@ -1,28 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
-import AgentStory from "../../components/AgentStory.astro";
 ---
-
-<BaseLayout title="Orders agent" description="The Orders agent reads WhatsApp text, voice notes, and photos of lists, then drafts the order for you to confirm.">
-  <PageHero
-    eyebrow="Orders"
-    title="From voice note to confirmed order"
-    lede="Built for shops that take lists in Pidgin, English, and photos of exercise books."
-  />
-  <AgentStory
-    slug="orders"
-    title="It listens, then writes the order in your prices."
-    lede="A customer at Chinedu Stores sends a voice note at 6:40am. The agent transcribes it, maps items to your price list, and sends a confirmation before your first delivery leaves."
-    story={[
-      "Handwritten lists in photos are treated the same as typed messages. If a line is unclear, the agent asks one short question instead of guessing.",
-      "You set a naira limit. Orders under the limit go out after the customer says YES. Orders above it wait in your queue.",
-      "The same thread stays on WhatsApp. Your staff can still type; the agent just stops duplicating the notebook.",
-    ]}
-    checkpoints={[
-      "Approve orders above your value limit.",
-      "Edit the price list any time.",
-      "Undo a drafted order for 24 hours.",
-    ]}
-  />
+<BaseLayout title="An order is an order. Wherever it starts." description="Bring website checkouts, WhatsApp requests and walk-in sales into one order workflow.">
+<PageHero eyebrow="The Kora product plan" title="An order is an order. Wherever it starts." lede="Bring website checkouts, WhatsApp requests and walk-in sales into one order workflow." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Start with the right variant</h2>
+<p>Black trainers in size 43 are a different stock item from size 42. An order saves the selected SKU, quantity, agreed price and customer details.</p>
+<h2>Reserve before promising</h2>
+<p>The backend checks available stock when the order is committed. A draft or customer enquiry does not automatically remove stock. Confirmed orders can hold units for a defined period.</p>
+<h2>Keep payment and fulfilment separate</h2>
+<p>An order can be awaiting payment, paid but not collected, partially fulfilled or completed. Those are different events, with different effects on inventory.</p>
+<h2>Build the channels in stages</h2>
+<p>The MVP starts with merchant-created and counter orders. A connected storefront and official WhatsApp assistant will reuse those same backend operations. AI-assisted extraction must ask about unclear items rather than inventing prices or quantities.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

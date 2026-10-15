@@ -1,31 +1,11 @@
 ---
-import HeroDesk from "./HeroDesk.astro";
-interface Props {
-  anchorId?: string;
-}
-const { anchorId } = Astro.props;
+import ChannelDemo from "./ChannelDemo.astro";
+interface Props { anchorId?: string; }
+const {anchorId}=Astro.props;
 ---
-
-<section id={anchorId} class="agent-section">
-  <div class="kora-container home-section setup-section">
-    <div>
-      <p class="eyebrow">Try it for yourself</p>
-      <h2>
-        One chat.
-        <br />
-        Four things handled.
-      </h2>
-      <p class="setup-intro">
-        Pick an agent and press play. Watch the messages arrive, then reply
-        inside the chat when Kora asks for your say-so.
-      </p>
-      <p class="text-sm text-muted">
-        Sample data only. No bank connection, no messages sent, no real money
-        moves.
-      </p>
-    </div>
-    <div class="phone-demo">
-      <HeroDesk />
-    </div>
-  </div>
-</section>
+<section id={anchorId} class="agent-section"><div class="kora-container home-section setup-section"><div>
+<p class="eyebrow">One shop. Three ways to sell.</p><h2>Website.<br/>WhatsApp.<br/>Walk-ins.<br/><span class="text-accent">All together.</span></h2>
+<p class="setup-intro">Watch three pairs sell across three channels. Same shop, same stock. Kora keeps count.</p>
+<p class="text-sm text-muted">Choose a chapter and press play. Confirm the sample order inside the chat to keep it moving.</p>
+<p class="text-sm text-muted mt-4">Product preview · simulated orders and payments. The commerce platform is in development.</p>
+</div><div class="phone-demo"><ChannelDemo /></div></div></section>

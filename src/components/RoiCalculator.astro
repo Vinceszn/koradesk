@@ -59,14 +59,13 @@
   <p class="mt-4 text-sm text-muted">
     We multiply total weekly admin hours by your percentage, then by 4.3 weeks
     and the hourly value. This estimates time value, not a cash refund or a
-    reduction in payroll. Starter costs less if you only need Orders and
-    Payments.
+    reduction in payroll. Proposed prices are for comparison; no subscription is sold on this site.
   </p>
 </section>
 <script>
   const form = document.querySelector<HTMLFormElement>("#roi-form");
   const out = document.getElementById("roi-out");
-  let growth = 45000;
+  let growth = 10000;
   function naira(n: number) {
     return new Intl.NumberFormat("en-NG", {
       style: "currency",
@@ -86,7 +85,7 @@
     const figures = [
       ["Estimated hours saved / week", hours.toFixed(1)],
       ["Estimated time value / month", naira(total)],
-      ["Growth monthly equivalent", naira(growth)],
+      ["Store monthly equivalent (proposed)", naira(growth)],
       ["Time value minus plan cost / month", naira(total - growth)],
     ];
     out.replaceChildren(
@@ -109,7 +108,7 @@
   document.addEventListener("kora:billing", ((
     event: CustomEvent<{ annual: boolean }>,
   ) => {
-    growth = event.detail.annual ? 37500 : 45000;
+    growth = event.detail.annual ? 8333 : 10000;
     calc();
   }) as EventListener);
   calc();

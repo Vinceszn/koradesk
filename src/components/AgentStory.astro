@@ -12,7 +12,7 @@ const agent = agents.find((a) => a.slug === slug);
 ---
 
 <section class="mx-auto max-w-3xl px-4 py-12 prose-kora">
-  <p class="eyebrow">{agent?.name} agent</p>
+  <p class="eyebrow">{agent?.name} workflow</p>
   <h2 class="mt-2 text-3xl">{title}</h2>
   <p class="mt-3 text-muted">{lede}</p>
   {story.map((p) => <p>{p}</p>)}
@@ -24,6 +24,6 @@ const agent = agents.find((a) => a.slug === slug);
     Human checkpoint: {agent?.checkpoint}
   </p>
   <p>
-    <a href="/pilot" class="btn btn-primary">Start free pilot</a>
+    <a href="/pilot" class="btn btn-primary">Explore the pilot</a>
   </p>
 </section>

@@ -85,11 +85,11 @@ function clockFor(window) {
   };
 }
 
-test("all four chats can be stepped forward, reversed, replayed, and switched", () => {
+test("all three channel chats can be stepped forward, reversed, replayed, and switched", () => {
   const p = page();
   const { doc } = p;
   const root = doc.querySelector("[data-desk-demo]");
-  for (const id of ["orders", "payments", "stock", "books", "orders"]) {
+  for (const id of ["whatsapp", "website", "instore", "whatsapp"]) {
     doc.querySelector(`[data-agent="${id}"]`).click();
     assert.equal(root.dataset.messageCount, "1");
     assert.equal(
@@ -116,18 +116,15 @@ test("two conversation instances keep their messages and selection isolated", ()
     root.after(root.cloneNode(true));
   });
   const [first, second] = p.doc.querySelectorAll("[data-desk-demo]");
-  first.querySelector('[data-agent="stock"]').click();
+  first.querySelector('[data-agent="instore"]').click();
   first.querySelector("[data-next]").click();
   assert.equal(first.dataset.messageCount, "2");
   assert.equal(second.dataset.messageCount, "1");
   assert.equal(
-    second.querySelector('[data-agent="orders"]').getAttribute("aria-pressed"),
+    second.querySelector('[data-agent="whatsapp"]').getAttribute("aria-pressed"),
     "true",
   );
-  assert.equal(
-    second.querySelector(".transcript-toggle").getAttribute("aria-expanded"),
-    "false",
-  );
+  assert.equal(second.querySelector("[data-on-hand]").textContent, "3");
   const ids = [...p.doc.querySelectorAll("[id]")].map((el) => el.id);
   assert.equal(ids.length, new Set(ids).size);
   p.close();
@@ -157,12 +154,12 @@ test("timed playback shows typing, delivers messages in order, and waits for own
   assert.equal(clock.pending(), 0);
   root.querySelector("[data-quick-reply]").click();
   assert.equal(root.dataset.messageCount, "4");
-  clock.advance(3100);
+  clock.advance(10000);
   assert.equal(root.dataset.playback, "finished");
-  assert.equal(root.dataset.messageCount, "6");
+  assert.equal(root.dataset.messageCount, "8");
   assert.match(
     root.querySelector("[data-messages]").textContent,
-    /Invoice KD-1840/,
+    /Receipt 1041/,
   );
   assert.equal(clock.pending(), 0);
   p.close();
@@ -184,7 +181,7 @@ test("pause, replay, and agent switching cancel pending messages", () => {
   root.querySelector("[data-demo-reset]").click();
   clock.advance(1550);
   assert.equal(root.dataset.messageCount, "2");
-  root.querySelector('[data-agent="payments"]').click();
+  root.querySelector('[data-agent="website"]').click();
   clock.advance(60000);
   assert.equal(root.dataset.messageCount, "1");
   assert.doesNotMatch(
@@ -192,11 +189,13 @@ test("pause, replay, and agent switching cancel pending messages", () => {
     /rice|noodles/,
   );
   root.querySelector("[data-play]").click();
+  clock.advance(1550);
+  root.querySelector("[data-quick-reply]").click();
   clock.advance(10000);
   assert.equal(root.dataset.playback, "finished");
   assert.match(
     root.querySelector("[data-messages]").textContent,
-    /Receipt KD-1839/,
+    /Receipt 1042/,
   );
   p.close();
 });
@@ -223,12 +222,12 @@ test("typed sample replies validate, continue the chat, and return focus to play
   assert.equal(root.dataset.messageCount, "4");
   assert.equal(p.doc.activeElement, root.querySelector("[data-play]"));
   assert.equal(input.disabled, true);
-  clock.advance(3100);
+  clock.advance(10000);
   assert.equal(root.dataset.complete, "true");
   p.close();
 });
 
-test("reduced motion skips timed effects while preserving approval and transcript controls", () => {
+test("reduced motion skips timed effects while preserving approval controls", () => {
   let clock;
   const p = page("", (window) => {
     clock = clockFor(window);
@@ -240,13 +239,6 @@ test("reduced motion skips timed effects while preserving approval and transcrip
     });
   });
   const root = p.doc.querySelector("[data-desk-demo]");
-  const transcript = root.querySelector(".transcript-toggle");
-  transcript.click();
-  assert.equal(transcript.getAttribute("aria-expanded"), "true");
-  assert.equal(
-    p.doc.getElementById(transcript.getAttribute("aria-controls")).hidden,
-    false,
-  );
   root.querySelector("[data-play]").click();
   assert.equal(root.dataset.playback, "awaiting-reply");
   assert.equal(clock.pending(), 0);
@@ -288,16 +280,16 @@ test("annual billing discloses actual yearly totals and updates the calculator, 
   );
   assert.match(
     doc.querySelector(".price-note").textContent,
-    /150,000.*billed once a year.*12 months/,
+    /50,000.*illustrative annual total.*12 months/,
   );
   assert.match(
     doc.querySelectorAll(".price-note")[2].textContent,
-    /80,000 per client/,
+    /200,000.*illustrative annual total/,
   );
-  assert.match(doc.querySelector("#roi-out").textContent, /37,500/);
+  assert.match(doc.querySelector("#roi-out").textContent, /8,333/);
   doc.querySelector("#billing-toggle").click();
   assert.deepEqual(prices(), initial);
-  assert.match(doc.querySelector("#roi-out").textContent, /45,000/);
+  assert.match(doc.querySelector("#roi-out").textContent, /10,000/);
   const share = doc.querySelector('[name="share"]');
   share.value = "-10";
   share.dispatchEvent(new p.window.Event("input", { bubbles: true }));
@@ -546,5 +538,26 @@ test("ecosystem timed playback gates checkout and cancels old channel timers", (
   clock.advance(10000);
   assert.equal(root.dataset.complete, "true");
   assert.equal(root.querySelector("[data-on-hand]").textContent, "1");
+  p.close();
+});
+
+test("commerce copy and generated artwork match the new product scope", () => {
+  const p = page();
+  const text = p.doc.body.textContent;
+  assert.match(p.doc.querySelector("h1").textContent, /More sales\. Less\s+wahala/);
+  assert.match(text, /website, WhatsApp and shop counter/);
+  assert.match(text, /founding pilot/i);
+  assert.doesNotMatch(text, /live in a guided pilot|24-hour undo window|Books that balance themselves|300 conversations/);
+  for (const asset of ["button-enamel", "inventory", "storefront"]) assert.ok(existsSync(`dist/brand/commerce/${asset}.webp`));
+  for (const button of p.doc.querySelectorAll(".art-button")) {
+    assert.equal(button.tagName, "A");
+    assert.equal(button.getAttribute("href"), "/pilot");
+    assert.ok(button.textContent.trim());
+  }
+  assert.equal(p.doc.querySelectorAll(".commerce-artwork").length, 2);
+  for (const image of p.doc.querySelectorAll(".commerce-artwork img")) {
+    assert.equal(image.alt, "");
+    assert.ok(image.width > 0 && image.height > 0);
+  }
   p.close();
 });

@@ -20,11 +20,11 @@ import { naira, plans } from "../data/site";
       ></span>
     </button>
     <span class="text-muted">
-      Annual <span class="font-semibold text-accent">(2 months free)</span>
+      Annual <span class="font-semibold text-accent">(illustrative comparison)</span>
     </span>
   </div>
   <p class="billing-description">
-    Switch billing to compare. Annual plans cover 12 months for the price of 10.
+    Proposed pricing only. The annual comparison illustrates a possible discount; annual subscriptions are not available to buy.
   </p>
   <div class="pricing-grid grid gap-4 md:grid-cols-3">
     {plans.map((plan) => (
@@ -39,7 +39,7 @@ import { naira, plans } from "../data/site";
       >
         {plan.featured && (
           <p class="plan-tag mb-2 w-fit rounded-full bg-ink px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-            Most shops start here
+            Proposed store plan
           </p>
         )}
         <h2 class="text-2xl">{plan.name}</h2>
@@ -60,7 +60,7 @@ import { naira, plans } from "../data/site";
           data-per-client={plan.perClient ? "true" : "false"}
           class="price-note mt-1 text-sm text-muted"
         >
-          Billed monthly. Cancel any time.
+          Proposed monthly price. No charge taken here.
         </p>
         <ul class="mt-5 flex-1 space-y-2.5 border-t border-sand pt-5 text-sm">
           {plan.includes.map((item) => (
@@ -77,7 +77,7 @@ import { naira, plans } from "../data/site";
             plan.featured ? "btn btn-primary" : "btn btn-ghost",
           ]}
         >
-          {plan.id === "partner" ? "Talk to partnerships" : "Start free pilot"}
+          {plan.id === "partner" ? "Talk to partnerships" : "Discuss this plan"}
         </a>
       </article>
     ))}
@@ -111,8 +111,8 @@ import { naira, plans } from "../data/site";
     notes.forEach((n) => {
       const total = Number(n.dataset.annualTotal);
       n.textContent = annual
-        ? `${format(total)}${n.dataset.perClient === "true" ? " per client" : ""} billed once a year. Covers 12 months.`
-        : "Billed monthly. Cancel any time.";
+        ? `${format(total)}${n.dataset.perClient === "true" ? " per client" : ""} illustrative annual total. Covers 12 months; not available to purchase.`
+        : "Proposed monthly price. No charge taken here.";
     });
     document.dispatchEvent(
       new CustomEvent("kora:billing", { detail: { annual } }),
