@@ -500,3 +500,51 @@ test("moving benefit strips can pause and resume, and reduced motion disables th
   assert.equal(reduced.doc.querySelector("[data-ticker-pause]").hidden, true);
   reduced.close();
 });
+
+test("ecosystem chapters reserve stock, preserve it on payment, and deduct only at pickup", () => {
+  const p = page("ecosystem-preview");
+  const root = p.doc.querySelector("[data-desk-demo]");
+  const counts = () => ["on-hand", "reserved", "available"].map(key => Number(root.querySelector(`[data-${key}]`).textContent));
+  for (const [channel, initial] of [["whatsapp", 3], ["website", 2], ["instore", 1]]) {
+    root.querySelector(`[data-agent="${channel}"]`).click();
+    assert.deepEqual(counts(), [initial, 0, initial]);
+    const data = JSON.parse(root.querySelector("[data-demo-data]").textContent).find(s => s.id === channel);
+    for (let i = 1; i < data.messages.length; i++) {
+      root.querySelector("[data-next]").click();
+      const [onHand, reserved, available] = counts();
+      assert.equal(available, onHand - reserved);
+      assert.ok(available >= 0);
+      if (data.messages[i].text.includes("sample payment verified")) assert.deepEqual(counts(), [initial, 1, initial - 1]);
+    }
+    assert.deepEqual(counts(), [initial - 1, 0, initial - 1]);
+    root.querySelector("[data-previous]").click();
+    root.querySelector("[data-demo-reset]").click();
+    assert.deepEqual(counts(), [initial, 0, initial]);
+  }
+  p.close();
+});
+
+test("ecosystem timed playback gates checkout and cancels old channel timers", () => {
+  let clock;
+  const p = page("ecosystem-preview", window => { clock = clockFor(window); });
+  const root = p.doc.querySelector("[data-desk-demo]");
+  root.querySelector("[data-play]").click();
+  clock.advance(3100);
+  assert.equal(root.dataset.playback, "awaiting-reply");
+  root.querySelector("[data-quick-reply]").click();
+  clock.advance(1550);
+  assert.equal(root.querySelector("[data-reserved]").textContent, "1");
+  root.querySelector('[data-agent="website"]').click();
+  clock.advance(60000);
+  assert.equal(root.dataset.messageCount, "1");
+  assert.equal(root.querySelector("[data-reserved]").textContent, "0");
+  assert.ok(root.querySelector(".chat-storefront"));
+  root.querySelector("[data-play]").click();
+  clock.advance(1550);
+  assert.equal(root.dataset.playback, "awaiting-reply");
+  root.querySelector("[data-quick-reply]").click();
+  clock.advance(10000);
+  assert.equal(root.dataset.complete, "true");
+  assert.equal(root.querySelector("[data-on-hand]").textContent, "1");
+  p.close();
+});

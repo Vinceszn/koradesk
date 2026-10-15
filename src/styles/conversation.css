@@ -520,3 +520,20 @@
     transform: none;
   }
 }
+
+/* The ecosystem preview keeps the original handset and adds one shared stock record. */
+.conversation-demo:has(.shared-stock) .conversation-agents {grid-template-columns:repeat(3,minmax(0,1fr))}
+.channel-number {font-family:var(--font-heading, sans-serif);font-size:1.1rem;color:var(--chat-green)}
+.shared-stock {background:#fffdf7;color:#182820;border:1px solid #869b8b;border-bottom:3px solid #43594c;border-radius:1rem;padding:1rem;margin-bottom:1.1rem;}
+.stock-product {display:flex;align-items:center;gap:.65rem;margin-bottom:.8rem}
+.stock-product strong {font-size:.875rem;display:block}.stock-product strong span {font-weight:400}
+.stock-product small {font-size:.75rem;color:#526258;display:block}
+.stock-swatch {width:36px;height:36px;display:grid;place-items:center;background:#182820;color:white;border-radius:10px;font-size:1.3rem;transform:rotate(-5deg)}
+.shared-stock dl {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
+.shared-stock dl>div {border-left:1px solid #d5ddd4;padding-left:.65rem}
+.shared-stock dt {font-size:.7rem;color:#526258}.shared-stock dd {font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums}
+.shared-stock dl>div:last-child dd {color:#075e54}
+.chat-system {align-self:center;background:#fff1bf;color:#645524;text-align:center;font-size:.75rem;max-width:95%;border:1px solid #d1bb78}
+.chat-storefront {align-self:stretch;max-width:100%;margin:0;background:#fffdf7;border:1px solid #869b8b;padding:1rem;border-radius:.6rem}
+.chat-storefront .chat-card-title {border-bottom:1px solid #d5ddd4;padding-bottom:.5rem}
+.chat-storefront>p:before {content:"↗";display:grid;place-items:center;height:85px;background:#e3ebdd;color:#182820;font-size:3rem;border-radius:.4rem;margin-bottom:.7rem}
