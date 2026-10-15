@@ -29,3 +29,21 @@ Then open the URL Astro prints (usually `http://localhost:4321`).
 - Tap-through WhatsApp demo (no autoplay, respects reduced motion)
 
 Forms keep a `localStorage` copy and hand off to WhatsApp or email compose, so the static site takes real enquiries without a backend.
+
+## UI refresh
+
+The homepage uses the `HeroDesk` interactive sample and the reusable, editable
+`AgentSymbol` SVG set. The walkthrough uses the same sample component. Theme
+and shared component tokens remain in `global.css`; composition rules live in
+`refresh.css`. Inter is now used for both text and display type, reducing the
+font families shipped by each page.
+
+Run `npm test` to build all routes and exercise the built HTML/scripts in a DOM
+simulation. These checks cover agent scenarios, billing, calculator updates,
+pilot validation and storage failures, the WhatsApp review handoff, inline
+navigation, and local route integrity. They do not replace rendered browser QA.
+
+Pilot drafts are stored in `sessionStorage` until the tab closes. The review page
+clearly asks the visitor to send the request in WhatsApp; no backend submission
+or automatic message sending is implied. No production account or payment
+integration has been added.

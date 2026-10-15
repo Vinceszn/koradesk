@@ -1,357 +1,367 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CheckIcon from "../components/CheckIcon.astro";
-import DemoPhone from "../components/DemoPhone.astro";
+import AgentSymbol from "../components/AgentSymbol.astro";
+import HeroDesk from "../components/HeroDesk.astro";
 import Faq from "../components/Faq.astro";
-import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
+import { agents, faqs, site, waLink } from "../data/site";
+const outcomes = [
+  {
+    title: "Every order, accounted for.",
+    text: "Turn voice notes, messages, and handwritten lists into a clear order draft.",
+    agent: "orders",
+    before: "Voice notes piling up",
+    after: "An order, ready to check",
+  },
+  {
+    title: "Know exactly who paid.",
+    text: "Match bank alerts to invoices and keep outstanding payments in view.",
+    agent: "payments",
+    before: "“I sent it. Check your alert.”",
+    after: "A payment, matched to its invoice",
+  },
+  {
+    title: "Close with a clearer picture.",
+    text: "Keep stock and sales records together, with a summary your accountant can review.",
+    agent: "books",
+    before: "Another evening with the ledger",
+    after: "Your day, already summarised",
+  },
+];
 ---
 
 <BaseLayout title={site.name} description={site.description}>
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      })}
+    />
   </Fragment>
-
-  <!-- Hero -->
-  <section class="overflow-hidden border-b border-sand bg-paper">
-    <div class="mx-auto max-w-4xl px-4 pt-16 text-center md:pt-24">
-      <p class="inline-flex min-h-11 items-center gap-2 rounded-full border border-sand bg-white px-4 text-sm text-muted">
-        <span class="relative flex h-2 w-2" aria-hidden="true">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
-        </span>
-        Now onboarding founding shops in Lagos
-      </p>
-      <h1 class="mx-auto mt-6 max-w-3xl text-5xl font-bold leading-[1.04] tracking-tighter md:text-6xl">
-        You didn&rsquo;t start a shop to do
-        <span class="relative inline-block">
-          paperwork.
-          <svg class="absolute -left-2 top-1/2 h-3 w-[calc(100%+1rem)] -translate-y-1/2 -rotate-2 md:h-4" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M3 8 C 60 3, 140 3, 197 7" stroke="var(--color-clay)" stroke-width="5" stroke-linecap="round" fill="none" />
+  <section class="home-hero">
+    <div class="kora-container hero-grid">
+      <div class="hero-copy">
+        <p class="availability">
+          <span aria-hidden="true"></span>Founding shop pilots · Lagos
+        </p>
+        <h1>
+          Your shop.
+          <br />
+          Your people.
+          <br />
+          <span>Less paperwork.</span>
+        </h1>
+        <p class="hero-lede">
+          Orders, payments, stock, and books.
+          <br class="desktop-break" /> Handled from the WhatsApp you already
+          use.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-accent" href="/pilot">
+            Start your free pilot <span aria-hidden="true">↗</span>
+          </a>
+          <a class="hero-demo-link" href="#demo">
+            Try the sample <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+        <p class="hero-fineprint">
+          14 days free. No card. A real person helps you set up.
+        </p>
+        <div class="hero-assurance">
+          <svg
+            width="20"
+            height="22"
+            viewBox="0 0 24 26"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            aria-hidden="true"
+          >
+            <path d="M12 2 3 6v7c0 6 9 11 9 11s9-5 9-11V6l-9-4Z" />
+            <path d="m8 12 3 3 5-6" />
           </svg>
-        </span>
-      </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-muted md:text-xl">
-        Kora Desk does the copying, matching, and counting inside WhatsApp. You approve anything that moves money.
-      </p>
-      <p class="mt-4 text-sm text-muted">Free 14-day pilot · No card · Human onboarding</p>
-      <p class="mt-12 text-xs font-semibold uppercase tracking-widest text-muted">Crossed out, every evening:</p>
-    </div>
-    <p class="sr-only">A scrolling strip of admin chores being crossed out, and the evenings handed back.</p>
-    <div class="mt-4 space-y-3" aria-hidden="true">
-      <div class="ticker">
-        <div class="ticker-track">
-          <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Copying voice notes into ledgers</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Hunting unmatched transfers</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Friday stock counts</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Chasing &ldquo;who paid?&rdquo;</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Rewriting price lists</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Month-end cleanup</span>
-            </div>
-          </div>
-          <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Copying voice notes into ledgers</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Hunting unmatched transfers</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Friday stock counts</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Chasing &ldquo;who paid?&rdquo;</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Rewriting price lists</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="ink" />
-              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">Month-end cleanup</span>
-            </div>
-          </div>
+          <p>
+            The agents do the admin.
+            <br />
+            <strong>You approve anything that moves money.</strong>
+          </p>
         </div>
       </div>
-      <p class="text-center text-xs font-semibold uppercase tracking-widest text-accent">Handed back:</p>
-      <div class="ticker">
-        <div class="ticker-track reverse">
-          <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Serve the person in front of you</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Close the shop at 6pm</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Count cash, not chats</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">One WhatsApp number for everything</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Books that balance themselves</span>
-            </div>
-          </div>
-          <div class="flex shrink-0 items-stretch gap-3 pr-3">
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Serve the person in front of you</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Close the shop at 6pm</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Count cash, not chats</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">One WhatsApp number for everything</span>
-            </div>
-            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
-              <CheckIcon tone="accent" />
-              <span class="text-sm font-semibold text-ink">Books that balance themselves</span>
-            </div>
-          </div>
-        </div>
+      <div class="hero-workbench" id="demo">
+        <p class="workbench-label">
+          <span>FROM CHAT TO SORTED</span>
+          <span>01 / A WORKING EXAMPLE</span>
+        </p>
+        <HeroDesk />
+        <p class="workbench-footnote">
+          Try all four agents. Sample data only; nothing is sent.
+        </p>
       </div>
     </div>
-    <div class="mx-auto max-w-4xl px-4 pb-16 pt-10 text-center md:pb-20">
-      <p class="text-sm text-muted">No stats yet — 14-day pilots, humans included.</p>
-      <p class="mt-4">
-        <a href="#demo" class="link-accent inline-flex min-h-11 items-center gap-2 text-sm font-semibold">
-          See how it works
-          <span aria-hidden="true">↓</span>
-        </a>
+  </section>
+  <div class="promise-strip">
+    <div class="kora-container">
+      <p>Built for the way your shop runs.</p>
+      <span>No new app for customers</span>
+      <span>One WhatsApp number</span>
+      <span>Human onboarding included</span>
+    </div>
+  </div>
+  <section class="kora-container home-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">A lighter working day</p>
+        <h2>
+          The chats keep coming.
+          <br />
+          The admin doesn’t have to.
+        </h2>
+      </div>
+      <p>
+        Keep serving the person in front of you. Give the copying, matching, and
+        counting to Kora.
       </p>
     </div>
-  </section>
-
-<style is:global>
-  .ticker {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
-  .ticker-track {
-    display: flex;
-    width: max-content;
-    -webkit-animation: ticker-scroll 48s linear infinite;
-    animation: ticker-scroll 48s linear infinite;
-  }
-  .ticker-track.reverse {
-    animation-direction: reverse;
-    animation-duration: 60s;
-  }
-  @media (hover: hover) {
-    .ticker:hover .ticker-track {
-      animation-play-state: paused;
-    }
-  }
-  @-webkit-keyframes ticker-scroll {
-    to { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
-  }
-  @keyframes ticker-scroll {
-    to { transform: translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ticker-track { -webkit-animation: none; animation: none; }
-  }
-</style>
-
-  <DemoPhone anchorId="demo" />
-
-  <section class="border-b border-sand bg-paper">
-    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-5 text-sm text-muted">
-      <p class="flex items-center gap-2"><CheckIcon tone="plain" />No app to install</p>
-      <p class="flex items-center gap-2"><CheckIcon tone="plain" />Works on slow networks</p>
-      <p class="flex items-center gap-2"><CheckIcon tone="plain" />You approve money moves</p>
-    </div>
-  </section>
-
-  <!-- The daily mess -->
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <p class="eyebrow">The 9pm pile-up</p>
-    <h2 class="mt-3 text-3xl md:text-4xl">The daily wahala, in three lines</h2>
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
-        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Surulere · 9:14 PM</p>
-        <h3 class="mt-2 text-xl">Missed orders</h3>
-        <p class="mt-2 text-muted">Voice notes pile up while you serve the person in front of you.</p>
-        <p class="mt-4 text-sm font-semibold text-accent">Fix: the Orders agent drafts every request as it arrives.</p>
-      </article>
-      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:rotate-1">
-        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Agege · 9:41 PM</p>
-        <h3 class="mt-2 text-xl">Unmatched payments</h3>
-        <p class="mt-2 text-muted">Alerts and screenshots sit in chat. You guess who paid.</p>
-        <p class="mt-4 text-sm font-semibold text-accent">Fix: Payments matches transfers to open invoices.</p>
-      </article>
-      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
-        <p class="text-xs font-semibold uppercase tracking-widest text-muted">Yaba · Friday 6:02 PM</p>
-        <h3 class="mt-2 text-xl">Stock that never adds up</h3>
-        <p class="mt-2 text-muted">The shelf and the book disagree by Friday.</p>
-        <p class="mt-4 text-sm font-semibold text-accent">Fix: Stock updates from sales and deliveries, then flags odd gaps.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Four agents -->
-  <section class="border-y border-sand bg-surface py-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <p class="eyebrow">Four specialists, zero new apps</p>
-      <h2 class="mt-3 text-3xl md:text-4xl">Four agents. One WhatsApp number.</h2>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
-        {
-          agents.map((agent, i) => (
-            <a
-              href={agent.href}
-              class:list={[
-                "rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]",
-                i % 2 === 1 && "sm:mt-10",
-              ]}
+    <div class="outcome-grid">
+      {outcomes.map((item, i) => (
+        <article class="outcome">
+          <div class="outcome-number">
+            <span>0{i + 1}</span>
+            <AgentSymbol agent={item.agent} />
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <div class="outcome-shift">
+            <span>{item.before}</span>
+            <svg
+              width="16"
+              height="22"
+              viewBox="0 0 16 22"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
             >
-              <img src={`/brand/agent-${agent.slug}.png`} alt="" width="44" height="44" loading="lazy" class="mb-4 h-11 w-11" />
-              <h3 class="text-2xl">{agent.name}</h3>
-              <p class="mt-2 text-muted">{agent.job}</p>
-              <p class="mt-4 text-sm text-muted">{agent.checkpoint}</p>
-              <span class="mt-4 inline-block text-sm font-semibold text-accent">Read more →</span>
-            </a>
-          ))
-        }
+              <path d="M8 1v17m-4-4 4 4 4-4" />
+            </svg>
+            <strong>{item.after}</strong>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="agent-section">
+    <div class="kora-container home-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Meet your back office</p>
+          <h2>
+            Four specialists.
+            <br />
+            One familiar chat.
+          </h2>
+        </div>
+        <a class="text-link" href="/product">
+          Explore the agents <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div class="agent-directory">
+        {agents.map((agent, i) => (
+          <a href={agent.href} class="agent-row">
+            <span class="agent-row-number">0{i + 1}</span>
+            <span class={`agent-symbol agent-${agent.slug}`}>
+              <AgentSymbol agent={agent.slug} size={27} />
+            </span>
+            <h3>{agent.name}</h3>
+            <div class="agent-row-detail">
+              <p>{agent.job}</p>
+              <span>{agent.checkpoint}</span>
+            </div>
+            <span class="agent-row-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
-
-  <!-- How it works -->
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h2 class="text-3xl md:text-4xl">How it works</h2>
-    <p class="mt-3 max-w-2xl text-muted">No onboarding webinar. No 40-page manual.</p>
-    <ol class="mt-8 border-t border-sand">
-      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
-        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">01</p>
+  <section class="kora-container home-section setup-section">
+    <div>
+      <p class="eyebrow">A person gets you started</p>
+      <h2>
+        Your number.
+        <br />
+        Your prices.
+        <br />
+        <span class="text-accent">We’ll do the setup.</span>
+      </h2>
+      <p class="setup-intro">
+        A guided 14-day pilot, built around your shop. We stay close while you
+        see what works.
+      </p>
+      <a href="/customers" class="text-link">
+        See how the pilot runs <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <ol class="setup-steps">
+      <li>
+        <span>01</span>
         <div>
-          <h3 class="text-xl">Connect your number</h3>
-          <p class="mt-2 max-w-2xl text-muted">We link the WhatsApp line customers already use. No app for them to install.</p>
+          <h3>Connect your WhatsApp</h3>
+          <p>We help link the number your customers already know.</p>
         </div>
       </li>
-      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
-        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">02</p>
+      <li>
+        <span>02</span>
         <div>
-          <h3 class="text-xl">Tell it your prices</h3>
-          <p class="mt-2 max-w-2xl text-muted">Share a price list, even a photo of a handwritten sheet. You can correct it any time.</p>
+          <h3>Share your price list</h3>
+          <p>
+            A spreadsheet, a message, even a photo of your handwritten list.
+          </p>
         </div>
       </li>
-      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
-        <p class="font-display text-4xl font-bold leading-none text-sand" aria-hidden="true">03</p>
+      <li>
+        <span>03</span>
         <div>
-          <h3 class="text-xl">Approve the first few actions</h3>
-          <p class="mt-2 max-w-2xl text-muted">Watch the log. Raise or lower limits. Undo for 24 hours.</p>
+          <h3>Check. Approve. Get on with your day.</h3>
+          <p>
+            Review the first drafts with your setup person. You set the approval
+            limits.
+          </p>
         </div>
       </li>
     </ol>
-    <p class="mt-6"><a class="link-accent font-semibold" href="/how-it-works">See the full walkthrough</a></p>
   </section>
-
-  <!-- Founding pilot -->
-  <section class="border-y border-sand bg-surface py-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <p class="eyebrow">Early access</p>
-      <h2 class="mt-3 text-3xl md:text-4xl">Built with founding shops in Lagos</h2>
-      <p class="mt-3 max-w-2xl text-muted">
-        Kora Desk is live in a guided pilot. We onboard a few shops each week, sit with you through the first 14 days, and shape the product around what breaks.
-      </p>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
-        {
-          foundingPerks.map((perk) => (
-            <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
-              <h3 class="text-xl">{perk.title}</h3>
-              <p class="mt-2 text-muted">{perk.text}</p>
-            </article>
-          ))
-        }
+  <section class="control-section">
+    <div class="kora-container control-grid">
+      <div>
+        <p class="eyebrow eyebrow-bright">Your business. Your say.</p>
+        <h2>
+          A helping hand.
+          <br />
+          You keep the keys.
+        </h2>
+        <p>
+          Refunds, write-offs, and supplier payments need your approval. Every
+          action has a log you can review.
+        </p>
+        <a class="btn btn-on-dark" href="/trust">
+          How we keep you in control <span aria-hidden="true">↗</span>
+        </a>
       </div>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/pilot" class="btn btn-primary">Join the pilot</a>
-        <a href="/customers" class="btn btn-ghost">How the 14 days run</a>
+      <div class="approval-example">
+        <div>
+          <span class="approval-icon" aria-hidden="true">
+            ✓
+          </span>
+          <span>Owner approval required</span>
+        </div>
+        <h3>
+          Nothing moves money
+          <br />
+          without your say-so.
+        </h3>
+        <ul>
+          <li>
+            <span>Approval limits</span>
+            <strong>Set by you</strong>
+          </li>
+          <li>
+            <span>Action history</span>
+            <strong>Always reviewable</strong>
+          </li>
+          <li>
+            <span>Most actions</span>
+            <strong>24-hour undo window</strong>
+          </li>
+        </ul>
+        <p>
+          External messages and completed bank transfers cannot be recalled.
+        </p>
       </div>
     </div>
   </section>
-
-  <!-- Trust band -->
-  <section class="bg-ink py-16 text-white">
-    <div class="mx-auto max-w-6xl px-4">
-      <p class="eyebrow eyebrow-bright">Trust</p>
-      <h2 class="mt-3 max-w-2xl text-3xl">You <span class="underline decoration-accent-bright decoration-[3px] underline-offset-[6px]">approve money moves</span>. Everything is logged. You can undo.</h2>
-      <p class="mt-4 max-w-2xl text-sand">
-        The agent never pays a supplier, never issues a refund, and never writes off a debt without you. Full audit trail. 24-hour undo window.
+  <section class="kora-container home-section home-pricing">
+    <div>
+      <p class="eyebrow">Straightforward naira pricing</p>
+      <h2>
+        Start small.
+        <br />
+        Find your rhythm.
+      </h2>
+      <p>
+        Your first 14 days are free. Choose a plan after you’ve tried it with
+        your shop.
       </p>
-      <a href="/trust" class="btn btn-on-dark mt-6">Trust &amp; security</a>
+      <a class="text-link" href="/pricing">
+        Compare plans <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="price-preview">
+      <div>
+        <span>Starter</span>
+        <strong>
+          ₦15,000<small> / month</small>
+        </strong>
+        <p>Orders + Payments · 1 WhatsApp number</p>
+      </div>
+      <div>
+        <span>Growth</span>
+        <strong>
+          ₦45,000<small> / month</small>
+        </strong>
+        <p>All four agents · 3 WhatsApp numbers</p>
+      </div>
     </div>
   </section>
-
-  <!-- Pricing teaser -->
-  <section class="mx-auto max-w-6xl px-4 pb-16">
-    <h2 class="text-3xl">Simple prices in naira</h2>
-    <p class="mt-3 max-w-2xl text-muted">No hidden charges. No “DM for price” games.</p>
-    <p class="mt-2 text-muted">Starter from {naira(15000)} / month. Growth {naira(45000)}. 14-day pilot free.</p>
-    <a class="btn btn-ghost mt-5" href="/pricing">See full pricing</a>
-  </section>
-
-  <!-- FAQ -->
-  <section class="mx-auto max-w-3xl px-4 pb-16">
-    <h2 class="text-3xl">Questions owners ask</h2>
-    <div class="mt-6">
+  <section class="kora-container home-section home-faq">
+    <div>
+      <p class="eyebrow">Before you start</p>
+      <h2>Good questions.</h2>
+      <p>
+        Still have one?{" "}
+        <a
+          class="link-accent"
+          href={waLink("Hello, I have a question about Kora Desk.", "home-faq")}
+        >
+          Talk to a person.
+        </a>
+      </p>
+    </div>
+    <div>
       <Faq items={faqs} />
     </div>
   </section>
-
-  <!-- Final CTA -->
-  <div class="awning" aria-hidden="true"></div>
-  <section class="bg-ink py-16 text-white">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-      <h2 class="text-4xl">Ready in two minutes</h2>
-      <p class="mt-3 text-sand">Tell us your name, your shop, and your WhatsApp number. We set up the pilot with you.</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="/pilot" class="btn btn-light">Start free pilot</a>
-        <a href={waLink("Hello, I want to start a Kora Desk pilot.", "home-cta")} class="btn btn-on-dark">Talk on WhatsApp</a>
-        <a href="/demo" class="btn btn-on-dark">Book a 15-minute demo</a>
+  <section class="closing-section">
+    <div class="kora-container">
+      <p class="eyebrow">Let’s clear your desk</p>
+      <h2>
+        More shop.
+        <br />
+        <span>Less after-hours.</span>
+      </h2>
+      <p>
+        Start with your name, your shop, and your WhatsApp number.
+        <br />
+        We’ll take the setup from there.
+      </p>
+      <div class="hero-actions">
+        <a href="/pilot" class="btn btn-accent">
+          Start your free pilot <span aria-hidden="true">↗</span>
+        </a>
+        <a href="/demo" class="text-link">
+          Talk it through first <span aria-hidden="true">↗</span>
+        </a>
       </div>
+      <p class="hero-fineprint">
+        14 days free · No card required · Human setup
+      </p>
     </div>
   </section>
 </BaseLayout>

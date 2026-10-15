@@ -1,92 +1,169 @@
 ---
-import { businessTypes, site } from "../data/site";
+import { businessTypes } from "../data/site";
 ---
 
 <form id="pilot-form" class="space-y-4" novalidate>
-  <label class="block">
+  <label class="block" for="pilot-name">
     <span class="text-sm font-semibold">Your name</span>
-    <input class="field mt-1.5" name="name" autocomplete="name" required />
-    <span class="error hidden text-sm text-clay">Please enter your name.</span>
   </label>
-  <label class="block">
+  <input
+    id="pilot-name"
+    class="field"
+    name="name"
+    autocomplete="name"
+    required
+    aria-describedby="pilot-name-error"
+  />
+  <p id="pilot-name-error" class="error hidden text-sm text-clay">
+    Please enter your name.
+  </p>
+  <label class="block" for="pilot-business">
     <span class="text-sm font-semibold">Business name</span>
-    <input class="field mt-1.5" name="business" required />
-    <span class="error hidden text-sm text-clay">Please enter the business name.</span>
   </label>
-  <label class="block">
+  <input
+    id="pilot-business"
+    class="field"
+    name="business"
+    autocomplete="organization"
+    required
+    aria-describedby="pilot-business-error"
+  />
+  <p id="pilot-business-error" class="error hidden text-sm text-clay">
+    Please enter the business name.
+  </p>
+  <label class="block" for="pilot-type">
     <span class="text-sm font-semibold">Business type</span>
-    <select class="field mt-1.5" name="type" required>
-      <option value="">Choose one</option>
-      {businessTypes.map((t) => <option value={t}>{t}</option>)}
-    </select>
-    <span class="error hidden text-sm text-clay">Please choose a type.</span>
   </label>
-  <label class="block">
+  <select
+    id="pilot-type"
+    class="field"
+    name="type"
+    required
+    aria-describedby="pilot-type-error"
+  >
+    <option value="">Choose one</option>
+    {businessTypes.map((type) => (
+      <option value={type}>{type}</option>
+    ))}
+  </select>
+  <p id="pilot-type-error" class="error hidden text-sm text-clay">
+    Please choose a type.
+  </p>
+  <label class="block" for="pilot-whatsapp">
     <span class="text-sm font-semibold">WhatsApp number</span>
-    <input
-      class="field mt-1.5"
-      name="whatsapp"
-      inputmode="tel"
-      autocomplete="tel"
-      placeholder="+234 801 234 5678"
-      required
-    />
-    <span class="error hidden text-sm text-clay">Use a number with country code, for example +234…</span>
   </label>
-  <label class="flex items-start gap-3 text-sm">
-    <input class="mt-1 h-5 w-5" type="checkbox" name="consent" required />
+  <input
+    id="pilot-whatsapp"
+    class="field"
+    type="tel"
+    name="whatsapp"
+    inputmode="tel"
+    autocomplete="tel"
+    placeholder="+234 801 234 5678"
+    required
+    aria-describedby="pilot-phone-hint pilot-whatsapp-error"
+  />
+  <p id="pilot-phone-hint" class="text-xs text-muted">
+    Include your country code, for example +234.
+  </p>
+  <p id="pilot-whatsapp-error" class="error hidden text-sm text-clay">
+    Enter a valid number with country code.
+  </p>
+  <label class="flex items-start gap-3 text-sm" for="pilot-consent">
+    <input
+      id="pilot-consent"
+      class="mt-1 h-5 w-5 shrink-0"
+      type="checkbox"
+      name="consent"
+      required
+      aria-describedby="pilot-consent-error"
+    />
     <span>
-      I agree that Kora Desk may contact me on WhatsApp about this pilot, and I have read the
-      <a class="link-accent" href="/legal/privacy">privacy notice</a>.
+      I agree that Kora Desk may contact me on WhatsApp about this pilot, and I
+      have read the{" "}
+      <a class="link-accent" href="/legal/privacy">
+        privacy notice
+      </a>
+      .
     </span>
   </label>
-  <p class="consent-error hidden text-sm text-clay">Please tick the box to continue.</p>
-  <button type="submit" class="btn btn-primary w-full">
-    Start free 14-day pilot
+  <p id="pilot-consent-error" class="error hidden text-sm text-clay">
+    Please tick the box to continue.
+  </p>
+  <p id="pilot-storage-error" class="form-error hidden" role="alert">
+    This browser could not save your draft. Allow site storage, then try again.
+  </p>
+  <button type="submit" class="btn btn-accent w-full">
+    Continue to WhatsApp <span aria-hidden="true">↗</span>
   </button>
-  <p class="text-sm text-muted">No card required. The pilot covers up to 100 conversations. A person from {site.name} will confirm your number.</p>
+  <p class="text-xs text-muted">
+    Next, review your details and send your request on WhatsApp. Nothing is sent
+    from this form.
+  </p>
+  <noscript>
+    <p class="form-error">
+      Enable JavaScript to prepare your request, or{" "}
+      <a href="/contact" class="link-accent">
+        contact us directly
+      </a>
+      .
+    </p>
+  </noscript>
 </form>
-
 <script>
-  const form = document.getElementById("pilot-form");
-  const phone = /^\+[1-9]\d{7,14}$/;
-
-  function showError(input, on) {
-    const err = input.parentElement?.querySelector(".error");
-    err?.classList.toggle("hidden", !on);
-    input.setAttribute("aria-invalid", String(on));
-  }
-
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = form.elements.namedItem("name");
-    const business = form.elements.namedItem("business");
-    const type = form.elements.namedItem("type");
-    const whatsapp = form.elements.namedItem("whatsapp");
-    const consent = form.elements.namedItem("consent");
-    const cleaned = String(data.get("whatsapp") || "").replace(/[\s-]/g, "");
-    let ok = true;
-    showError(name, !name.value.trim());
-    if (!name.value.trim()) ok = false;
-    showError(business, !business.value.trim());
-    if (!business.value.trim()) ok = false;
-    showError(type, !type.value);
-    if (!type.value) ok = false;
-    const phoneOk = phone.test(cleaned);
-    showError(whatsapp, !phoneOk);
-    if (!phoneOk) ok = false;
-    document.querySelector(".consent-error")?.classList.toggle("hidden", consent.checked);
-    if (!consent.checked) ok = false;
-    if (!ok) return;
-    const payload = {
-      name: name.value.trim(),
-      business: business.value.trim(),
-      type: type.value,
-      whatsapp: cleaned,
-      at: new Date().toISOString(),
+  const form = document.querySelector<HTMLFormElement>("#pilot-form");
+  if (form) {
+    const controls = {
+      name: form.elements.namedItem("name") as HTMLInputElement,
+      business: form.elements.namedItem("business") as HTMLInputElement,
+      type: form.elements.namedItem("type") as HTMLSelectElement,
+      whatsapp: form.elements.namedItem("whatsapp") as HTMLInputElement,
+      consent: form.elements.namedItem("consent") as HTMLInputElement,
     };
-    localStorage.setItem("kora-pilot", JSON.stringify(payload));
-    window.location.href = "/pilot/thanks";
-  });
+    function invalid(
+      input: HTMLInputElement | HTMLSelectElement,
+      bad: boolean,
+    ) {
+      input.setAttribute("aria-invalid", String(bad));
+      const error = document.getElementById(`${input.id}-error`);
+      error?.classList.toggle("hidden", !bad);
+    }
+    // Clear stale feedback when the owner corrects a field; validate again on submit.
+    Object.values(controls).forEach((input) =>
+      input.addEventListener("input", () => invalid(input, false)),
+    );
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const cleaned = controls.whatsapp.value.replace(/[\s()-]/g, "");
+      const checks = [
+        [controls.name, !controls.name.value.trim()],
+        [controls.business, !controls.business.value.trim()],
+        [controls.type, !controls.type.value],
+        [controls.whatsapp, !/^\+[1-9]\d{7,14}$/.test(cleaned)],
+        [controls.consent, !controls.consent.checked],
+      ] as const;
+      checks.forEach(([input, bad]) => invalid(input, bad));
+      const first = checks.find(([, bad]) => bad);
+      if (first) {
+        first[0].focus();
+        return;
+      }
+      const payload = JSON.stringify({
+        name: controls.name.value.trim(),
+        business: controls.business.value.trim(),
+        type: controls.type.value,
+        whatsapp: cleaned,
+        at: new Date().toISOString(),
+      });
+      try {
+        sessionStorage.setItem("kora-pilot", payload);
+      } catch {
+        document
+          .getElementById("pilot-storage-error")
+          ?.classList.remove("hidden");
+        return;
+      }
+      window.location.assign("/pilot/thanks");
+    });
+  }
 </script>

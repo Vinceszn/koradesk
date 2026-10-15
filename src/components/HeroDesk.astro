@@ -1,0 +1,295 @@
+---
+import AgentSymbol from "./AgentSymbol.astro";
+const demos = [
+  {
+    id: "orders",
+    name: "Orders",
+    result: "Order drafted",
+    caption:
+      "A voice note becomes an itemised order. Check the draft before it goes out.",
+    incoming:
+      "Abeg, send 3 bags of rice and 2 cartons of noodles. Deliver tomorrow morning.",
+    label: "Customer voice note · transcript",
+    rows: [
+      ["Rice · 50kg × 3", "₦168,000"],
+      ["Noodles · carton × 2", "₦24,500"],
+    ],
+    totalLabel: "Order total",
+    total: "₦192,500",
+    note: "Draft only · waiting for confirmation",
+    reply:
+      "Your order is drafted: ₦192,500. Please confirm the items and delivery time.",
+    next: "Confirm sample order",
+    final: "Sample order confirmed",
+    finalNote: "Invoice prepared · no real order was placed",
+  },
+  {
+    id: "payments",
+    name: "Payments",
+    result: "Payment matched",
+    caption:
+      "A bank alert is matched to an open invoice. The shop gets a clear record.",
+    incoming:
+      "I have sent the ₦86,500 for invoice KD-1839. Please confirm receipt.",
+    label: "Customer message",
+    rows: [
+      ["Open invoice", "KD-1839"],
+      ["Transfer received", "₦86,500"],
+    ],
+    totalLabel: "Amount matched",
+    total: "₦86,500",
+    note: "Matching example · no bank connection",
+    reply:
+      "₦86,500 matched to invoice KD-1839. Receipt prepared and books updated.",
+    next: "View sample receipt",
+    final: "Receipt ready",
+    finalNote: "Invoice KD-1839 · marked paid in this demo",
+  },
+  {
+    id: "stock",
+    name: "Stock",
+    result: "Reorder drafted",
+    caption:
+      "Low stock becomes a suggested reorder. The supplier waits for your approval.",
+    incoming:
+      "We have only 4 cartons of noodles left. Can you check what we need to order?",
+    label: "Shop staff message",
+    rows: [
+      ["Noodles in stock", "4 cartons"],
+      ["Suggested reorder", "10 cartons"],
+    ],
+    totalLabel: "After delivery",
+    total: "14 cartons",
+    note: "Supplier has not been contacted",
+    reply:
+      "Noodles are below your stock limit. A reorder for 10 cartons is ready for your approval.",
+    next: "Approve sample reorder",
+    final: "Sample reorder approved",
+    finalNote: "Demo only · no supplier was contacted",
+  },
+  {
+    id: "books",
+    name: "Books",
+    result: "Day summarised",
+    caption:
+      "The day's orders and payments become a simple summary for you and your accountant.",
+    incoming:
+      "Shop is closed. Please send today's sales and show me what is still unpaid.",
+    label: "Shop owner message",
+    rows: [
+      ["Sales today", "₦286,500"],
+      ["Payments received", "₦200,000"],
+    ],
+    totalLabel: "Still unpaid",
+    total: "₦86,500",
+    note: "Illustrative figures · accountant reviews before filing",
+    reply:
+      "Your day summary is ready. ₦86,500 is still unpaid. Your accountant can review the books.",
+    next: "View sample summary",
+    final: "Summary ready for review",
+    finalNote: "Nothing is filed or sent from this demo",
+  },
+];
+---
+
+<section
+  class="desk-demo"
+  aria-label="Interactive Kora Desk sample"
+  data-desk-demo
+>
+  <div class="desk-topline">
+    <span class="desk-dot" aria-hidden="true"></span>
+    <span>A little less admin.</span>
+    <span class="desk-sample">Interactive sample</span>
+  </div>
+  <div class="desk-tabs" role="group" aria-label="Choose an agent">
+    {demos.map((demo, i) => (
+      <button
+        type="button"
+        data-agent={demo.id}
+        aria-pressed={i === 0 ? "true" : "false"}
+        class="desk-tab"
+      >
+        <AgentSymbol agent={demo.id} size={19} />
+        <span>{demo.name}</span>
+      </button>
+    ))}
+  </div>
+  <div class="desk-body">
+    <div class="desk-chat-label">
+      <span class="shop-avatar" aria-hidden="true">
+        CS
+      </span>
+      <div>
+        <strong>Chinedu Stores</strong>
+        <span>Illustrative WhatsApp conversation</span>
+      </div>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        aria-hidden="true"
+      >
+        <path d="M20 11.5a8.5 8.5 0 0 1-12 7.7L3 21l1.8-5A8.5 8.5 0 1 1 20 11.5Z" />
+      </svg>
+    </div>
+    <div class="desk-incoming">
+      <span data-incoming-label>{demos[0].label}</span>
+      <p data-incoming>{demos[0].incoming}</p>
+      <span class="message-time">9:41 AM</span>
+    </div>
+    <div class="desk-connector" aria-hidden="true">
+      <svg width="22" height="32" viewBox="0 0 22 32" fill="none">
+        <path
+          d="M11 1v26m-5-5 5 5 5-5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>Kora takes it from here</span>
+    </div>
+    <div class="desk-receipt">
+      <div class="receipt-heading">
+        <span class="receipt-agent" data-receipt-agent>
+          Orders agent
+        </span>
+        <span class="receipt-state" data-result>
+          {demos[0].result}
+        </span>
+      </div>
+      <div class="receipt-rows" data-receipt-rows>
+        {demos[0].rows.map((row) => (
+          <div>
+            <span>{row[0]}</span>
+            <strong>{row[1]}</strong>
+          </div>
+        ))}
+      </div>
+      <div class="receipt-total">
+        <span data-total-label>{demos[0].totalLabel}</span>
+        <strong data-total>{demos[0].total}</strong>
+      </div>
+      <p class="receipt-note" data-receipt-note>
+        {demos[0].note}
+      </p>
+    </div>
+    <p class="desk-reply" data-reply hidden></p>
+    <button type="button" class="desk-action" data-demo-next>
+      {demos[0].next}
+      <span aria-hidden="true">↗</span>
+    </button>
+    <p class="desk-feedback" data-feedback role="status" aria-live="polite">
+      {demos[0].caption}
+    </p>
+  </div>
+  <div class="desk-bottom">
+    <span>
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        aria-hidden="true"
+      >
+        <rect x="5" y="10" width="14" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </svg>
+      You stay in control.
+    </span>
+    <button type="button" data-demo-reset>
+      Reset sample <span aria-hidden="true">↺</span>
+    </button>
+  </div>
+  <script
+    type="application/json"
+    data-demo-data
+    set:html={JSON.stringify(demos)}
+  />
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>("[data-desk-demo]").forEach((root) => {
+    const data = JSON.parse(
+      root.querySelector("[data-demo-data]")!.textContent!,
+    );
+    let selected = data[0];
+    let complete = false;
+    const next = root.querySelector<HTMLButtonElement>("[data-demo-next]")!;
+    const reply = root.querySelector<HTMLElement>("[data-reply]")!;
+    function setText(selector: string, text: string) {
+      root.querySelector(selector)!.textContent = text;
+    }
+    function render() {
+      root
+        .querySelectorAll<HTMLButtonElement>("[data-agent]")
+        .forEach((button) =>
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.agent === selected.id),
+          ),
+        );
+      root.dataset.selected = selected.id;
+      setText("[data-incoming-label]", selected.label);
+      setText("[data-incoming]", selected.incoming);
+      setText("[data-receipt-agent]", `${selected.name} agent`);
+      setText("[data-result]", complete ? selected.final : selected.result);
+      const rows = root.querySelector("[data-receipt-rows]")!;
+      rows.replaceChildren(
+        ...selected.rows.map((row: string[]) => {
+          const line = document.createElement("div");
+          const label = document.createElement("span");
+          const value = document.createElement("strong");
+          label.textContent = row[0];
+          value.textContent = row[1];
+          line.append(label, value);
+          return line;
+        }),
+      );
+      setText("[data-total-label]", selected.totalLabel);
+      setText("[data-total]", selected.total);
+      setText(
+        "[data-receipt-note]",
+        complete ? selected.finalNote : selected.note,
+      );
+      reply.textContent = selected.reply;
+      reply.hidden = !complete;
+      next.replaceChildren(
+        document.createTextNode(
+          complete ? "Try this sample again" : selected.next,
+        ),
+      );
+      const arrow = document.createElement("span");
+      arrow.setAttribute("aria-hidden", "true");
+      arrow.textContent = complete ? "↺" : "↗";
+      next.append(arrow);
+      setText(
+        "[data-feedback]",
+        complete ? selected.finalNote : selected.caption,
+      );
+      root.dataset.complete = String(complete);
+    }
+    root.querySelectorAll<HTMLButtonElement>("[data-agent]").forEach((button) =>
+      button.addEventListener("click", () => {
+        selected = data.find(
+          (item: { id: string }) => item.id === button.dataset.agent,
+        );
+        complete = false;
+        render();
+      }),
+    );
+    next.addEventListener("click", () => {
+      complete = !complete;
+      render();
+    });
+    root.querySelector("[data-demo-reset]")!.addEventListener("click", () => {
+      complete = false;
+      render();
+    });
+  });
+</script>

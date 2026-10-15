@@ -1,7 +1,7 @@
 <div
   id="cookie-banner"
-  class="fixed inset-x-0 bottom-16 z-40 mx-auto hidden max-w-md rounded-2xl border border-sand bg-paper p-5 shadow-soft md:bottom-6"
-  role="dialog"
+  class="cookie-notice fixed inset-x-0 bottom-16 z-40 mx-auto hidden max-w-md rounded-2xl border border-sand bg-paper p-5 shadow-soft md:bottom-6"
+  role="region"
   aria-labelledby="cookie-title"
 >
   <p id="cookie-title" class="font-semibold">Cookies</p>
@@ -22,13 +22,13 @@
 <script>
   const key = "kora-consent";
   const banner = document.getElementById("cookie-banner");
-  if (!localStorage.getItem(key) && banner) banner.classList.remove("hidden");
+  try { if (!localStorage.getItem(key) && banner) banner.classList.remove("hidden"); }
+  catch { banner?.classList.remove("hidden"); }
+  function saveConsent(value: string) { try { localStorage.setItem(key, value); } catch {} banner?.classList.add("hidden"); }
   document.getElementById("cookie-accept")?.addEventListener("click", () => {
-    localStorage.setItem(key, "analytics");
-    banner?.classList.add("hidden");
+    saveConsent("analytics");
   });
   document.getElementById("cookie-reject")?.addEventListener("click", () => {
-    localStorage.setItem(key, "essential");
-    banner?.classList.add("hidden");
+    saveConsent("essential");
   });
 </script>

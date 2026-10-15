@@ -9,17 +9,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "npm run build && wrangler pages deploy dist --project-name koradesk",
-    "cf-typegen": "cf workers types"
+    "cf-typegen": "cf workers types",
+    "test": "npm run build && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource-variable/nunito": "^5.3.0",
     "astro": "^5.14.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "cf": "^1.0.0-beta.12",
+    "jsdom": "^26.1.0",
     "tailwindcss": "^4.1.13",
     "wrangler": "^4.148.0"
   }

@@ -1,71 +1,116 @@
-<section class="rounded-3xl border border-sand bg-white p-6 md:p-8" aria-labelledby="roi-heading">
-  <h2 id="roi-heading" class="text-2xl md:text-3xl">Hours and naira, not a promise</h2>
+<section
+  class="rounded-3xl border border-sand bg-white p-6 md:p-8"
+  aria-labelledby="roi-heading"
+>
+  <p class="eyebrow">Make it your numbers</p>
+  <h2 id="roi-heading" class="mt-3 text-2xl md:text-3xl">
+    What is your admin time worth?
+  </h2>
   <p class="mt-2 text-muted">
-    Edit the numbers to match your shop. Results are estimates only. They are not a guarantee.
+    Estimate the value of the time you could get back. These are assumptions you
+    control, not guaranteed savings.
   </p>
   <form id="roi-form" class="mt-6 grid gap-4 md:grid-cols-2">
     <label class="block">
-      <span class="text-sm font-semibold">Staff doing admin</span>
-      <input class="field mt-1.5" type="number" name="staff" min="1" value="2" />
+      <span class="text-sm font-semibold">
+        Total admin hours each week, across your team
+      </span>
+      <input
+        class="field mt-1.5"
+        type="number"
+        name="hours"
+        min="0"
+        max="10000"
+        value="16"
+      />
     </label>
     <label class="block">
-      <span class="text-sm font-semibold">Hours / week on orders, payments, stock</span>
-      <input class="field mt-1.5" type="number" name="hours" min="1" value="16" />
-    </label>
-    <label class="block">
-      <span class="text-sm font-semibold">Average hourly cost (₦)</span>
-      <input class="field mt-1.5" type="number" name="rate" min="100" step="100" value="2500" />
-    </label>
-    <label class="block">
-      <span class="text-sm font-semibold">Monthly orders</span>
-      <input class="field mt-1.5" type="number" name="orders" min="1" value="400" />
+      <span class="text-sm font-semibold">Value of one admin hour (₦)</span>
+      <input
+        class="field mt-1.5"
+        type="number"
+        name="rate"
+        min="0"
+        max="10000000"
+        step="100"
+        value="2500"
+      />
     </label>
     <label class="block md:col-span-2">
-      <span class="text-sm font-semibold">Share of admin hours you think the assistant can take (editable)</span>
-      <input class="field mt-1.5" type="number" name="share" min="10" max="90" value="50" />
+      <span class="text-sm font-semibold">
+        Share of admin time you expect Kora to handle (%)
+      </span>
+      <input
+        class="field mt-1.5"
+        type="number"
+        name="share"
+        min="0"
+        max="100"
+        value="50"
+      />
     </label>
   </form>
-  <div class="mt-6 grid gap-3 sm:grid-cols-2" id="roi-out"></div>
+  <div
+    class="mt-6 grid gap-3 sm:grid-cols-2"
+    id="roi-out"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
   <p class="mt-4 text-sm text-muted">
-    Assumptions you can change: we apply your share percentage to weekly admin hours, multiply by 4.3 weeks, then compare to Growth at ₦45,000 / month. Starter is cheaper if you only need Orders and Payments.
+    We multiply total weekly admin hours by your percentage, then by 4.3 weeks
+    and the hourly value. This estimates time value, not a cash refund or a
+    reduction in payroll. Starter costs less if you only need Orders and
+    Payments.
   </p>
 </section>
-
 <script>
-  const form = document.getElementById("roi-form");
+  const form = document.querySelector<HTMLFormElement>("#roi-form");
   const out = document.getElementById("roi-out");
-  const growth = 45000;
-
-  function naira(n) {
+  let growth = 45000;
+  function naira(n: number) {
     return new Intl.NumberFormat("en-NG", {
       style: "currency",
       currency: "NGN",
       maximumFractionDigits: 0,
     }).format(n);
   }
-
   function calc() {
     if (!form || !out) return;
     const data = new FormData(form);
-    const hours = Number(data.get("hours")) || 0;
-    const rate = Number(data.get("rate")) || 0;
-    const share = (Number(data.get("share")) || 0) / 100;
-    const hoursSaved = hours * share;
-    const monthlyValue = hoursSaved * 4.3 * rate;
-    const payback = monthlyValue > 0 ? growth / monthlyValue : 0;
-    out.innerHTML = [
-      ["Estimated hours saved / week", hoursSaved.toFixed(1)],
-      ["Estimated naira value / month", naira(monthlyValue)],
-      ["Growth plan cost", naira(growth)],
-      ["Estimated payback", payback > 0 ? `${payback.toFixed(1)} months` : "—"],
-    ]
-      .map(
-        ([k, v]) =>
-          `<div class="rounded-xl border border-sand bg-surface p-4"><p class="text-sm text-muted">${k}</p><p class="mt-1 text-2xl font-semibold tracking-tight">${v}</p></div>`,
-      )
-      .join("");
+    function value(name: string, max: number) {
+      const n = Number(data.get(name));
+      return Number.isFinite(n) ? Math.min(max, Math.max(0, n)) : 0;
+    }
+    const hours = (value("hours", 10000) * value("share", 100)) / 100;
+    const total = hours * 4.3 * value("rate", 10000000);
+    const figures = [
+      ["Estimated hours saved / week", hours.toFixed(1)],
+      ["Estimated time value / month", naira(total)],
+      ["Growth monthly equivalent", naira(growth)],
+      ["Time value minus plan cost / month", naira(total - growth)],
+    ];
+    out.replaceChildren(
+      ...figures.map(([label, value]) => {
+        const box = document.createElement("div");
+        box.className = "rounded-xl border border-sand bg-surface p-4";
+        const key = document.createElement("p");
+        key.className = "text-sm text-muted";
+        key.textContent = label;
+        const figure = document.createElement("p");
+        figure.className = "mt-1 text-2xl font-semibold tracking-tight";
+        figure.textContent = value;
+        box.append(key, figure);
+        return box;
+      }),
+    );
   }
-
+  form?.addEventListener("submit", (event) => event.preventDefault());
   form?.addEventListener("input", calc);
+  document.addEventListener("kora:billing", ((
+    event: CustomEvent<{ annual: boolean }>,
+  ) => {
+    growth = event.detail.annual ? 37500 : 45000;
+    calc();
+  }) as EventListener);
   calc();
 </script>
