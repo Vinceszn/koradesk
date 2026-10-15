@@ -1,0 +1,27 @@
+/* Floating Liquid Glass navigation */
+.kora-glass-header {
+  position: sticky; top: 12px; z-index: 40;
+  width: calc(100% - 32px); max-width: 1184px;
+  margin: 12px auto 0; border: 1px solid rgba(255,255,255,.64);
+  border-radius: 999px; isolation: isolate;
+  background: linear-gradient(135deg,rgba(255,255,255,.19),rgba(255,255,255,.05));
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  backdrop-filter: blur(20px) saturate(145%);
+  box-shadow: 0 8px 28px rgba(18,46,35,.06),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(255,255,255,.15);
+}
+.kora-glass-header > div {padding: 10px 18px;}
+.kora-glass-header #mobile-nav {border-color:rgba(100,125,113,.16); margin:0 12px 8px;}
+.kora-glass-header:has(#mobile-nav:not(.hidden)) {border-radius:28px;}
+.dark .kora-glass-header {
+  background:linear-gradient(135deg,rgba(18,34,27,.22),rgba(18,34,27,.08));
+  border-color:rgba(255,255,255,.16);
+  box-shadow:0 8px 28px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -1px 0 rgba(255,255,255,.03);
+}
+@media(max-width:639px){
+ .kora-glass-header {top:8px;width:calc(100% - 16px);margin-top:8px;}
+ .kora-glass-header > div {padding:8px 12px;gap:8px;}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+ .kora-glass-header{background:rgba(255,255,255,.94);}
+ .dark .kora-glass-header{background:rgba(12,24,18,.94);}
+}

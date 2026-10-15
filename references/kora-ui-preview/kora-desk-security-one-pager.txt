@@ -1,0 +1,9 @@
+KORA — PRODUCT PREVIEW
+
+Kora is being designed to connect inventory, orders, payments and receipts across a merchant website, WhatsApp and the counter.
+
+This preview uses sample data; no live bank account, stock database or customer messaging is connected.
+
+Production controls to implement and test: tenant isolation, role permissions, signed provider events, server verification, atomic stock reservations, immutable movement history, backup recovery and delivery retries.
+
+Hosting regions, subprocessors, retention and support arrangements must be confirmed before live merchant onboarding.
