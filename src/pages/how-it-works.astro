@@ -3,29 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import DemoPhone from "../components/DemoPhone.astro";
 ---
-
-<BaseLayout title="How it works" description="Connect your WhatsApp number, share your prices, and approve the first actions. A 3-step walkthrough and a tap-through demo.">
-  <PageHero
-    eyebrow="How it works"
-    title="Three steps. Then the chats keep flowing."
-    lede="The demo below is simulated so you can tap at your own pace. No sound, no autoplay."
-  />
-  <section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
-    <ol>
-      <li><strong>Connect your number.</strong> We use WhatsApp Business Platform. Customers do not install anything. You keep the same chats.</li>
-      <li><strong>Tell it your prices.</strong> Upload a sheet, forward a broadcast, or photograph a wall list. Confirm a handful of items so it learns your units.</li>
-      <li><strong>Approve the first week.</strong> Sit with a named support person. Raise limits only when the log looks right.</li>
-    </ol>
-  </section>
-  <div id="demo">
-    <DemoPhone />
-  </div>
-  <section class="mx-auto max-w-3xl px-4 py-14">
-    <p class="eyebrow">Video walkthrough</p>
-    <h2 class="mt-3 text-3xl md:text-4xl">60-second demo video</h2>
-    <p class="mt-2 text-muted">The launch cut is not in this repo yet (phone-shot video, captions, no autoplay sound). Use the tap-through above, or <a class="link-accent" href="/demo">book a 15-minute walkthrough</a>.</p>
-    <p class="mt-6">
-      <a class="btn btn-primary" href="/pilot">Start free pilot</a>
-    </p>
-  </section>
+<BaseLayout title="How Kora works" description="A shared catalogue, stock reservations and one order-to-receipt workflow across sales channels.">
+<PageHero eyebrow="The product plan" title="Set up once. Sell in more places." lede="The channels change. The catalogue, stock rules and order record stay together." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora"><ol><li><strong>Catalogue and count.</strong> Add products, variants, prices and opening stock.</li><li><strong>Check and reserve.</strong> Confirm the order against available inventory.</li><li><strong>Verify and receipt.</strong> Match the provider-confirmed payment and prepare the PDF.</li><li><strong>Hand over and record.</strong> Dispatch or pickup consumes the reserved stock once.</li></ol><p>The merchant dashboard comes first. A connected storefront and official WhatsApp automation will reuse the same backend.</p></section>
+<DemoPhone anchorId="demo" />
 </BaseLayout>

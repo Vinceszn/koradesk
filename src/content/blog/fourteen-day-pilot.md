@@ -1,10 +1,12 @@
 ---
-title: A 14-day pilot that does not waste the owner’s time
-description: Connect one number, one price list, and one approval limit.
-pubDate: 2026-10-03
-minutes: 3
+title: "A founding pilot built around your trading day"
+description: "Start with one location, opening stock and a complete order-to-receipt flow."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Do not start with four agents. Start with Orders and Payments. Sit with the log for three mornings. Raise the limit only when the drafts look like your shop.
+Before a pilot starts, agree the catalogue, access, limits, price and review schedule. Kora’s pilot is in preparation; a website interest form does not activate an account.
 
-If the assistant is wrong twice on the same SKU, fix the price list before you blame the model.
+Count opening stock together. Test a small set of real orders only after the backend and payment setup are ready. Review reservations, cash declarations, provider confirmations, receipts and dispatch against what actually happened.
+
+Track discrepancies and support effort as carefully as completed orders. A feature is useful when the business can rely on the record.

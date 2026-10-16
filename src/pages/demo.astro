@@ -4,11 +4,11 @@ import PageHero from "../components/PageHero.astro";
 import { site } from "../data/site";
 ---
 
-<BaseLayout title="Book a 15-minute demo" description="Book a short Kora Desk walkthrough. Times shown in West Africa Time.">
+<BaseLayout title="Discuss your workflow" description="Request a conversation about your catalogue, sales channels and inventory needs.">
   <PageHero
     eyebrow="Demo"
-    title="Fifteen minutes, on your phone"
-    lede="Pick a WAT slot and send it to us on WhatsApp. We confirm within one working day."
+    title="Show us how your business sells"
+    lede="Suggest a WAT time to discuss the product preview. Availability is confirmed separately."
   />
   <section class="mx-auto max-w-lg px-4 py-14">
     <form id="demo-form" class="space-y-4" data-whatsapp={site.whatsappE164}>
@@ -34,7 +34,7 @@ import { site } from "../data/site";
       <button class="btn btn-primary w-full" type="submit">Request this slot</button>
       <div id="demo-ok" class="hidden rounded-3xl border border-sand bg-surface p-4">
         <p class="font-semibold text-leaf">Slot noted. One tap sends it to us.</p>
-        <p class="mt-1 text-sm text-muted">Tap below to send your request on WhatsApp — that is what books it.</p>
+        <p class="mt-1 text-sm text-muted">Tap below to send your request on WhatsApp — the team still needs to confirm availability.</p>
         <p class="mt-3">
           <a id="demo-wa" class="btn btn-accent" href="#">Send request on WhatsApp</a>
         </p>

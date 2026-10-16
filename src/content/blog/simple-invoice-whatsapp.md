@@ -1,12 +1,12 @@
 ---
-title: A simple invoice your customer will actually pay
-description: Keep invoices short, numbered, and tied to the WhatsApp thread they came from.
-pubDate: 2026-09-02
-minutes: 5
+title: "From order to payment to branded receipt"
+description: "The order supplies the shopping list. The provider supplies payment confirmation."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Put the invoice number in the same chat as the order. Name the bank, the account name, and the amount in naira. Ask for the transfer screenshot in that thread.
+An invoice should show the merchant, order reference, items, quantities, totals and payment instructions. Check that payment instructions belong to the correct business.
 
-If two customers pay ₦25,000 on the same day, the screenshot plus the invoice number is what saves you at 10pm.
+After the transaction is verified, a merchant-issued receipt can combine that saved order with the amount received, date, payment reference and remaining balance.
 
-Kora Desk drafts this message for you. You still confirm the account details once.
+Kora’s first workflow is being designed around this connection. Manual WhatsApp sharing comes first; official automated document delivery follows later.

@@ -1,11 +1,13 @@
 @import "@fontsource-variable/inter/index.css";
 @import "@fontsource-variable/nunito/index.css";
 @import "tailwindcss";
+@import "./refresh.css";
+@import "./conversation.css";
 
 /*
  * Kora Desk design system — "modern & minimal"
  * ------------------------------------------------
- * Near-white canvas, near-black ink, hairline borders, one deep emerald
+ * Warm off-white canvas, near-black ink, hairline borders, one deep emerald
  * accent (with a brighter variant for use on dark surfaces).
  */
 @theme {
@@ -13,15 +15,15 @@
   --color-paper: #ffffff;
   --color-surface: #f5f5f3;
   --color-sand: #e6e7e3;
-  --color-muted: #6d726f;
-  --color-accent: #0f7a5b;
-  --color-accent-deep: #0a5a43;
+  --color-muted: #59635c;
+  --color-accent: #126347;
+  --color-accent-deep: #0c4935;
   --color-accent-soft: #d3f3e4;
   --color-accent-bright: #34d399;
   --color-leaf: #067647;
   --color-clay: #d92d20;
   --color-warning: #b45309;
-  --color-faint: #9ca3a0;
+  --color-faint: #667168;
   --color-sun: #f6b73c;
   --color-blush: #ffa8bb;
   --color-lavender: #a78bfa;
@@ -104,7 +106,7 @@ h1 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 3px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -320,7 +322,7 @@ h1 {
   --color-leaf: #4ade80;
   --color-clay: #f97066;
   --color-warning: #fbbf24;
-  --color-faint: #6b7672;
+  --color-faint: #a3b2a9;
   --color-chat: #0a0f0d;
   --color-bubble: #1b2523;
   --color-bubble-out: #0c3f34;
@@ -354,6 +356,10 @@ h1 {
 .dark .btn-accent:hover {
   background-color: #0d6b4c;
 }
+.dark .btn-accent {
+  background-color: #126347;
+  color: #fff;
+}
 .dark .btn-light {
   color: #101514;
 }
@@ -361,6 +367,6 @@ h1 {
 /* form controls */
 .dark .field {
   background-color: #141b18;
-  border-color: var(--color-sand);
+  border-color: #718278;
   color: var(--color-ink);
 }

@@ -1,0 +1,607 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CheckIcon from "../components/CheckIcon.astro";
+import DemoPhone from "../components/DemoPhone.astro";
+import ArtButton from "../components/ArtButton.astro";
+import CommerceArtwork from "../components/CommerceArtwork.astro";
+import Faq from "../components/Faq.astro";
+import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
+---
+
+<BaseLayout title="Commerce ecosystem preview" description={site.description}>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      })}
+    />
+  </Fragment>
+
+  <!-- Hero -->
+  <section
+    class="original-hero overflow-hidden border-b border-sand bg-paper"
+    data-creative-hero
+  >
+    <div class="mx-auto max-w-4xl px-4 pt-16 text-center md:pt-24">
+      <p class="inline-flex min-h-11 items-center gap-2 rounded-full border border-sand bg-white px-4 text-sm text-muted">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
+        </span>
+        Building with Nigeria’s next founding merchants
+      </p>
+      <h1 class="mx-auto mt-6 max-w-3xl text-5xl font-bold leading-[1.04] tracking-tighter md:text-6xl">
+        More sales. Less
+        <span class="relative inline-block">
+          wahala.
+          <svg
+            class="absolute -left-2 top-1/2 h-3 w-[calc(100%+1rem)] -translate-y-1/2 -rotate-2 md:h-4"
+            viewBox="0 0 200 12"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8 C 60 3, 140 3, 197 7"
+              stroke="var(--color-clay)"
+              stroke-width="5"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-muted md:text-xl">
+        Your stock, orders and payments—connected across your website, WhatsApp and shop counter. One business, however you sell.
+      </p>
+      <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+        <ArtButton href="/pilot" label="Build with Kora" />
+        <a class="btn btn-ghost" href="#demo">
+          Watch a sale happen <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+      <p class="mt-4 text-sm text-muted">
+        Product preview · Founding pilot in preparation · No payment taken here
+      </p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">
+          Less of this:
+        </p>
+        <button
+          type="button"
+          class="motion-switch"
+          data-ticker-pause
+          aria-pressed="false"
+        >
+          Pause moving strips
+        </button>
+      </div>
+    </div>
+    <p class="sr-only">
+      Kora is being built to connect inventory, orders, payments and receipts across a website, WhatsApp and the shop counter.
+    </p>
+    <div class="mt-4 space-y-3" aria-hidden="true">
+      <div class="ticker">
+        <div class="ticker-track">
+          <div class="flex shrink-0 items-stretch gap-3 pr-3">
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Copying the same order twice
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Guessing who paid
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Three different stock lists
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Selling the last item twice
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Updating prices everywhere
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Hunting for receipts
+              </span>
+            </div>
+          </div>
+          <div class="flex shrink-0 items-stretch gap-3 pr-3">
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Copying the same order twice
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Guessing who paid
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Three different stock lists
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Selling the last item twice
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Updating prices everywhere
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-white p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="ink" />
+              <span class="text-sm text-muted line-through decoration-clay/70 decoration-2">
+                Hunting for receipts
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-center text-xs font-semibold uppercase tracking-widest text-accent">
+        More of this:
+      </p>
+      <div class="ticker">
+        <div class="ticker-track reverse">
+          <div class="flex shrink-0 items-stretch gap-3 pr-3">
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                One catalogue, every channel
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Stock you can account for
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Payments tied to orders
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Your own online storefront
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Receipts with your name on them
+              </span>
+            </div>
+          </div>
+          <div class="flex shrink-0 items-stretch gap-3 pr-3">
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                One catalogue, every channel
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Stock you can account for
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Payments tied to orders
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:-rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Your own online storefront
+              </span>
+            </div>
+            <div class="flex w-max max-w-[85vw] shrink-0 items-center gap-3 rounded-full border border-sand bg-bubble-out p-3 pr-5 text-left md:rotate-1">
+              <CheckIcon tone="accent" />
+              <span class="text-sm font-semibold text-ink">
+                Receipts with your name on them
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto max-w-4xl px-4 pb-16 pt-10 text-center md:pb-20">
+      <p class="text-sm text-muted">
+        A commerce platform for online sellers, physical shops and businesses doing both.
+      </p>
+      <p class="mt-4">
+        <a
+          href="#demo"
+          class="link-accent inline-flex min-h-11 items-center gap-2 text-sm font-semibold"
+        >
+          See how it works
+          <span aria-hidden="true">↓</span>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <style is:global>
+    .ticker {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+      );
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 8%,
+        black 92%,
+        transparent
+      );
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      -webkit-animation: ticker-scroll 48s linear infinite;
+      animation-play-state: paused;
+      animation: ticker-scroll 48s linear infinite;
+      animation-play-state: paused;
+    }
+    .ticker-track.reverse {
+      animation-direction: reverse;
+      animation-duration: 60s;
+    }
+    .original-hero[data-moving="true"] .ticker-track {
+      animation-play-state: running;
+    }
+    @media (hover: hover) {
+      .original-hero[data-moving="true"] .ticker:hover .ticker-track {
+        animation-play-state: paused;
+      }
+    }
+    @-webkit-keyframes ticker-scroll {
+      to {
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+    }
+    @keyframes ticker-scroll {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track {
+        -webkit-animation: none;
+        animation: none;
+      }
+    }
+  </style>
+
+  <DemoPhone anchorId="demo" />
+
+  <section class="border-b border-sand bg-paper">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-4 py-5 text-sm text-muted">
+      <p class="flex items-center gap-2">
+        <CheckIcon tone="plain" />
+        One shared catalogue
+      </p>
+      <p class="flex items-center gap-2">
+        <CheckIcon tone="plain" />
+        Stock reserved per order
+      </p>
+      <p class="flex items-center gap-2">
+        <CheckIcon tone="plain" />
+        Provider-verified payments
+      </p>
+    </div>
+  </section>
+
+  <!-- The daily mess -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <p class="eyebrow">The gaps between channels</p>
+    <h2 class="mt-3 text-3xl md:text-4xl">Your business grew. The scattered lists stayed.</h2>
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">
+          WhatsApp + website
+        </p>
+        <h3 class="mt-2 text-xl">Orders in too many places</h3>
+        <p class="mt-2 text-muted">
+          A website checkout here. A WhatsApp request there. A counter sale someone forgot to write down.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-accent">
+          The plan: one order record, whatever the channel.
+        </p>
+      </article>
+      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:rotate-1">
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">
+          Payments + receipts
+        </p>
+        <h3 class="mt-2 text-xl">Unmatched payments</h3>
+        <p class="mt-2 text-muted">
+          A screenshot arrives, but the invoice is still open. You need confirmation from the payment provider.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-accent">
+          The plan: verify the payment, then prepare the receipt.
+        </p>
+      </article>
+      <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:rotate-0 hover:border-ink md:-rotate-1">
+        <p class="text-xs font-semibold uppercase tracking-widest text-muted">
+          Shelf + storefront
+        </p>
+        <h3 class="mt-2 text-xl">Stock that never adds up</h3>
+        <p class="mt-2 text-muted">
+          Your website says available. Your staff just sold the last one. Your customer is already paying.
+        </p>
+        <p class="mt-4 text-sm font-semibold text-accent">
+          The plan: a shared stock record with order reservations.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Four agents -->
+  <section class="border-y border-sand bg-surface py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <p class="eyebrow">One commerce core</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">
+        Everything a sale needs, connected.
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {agents.map((agent, i) => (
+          <a
+            href={agent.href}
+            class:list={[
+              "rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]",
+              i % 2 === 1 && "sm:mt-10",
+            ]}
+          >
+            <img
+              src={`/brand/agent-${agent.slug}.png`}
+              alt=""
+              width="44"
+              height="44"
+              loading="lazy"
+              class="mb-4 h-11 w-11"
+            />
+            <h3 class="text-2xl">{agent.name}</h3>
+            <p class="mt-2 text-muted">{agent.job}</p>
+            <p class="mt-4 text-sm text-muted">{agent.checkpoint}</p>
+            <span class="mt-4 inline-block text-sm font-semibold text-accent">
+              Read more →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 commerce-art-grid" aria-label="The Kora commerce foundation">
+    <CommerceArtwork kind="inventory" title="One stock list. No matter where you sell." description="Variants, reservations and stock history form the first release. Know what’s available before promising it to a customer." href="/product/stock" label="Explore inventory" />
+    <CommerceArtwork kind="storefront" title="Your shop deserves its own address." description="A Kora-powered storefront is the next chapter: your catalogue and checkout connected to the same inventory and order records." href="/product/storefront" label="See the storefront plan" />
+  </section>
+  <!-- How it works -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-3xl md:text-4xl">How it works</h2>
+    <p class="mt-3 max-w-2xl text-muted">
+      Start with products and stock. Add the ways your customers buy.
+    </p>
+    <ol class="mt-8 border-t border-sand">
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p
+          class="font-display text-4xl font-bold leading-none text-sand"
+          aria-hidden="true"
+        >
+          01
+        </p>
+        <div>
+          <h3 class="text-xl">Set up your catalogue</h3>
+          <p class="mt-2 max-w-2xl text-muted">
+            Add products, sizes, colours and prices. Confirm the opening stock at your first location.
+          </p>
+        </div>
+      </li>
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p
+          class="font-display text-4xl font-bold leading-none text-sand"
+          aria-hidden="true"
+        >
+          02
+        </p>
+        <div>
+          <h3 class="text-xl">Bring orders together</h3>
+          <p class="mt-2 max-w-2xl text-muted">
+            Create orders against that catalogue. The backend checks availability and reserves the right variants.
+          </p>
+        </div>
+      </li>
+      <li class="flex gap-5 border-b border-sand py-6 md:gap-8">
+        <p
+          class="font-display text-4xl font-bold leading-none text-sand"
+          aria-hidden="true"
+        >
+          03
+        </p>
+        <div>
+          <h3 class="text-xl">Close the loop</h3>
+          <p class="mt-2 max-w-2xl text-muted">
+            Verify the payment, issue a branded receipt and record pickup or dispatch. Keep the full stock history.
+          </p>
+        </div>
+      </li>
+    </ol>
+    <p class="mt-6">
+      <a class="link-accent font-semibold" href="/how-it-works">
+        See the full walkthrough
+      </a>
+    </p>
+  </section>
+
+  <!-- Founding pilot -->
+  <section class="border-y border-sand bg-surface py-16">
+    <div class="mx-auto max-w-6xl px-4">
+      <p class="eyebrow">Early access</p>
+      <h2 class="mt-3 text-3xl md:text-4xl">
+        Help shape your next way to run a shop
+      </h2>
+      <p class="mt-3 max-w-2xl text-muted">
+        We’re preparing a focused founding pilot for Nigerian merchants. First: inventory, orders, verified payments and receipts. Then: a connected storefront and WhatsApp automation.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {foundingPerks.map((perk) => (
+          <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
+            <h3 class="text-xl">{perk.title}</h3>
+            <p class="mt-2 text-muted">{perk.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/pilot" class="btn btn-primary">
+          Express interest
+        </a>
+        <a href="/customers" class="btn btn-ghost">
+          Explore the pilot plan
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust band -->
+  <section class="bg-ink py-16 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <p class="eyebrow eyebrow-bright">Trust</p>
+      <h2 class="mt-3 max-w-2xl text-3xl">Every sale has a record. Every stock change has a reason.</h2>
+      <p class="mt-4 max-w-2xl text-sand">The backend is being designed around merchant permissions, verified payment events and an audit trail. Refunds and stock corrections need explicit actions; there’s no magic undo for a settled payment.</p>
+      <a href="/trust" class="btn btn-on-dark mt-6">
+        Trust &amp; security
+      </a>
+    </div>
+  </section>
+
+  <!-- Pricing teaser -->
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h2 class="text-3xl">Simple prices in naira</h2>
+    <p class="mt-3 max-w-2xl text-muted">
+      A proposed starting point, ready to test with founding merchants.
+    </p>
+    <p class="mt-2 text-muted">
+      Pilot pricing proposed from {naira(5000)} / month. Scope and access are agreed before any billing.
+    </p>
+    <a class="btn btn-ghost mt-5" href="/pricing">
+      See full pricing
+    </a>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mx-auto max-w-3xl px-4 pb-16">
+    <h2 class="text-3xl">Questions owners ask</h2>
+    <div class="mt-6">
+      <Faq items={faqs} />
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="awning" aria-hidden="true"></div>
+  <section class="bg-ink py-16 text-white">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <h2 class="text-4xl">Your next chapter starts with one stock list.</h2>
+      <p class="mt-3 text-sand">
+        Tell us what you sell and where orders come from. Help us build the commerce tools your business actually needs.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/pilot" class="btn btn-light">
+          Explore the pilot
+        </a>
+        <a
+          href={waLink("Hello, I want to start a Kora Desk pilot.", "home-cta")}
+          class="btn btn-on-dark"
+        >
+          Talk on WhatsApp
+        </a>
+        <a href="/demo" class="btn btn-on-dark">
+          Discuss your workflow
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-creative-hero]")
+    .forEach((root) => {
+      const button = root.querySelector<HTMLButtonElement>(
+        "[data-ticker-pause]",
+      )!;
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let paused = false;
+      let visible = false;
+      function paintMotion() {
+        root.dataset.moving = String(
+          visible && !paused && !reduced.matches && !document.hidden,
+        );
+        button.hidden = reduced.matches;
+        button.setAttribute("aria-pressed", String(paused));
+        button.textContent = paused
+          ? "Resume moving strips"
+          : "Pause moving strips";
+      }
+      button.addEventListener("click", () => {
+        paused = !paused;
+        paintMotion();
+      });
+      const observer = new IntersectionObserver((entries) => {
+        visible = entries.some((entry) => entry.isIntersecting);
+        paintMotion();
+      });
+      observer.observe(root);
+      reduced.addEventListener("change", paintMotion);
+      document.addEventListener("visibilitychange", paintMotion);
+      window.addEventListener(
+        "pagehide",
+        () => {
+          observer.disconnect();
+          root.dataset.moving = "false";
+          reduced.removeEventListener("change", paintMotion);
+          document.removeEventListener("visibilitychange", paintMotion);
+        },
+        { once: true },
+      );
+      paintMotion();
+    });
+</script>

@@ -1,5 +1,7 @@
 # Kora Desk — Pricing Model (no-loss edition)
 
+> SUPERSEDED — 16 October 2026. Historical WhatsApp-only assumptions below are retained for reference. Use [commerce-mvp.md](commerce-mvp.md) for the current ecosystem scope, proposed backend architecture, release stages and pricing hypotheses. Old “locked” labels do not govern the current build.
+
 Status: locked 7 Oct 2026. Re-run on: FX above ₦1,600/$, any Meta rate-card change, or gross margin below 40% for two running months. Inputs feed from the per-shop cost dashboard required by `architecture.md`.
 
 ## Assumptions (base case)
