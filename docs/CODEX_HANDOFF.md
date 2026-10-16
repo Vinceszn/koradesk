@@ -15,6 +15,10 @@ python3 -m http.server 4322 --directory references/kora-ui-preview
 
 Open http://localhost:4322. Serve this folder as the web root because its assets use root-relative paths. The snapshot is outside `public/` and is not included automatically in the Astro build. Do not edit generated snapshot files as the ongoing application source.
 
+## Current backend plan
+
+Read `docs/commerce-mvp.md` before planning or implementing the product. It now contains the inventory-first MVP scope and the complete proposed long-term backend architecture, updated 16 October 2026. The old `architecture.md` and `pricing-model.md` are superseded historical references. This is a blueprint, not an implemented backend or a production launch approval.
+
 ## Product direction
 
 Kora is evolving into one commerce backend for inventory, orders, payments and receipts, shared across a merchant's online store, WhatsApp sales and physical counter. Advanced inventory belongs in the initial product scope. Older repository copy describes a WhatsApp AI back office; reconcile that copy with this direction before treating it as the product specification.
@@ -39,8 +43,8 @@ Useful reference paths:
 
 1. Inspect the existing Astro project, scripts, design tokens, source components and docs. Keep the marketing site's working structure.
 2. Port the newer preview into maintainable Astro components and shared styles. Make a clean build reproduce the approved preview. Avoid replacing source with compiled HTML.
-3. Establish the product architecture in a short design note. Astro is the current marketing stack; a product-app framework and backend have not been finalized in this handoff. PostgreSQL is a reasonable proposal, not a previously approved Kora-specific implementation decision.
-4. Define a tenant-scoped product/SKU/variant model, inventory locations, stock movement ledger, reservations, orders, payment records, receipts and merchant roles. Decide whether purchasing, supplier records, transfers and low-stock alerts are required for the first release.
+3. Follow the proposed backend baseline in `docs/commerce-mvp.md`: retain Astro marketing, introduce a TypeScript/Next.js product/API layer, Supabase PostgreSQL/Auth/Storage, transactional stock commands, durable outbox/queues and a separate worker. Treat these as documented recommendations; resolve the listed merchant/provider/operational decisions at their milestone before live trading.
+4. Implement the documented tenant-scoped model and release boundaries. The proposed MVP includes low-stock thresholds, basic supplier/cost records and one location per merchant. Supplier purchase orders, transfers and specialised warehouse features are later releases. Do not silently expand the initial scope.
 5. Build a usable inventory-to-order flow with transactional stock reservations, cancellation/release, fulfilled stock deductions, and auditable adjustments. Prevent overselling under concurrent orders and prevent duplicate deductions on retries.
 6. Connect verified payment-provider records to orders using references, amount and currency. Verify webhook signatures, apply idempotency, and support a transparent manual reconciliation flow. A screenshot alone does not prove payment.
 7. Add storefront ordering and merchant-created WhatsApp/counter orders using the same inventory and order records.
