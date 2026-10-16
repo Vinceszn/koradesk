@@ -1,5 +1,7 @@
 # Kora Desk — Backend Architecture (locked v1)
 
+> SUPERSEDED — 16 October 2026. Historical WhatsApp-only assumptions below are retained for reference. Use [commerce-mvp.md](commerce-mvp.md) for the current ecosystem scope, proposed backend architecture, release stages and pricing hypotheses. Old “locked” labels do not govern the current build.
+
 Status: locked 7 Oct 2026. Changes require re-running the pricing model in `pricing-model.md`.
 
 ## Design constraints
