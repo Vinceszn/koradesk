@@ -1,0 +1,332 @@
+/* Shared forms and the interactive WhatsApp story. The homepage keeps the original brand system. */
+:root {
+  --kora-white: #fff;
+}
+[hidden] {
+  display: none !important;
+}
+input,
+select {
+  font: inherit;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+svg {
+  flex-shrink: 0;
+}
+.kora-container {
+  width: min(100% - 3rem, 76rem);
+  margin-inline: auto;
+}
+.home-section {
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+}
+.home-section h2 {
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+  font-weight: 550;
+}
+.setup-section h2 {
+  margin-top: 1rem;
+}
+.agent-section {
+  background: var(--color-surface);
+}
+.setup-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4rem;
+}
+.setup-intro {
+  max-width: 24rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  margin-block: 1.2rem;
+}
+.faq-item summary {
+  min-height: 52px;
+}
+.page-hero {
+  background: var(--color-surface);
+}
+.page-hero h1 {
+  font-weight: 550;
+  letter-spacing: -0.055em;
+}
+.pricing-grid {
+  gap: 1rem;
+}
+.plan-card {
+  min-width: 0;
+  position: relative;
+  border-radius: 12px;
+}
+.plan-card h2 {
+  font-weight: 550;
+  letter-spacing: -0.045em;
+}
+.plan-card.plan-featured {
+  border: 2px solid var(--color-accent);
+}
+.plan-card .plan-tag {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-radius: 4px;
+}
+.price-note {
+  min-height: 2.9em;
+}
+.plan-price {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+.billing-description {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+}
+.pilot-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 5rem;
+  align-items: start;
+  padding-block: 4rem 5rem;
+}
+.pilot-intro h1 {
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 550;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+  margin-block: 1.3rem;
+}
+.pilot-intro > p:not(.eyebrow) {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  max-width: 26rem;
+}
+.pilot-includes {
+  margin-top: 2rem;
+  border-top: 1px solid var(--color-sand);
+}
+.pilot-includes li {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-sand);
+  padding-block: 1rem;
+  font-size: 0.85rem;
+}
+.pilot-includes li span {
+  color: var(--color-accent);
+}
+.pilot-form-panel {
+  background: var(--kora-white);
+  border: 1px solid var(--color-sand);
+  border-radius: 12px;
+  padding: 1.8rem;
+}
+.pilot-form-panel > p:first-child {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+.field {
+  border-color: #8c988e;
+}
+.field:hover {
+  border-color: var(--color-accent);
+}
+.field[aria-invalid="true"] {
+  border-color: var(--color-clay);
+}
+.form-error {
+  color: var(--color-clay);
+  font-size: 0.8rem;
+}
+#pilot-form label:has(input[type="checkbox"]) {
+  min-height: 44px;
+  padding-block: 0.4rem;
+}
+.cookie-notice {
+  width: min(100% - 2rem, 28rem);
+  left: 1rem;
+  right: auto;
+  bottom: 1rem;
+  margin: 0;
+  background: var(--color-paper);
+}
+.site-footer {
+  margin-top: 0;
+}
+.whatsapp-float {
+  background: #d9ef9c;
+  color: #153e30;
+  border: 1px solid #a7c281;
+}
+.mobile-pilot-bar {
+  background: #153e30;
+  color: #fff;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+#billing-toggle {
+  background: #153e30;
+}
+#billing-knob {
+  background: #fff;
+}
+.dark .pilot-form-panel {
+  background: #151d1a;
+}
+.dark .field {
+  border-color: #718278;
+}
+.dark .btn-ghost:hover {
+  border-color: #b7c6bc;
+}
+.dark .btn-on-dark:focus-visible {
+  outline-color: #d9ef9c;
+}
+.dark .plan-tag {
+  background: #123f36;
+}
+@media (max-width: 899px) {
+  .setup-section,
+  .pilot-layout {
+    gap: 2.5rem;
+  }
+  .pilot-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pilot-intro {
+    max-width: 36rem;
+  }
+  .pilot-form-panel {
+    max-width: 36rem;
+    width: 100%;
+  }
+}
+@media (max-width: 639px) {
+  .kora-container {
+    width: calc(100% - 2rem);
+  }
+  .home-section {
+    padding-block: 3.5rem;
+  }
+  .setup-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+  .pilot-layout {
+    padding-block: 2.5rem 3rem;
+    gap: 2rem;
+  }
+  .pilot-form-panel {
+    padding: 1.25rem;
+  }
+  .cookie-notice {
+    bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  .whatsapp-float {
+    font-size: 0;
+    width: 48px;
+    justify-content: center;
+    padding: 0;
+    bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+  body:has(.cookie-notice:not(.hidden)) .whatsapp-float {
+    display: none;
+  }
+}
+#pilot-form > label.block {
+  margin-top: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+#pilot-form > label.block:first-child {
+  margin-top: 0;
+}
+#pilot-form > .field,
+#pilot-form > .error,
+#pilot-phone-hint {
+  margin-top: 0.35rem;
+}
+
+.original-hero h1 svg path {
+  stroke-dasharray: 210;
+  animation: paperwork-strike 0.45s ease-out both;
+}
+@keyframes paperwork-strike {
+  from {
+    stroke-dashoffset: 210;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.motion-switch {
+  min-height: 44px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-sand);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--color-muted);
+}
+.motion-switch:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.motion-switch[aria-pressed="true"] {
+  border-color: var(--color-accent);
+}
+.phone-demo {
+  width: min(100%, 26rem);
+  margin-inline: auto;
+  min-width: 0;
+  padding: 0.8rem;
+}
+@media (max-width: 639px) {
+  .phone-demo {
+    padding: 0.35rem;
+  }
+  .original-hero h1 {
+    font-size: clamp(2.5rem, 10vw, 3.25rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .original-hero h1 svg path {
+    animation: none;
+  }
+}
+.dark .motion-switch {
+  color: var(--color-muted);
+}
+
+/* Generated material layers decorate semantic controls; all copy remains live. */
+.art-button {
+  display:inline-flex;align-items:center;justify-content:center;gap:1.1rem;
+  width:264px;max-width:100%;min-height:88px;padding:1.3rem 2rem;
+  position:relative;border-radius:1.2rem;background:#075e54;
+  color:#fff;font-weight:800;text-decoration:none;isolation:isolate;
+  transition:transform .16s ease;
+}
+.art-button::before {content:"";position:absolute;inset:0;background:url('/brand/commerce/button-enamel.webp') center/cover no-repeat;z-index:-1;border-radius:inherit;pointer-events:none}
+.art-button:hover {transform:translateY(-2px)}
+.art-button:active {transform:translateY(2px)}
+.art-button:focus-visible {outline:3px solid #c76b4f;outline-offset:5px}
+.commerce-art-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem}
+.commerce-artwork {display:grid;grid-template-columns:minmax(120px,.8fr) minmax(0,1fr);align-items:center;gap:1.2rem}
+.commerce-artwork img {width:100%;height:auto;object-fit:contain}
+.commerce-artwork h3 {font-size:clamp(1.4rem,2vw,1.85rem);line-height:1.15;margin:.6rem 0}
+.commerce-artwork p:not(.eyebrow) {color:var(--color-muted);font-size:.9rem;line-height:1.7}
+.commerce-artwork a {display:inline-flex;align-items:center;min-height:44px;margin-top:.5rem;font-size:.875rem;font-weight:700}
+@media(max-width:1023px){.commerce-art-grid{grid-template-columns:1fr}.commerce-artwork{grid-template-columns:minmax(100px,.5fr) minmax(0,1fr)}}
+@media(max-width:479px){.commerce-artwork{grid-template-columns:1fr;gap:.5rem}.commerce-artwork img{max-width:230px;margin-inline:auto}.art-button{width:240px;min-height:80px}}
+@media(prefers-reduced-motion:reduce){.art-button{transition:none}.art-button:hover,.art-button:active{transform:none}}
+
+.art-button.art-button-compact {width:168px;min-height:56px;padding:.8rem 1.2rem;font-size:.8rem;gap:.5rem}

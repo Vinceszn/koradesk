@@ -4,15 +4,15 @@ import PageHero from "../components/PageHero.astro";
 import { site, waLink } from "../data/site";
 ---
 
-<BaseLayout title="Contact" description="Talk to Kora Desk on WhatsApp, book a 15-minute demo, or email the team.">
-  <PageHero eyebrow="Contact" title="A person will answer during business hours" lede={site.hours} />
+<BaseLayout title="Contact" description="Talk to Kora Desk on WhatsApp, discuss the product plan, or email the team.">
+  <PageHero eyebrow="Contact" title="Let’s talk about your business" lede={site.hours} />
   <section class="mx-auto grid max-w-6xl gap-8 px-4 py-14 md:grid-cols-2">
     <div class="space-y-3">
       <p><a class="link-accent" href={waLink("Hello, I would like to speak with the team.", "contact")}>WhatsApp {site.whatsappDisplay}</a></p>
       <p><a class="link-accent" href={`mailto:${site.email}`}>{site.email}</a></p>
       <p>{site.address}</p>
       <p>
-        Live chat on this site is a simple WhatsApp handoff during {site.hours}. Outside those hours, leave a message on the form.
+        Contact links open your messaging or email app during {site.hours}. Outside those hours, leave a message on the form.
       </p>
     </div>
     <form id="contact-form" class="space-y-4" data-email={site.email} data-whatsapp={site.whatsappE164}>
@@ -28,7 +28,7 @@ import { site, waLink } from "../data/site";
         <span class="text-sm font-semibold">Message</span>
         <textarea class="field mt-1.5 min-h-32" name="message" required></textarea>
       </label>
-      <button class="btn btn-primary w-full" type="submit">Send</button>
+      <button class="btn btn-primary w-full" type="submit">Prepare email</button>
       <div id="contact-ok" class="hidden rounded-3xl border border-sand bg-surface p-4">
         <p class="font-semibold text-leaf">Thanks — your message is ready to send.</p>
         <p class="mt-1 text-sm text-muted">Your email app should have opened with the message addressed to us. Nothing opened? Reach us directly:</p>

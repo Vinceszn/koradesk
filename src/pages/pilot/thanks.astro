@@ -4,11 +4,11 @@ import PageHero from "../../components/PageHero.astro";
 import { site, waLink } from "../../data/site";
 ---
 
-<BaseLayout title="Pilot request received" description="Your Kora Desk pilot request was received.">
+<BaseLayout title="Review your pilot request" description="Review your Kora Desk pilot details, then send your request on WhatsApp.">
   <PageHero
-    eyebrow="Thank you"
-    title="We have your number. A welcome chat is next."
-    lede="Your request is saved. One tap sends it to us on WhatsApp, and a person confirms your number."
+    eyebrow="One more step"
+    title="Ready when you are. Send your request."
+    lede="Your draft is saved on this tab. Review it below, then send it to our team on WhatsApp."
   />
   <section class="mx-auto max-w-lg px-4 py-14">
     <div id="summary" class="rounded-3xl border border-sand bg-white p-6"></div>
@@ -22,17 +22,21 @@ import { site, waLink } from "../../data/site";
         Send on WhatsApp
       </a>
     </p>
-    <p class="mt-3 text-sm text-muted">That tap puts you in the onboarding queue — we reply within one working day.</p>
+    <p class="mt-3 text-sm text-muted">Sending a message expresses interest; it does not create an account, reserve a pilot place or start a subscription.</p>
   </section>
 </BaseLayout>
 
 <script>
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-  const raw = localStorage.getItem("kora-pilot");
+  let d = null;
+  try {
+    const raw = sessionStorage.getItem("kora-pilot");
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (parsed && ["name", "business", "type", "whatsapp"].every(key => typeof parsed[key] === "string")) d = parsed;
+  } catch {}
   const box = document.getElementById("summary");
   const link = document.getElementById("thanks-wa");
-  if (box && raw) {
-    const d = JSON.parse(raw);
+  if (box && d) {
     box.innerHTML = `<p><strong>${esc(d.name)}</strong> · ${esc(d.business)}</p><p>${esc(d.type)}</p><p>${esc(d.whatsapp)}</p>`;
     if (link) {
       const number = link.getAttribute("data-whatsapp");
@@ -40,6 +44,7 @@ import { site, waLink } from "../../data/site";
       link.setAttribute("href", `https://wa.me/${number}?text=${text}`);
     }
   } else if (box) {
-    box.innerHTML = `We could not find a request on this device. <a class="link-accent" href="/pilot">Start a pilot request</a>.`;
+    link?.classList.add("hidden");
+    box.innerHTML = `We could not find a draft on this tab. <a class="link-accent" href="/pilot">Start a pilot request</a>.`;
   }
 </script>

@@ -1,28 +1,20 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
-import AgentStory from "../../components/AgentStory.astro";
 ---
-
-<BaseLayout title="Stock agent" description="Stock counts update from sales and supplier deliveries, with flags for low stock and odd variances.">
-  <PageHero
-    eyebrow="Stock"
-    title="The shelf and the book, closer together"
-    lede="Sales reduce counts. Deliveries add them. Odd gaps get a flag, not a silent guess."
-  />
-  <AgentStory
-    slug="stock"
-    title="Low stock before you run out on a Saturday."
-    lede="A frozen-food distributor can see which SKUs will not last the weekend, then approve a reorder draft."
-    story={[
-      "You start with a simple list: item, unit, quantity, reorder point. A photo of a stock sheet is enough to begin.",
-      "Variances above your threshold are called out in plain language: “Oil 25L is 12 units below expected after yesterday’s sales.”",
-      "Reorder drafts name a supplier if you have one on file. Nothing is sent until you approve.",
-    ]}
-    checkpoints={[
-      "Approve reorder drafts.",
-      "Set variance thresholds.",
-      "Count still belongs to your staff; the agent only tracks.",
-    ]}
-  />
+<BaseLayout title="One stock list. Every sale." description="Know what\u2019s on hand, what\u2019s reserved and what you can still sell.">
+<PageHero eyebrow="The Kora product plan" title="One stock list. Every sale." lede="Know what\u2019s on hand, what\u2019s reserved and what you can still sell." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Every variant gets its own count</h2>
+<p>Track products by SKU, including size, colour or pack. Begin with one stock location per merchant, with a data model that can support more locations later.</p>
+<h2>Three numbers, fewer surprises</h2>
+<p>On hand is the physical quantity. Reserved is the quantity held for orders. Available is on hand minus reserved. Payment confirms funds; pickup or dispatch records the goods leaving.</p>
+<h2>A history behind every change</h2>
+<p>Stock receiving, dispatch, accepted returns, damage and corrections each create a movement record. Corrections add a new entry with a reason instead of silently rewriting history.</p>
+<h2>Designed for the last-item problem</h2>
+<p>Every channel uses the same atomic reservation operation. Two concurrent checkouts cannot both reserve the last unit when the backend rules are enforced. An unpaid hold expires; paid holds remain until the order is resolved.</p>
+<h2>What comes first</h2>
+<p>Variants, opening counts, CSV import, receiving, adjustments, reservations, low-stock thresholds and basic purchase-cost tracking are in the proposed MVP. Batch expiry, serial numbers, bundles, supplier purchase orders and warehouse transfers need separate releases.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

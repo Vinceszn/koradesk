@@ -1,9 +1,9 @@
 ---
-title: Approvals, refunds, and the 24-hour undo
-description: The agent never moves money without you.
-category: Safety
+title: "Approvals, corrections and refunds"
+description: "Different actions need different controls."
+category: "Controls"
 ---
 
-Set a naira limit for orders. Anything above it waits. Refunds and write-offs always wait.
+There is no universal undo for payments and fulfilled orders. Planned stock corrections add a reasoned entry to the history. Refunds and physical returns are separate actions.
 
-Most actions can be reversed for 24 hours from the log. After that, ask support to help with a manual correction.
+Staff permissions and explicit confirmation should govern sensitive operations. The preview does not execute these actions.

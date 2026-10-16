@@ -1,69 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
-import { foundingPerks, pilotSteps } from "../data/site";
 ---
-
-<BaseLayout title="Customers" description="Kora Desk is onboarding founding shops in Lagos. See who the pilot is for and how the 14 days run.">
-  <PageHero
-    eyebrow="Customers"
-    title="Our first customers are co-builders"
-    lede="Kora Desk is live in a guided pilot. Founding shops get a named person, a founding rate, and a vote on what we build next."
-  />
-  <section class="mx-auto max-w-6xl px-4 py-14">
-    <h2 class="text-3xl md:text-4xl">Who the pilot is for</h2>
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      <a href="/who-its-for/retail" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]">
-        <h3 class="text-xl">Retail shops</h3>
-        <p class="mt-2 text-muted">Provisions, pharmacies, boutiques — anywhere lists arrive in chat.</p>
-      </a>
-      <a href="/who-its-for/food" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]">
-        <h3 class="text-xl">Food distribution &amp; catering</h3>
-        <p class="mt-2 text-muted">Frozen foods, market suppliers, caterers taking bulk orders on WhatsApp.</p>
-      </a>
-      <a href="/who-its-for/accountants" class="rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]">
-        <h3 class="text-xl">Accountants</h3>
-        <p class="mt-2 text-muted">A partner program with a multi-client dashboard and review rights.</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="border-y border-sand bg-surface py-14">
-    <div class="mx-auto max-w-6xl px-4">
-      <h2 class="text-3xl md:text-4xl">How the 14 days run</h2>
-      <ol class="mt-8 grid gap-4 md:grid-cols-3">
-        {
-          pilotSteps.map((step) => (
-            <li class="rounded-3xl border border-sand bg-white p-6">
-              <p class="eyebrow">{step.when}</p>
-              <h3 class="mt-3 text-lg font-semibold">{step.title}</h3>
-              <p class="mt-2 text-muted">{step.text}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="mx-auto max-w-6xl px-4 py-14">
-    <h2 class="text-3xl md:text-4xl">What founding shops get</h2>
-    <div class="mt-8 grid gap-4 sm:grid-cols-2">
-      {
-        foundingPerks.map((perk) => (
-          <article class="rounded-3xl border border-sand bg-white p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-soft">
-            <h3 class="text-xl">{perk.title}</h3>
-            <p class="mt-2 text-muted">{perk.text}</p>
-          </article>
-        ))
-      }
-    </div>
-    <div class="mt-10 rounded-3xl bg-ink px-6 py-10 text-white md:px-10">
-      <h2 class="max-w-2xl text-3xl">Bring your busiest WhatsApp number. We handle the rest.</h2>
-      <p class="mt-3 max-w-2xl text-sand">Two minutes to apply. A person confirms your number and sets up the pilot with you.</p>
-      <div class="mt-6 flex flex-wrap gap-3">
-        <a href="/pilot" class="btn btn-light">Join the pilot</a>
-        <a href="/pricing" class="btn btn-on-dark">See pricing</a>
-      </div>
-    </div>
-  </section>
+<BaseLayout title="Help us build around a real trading day." description="The founding pilot is in preparation. We are looking for a small group of merchants to test a focused workflow.">
+<PageHero eyebrow="Founding merchants" title="Help us build around a real trading day." lede="The founding pilot is in preparation. We are looking for a small group of merchants to test a focused workflow." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Who fits the first pilot</h2>
+<p>One stock location, countable physical products and a merchant willing to confirm opening quantities and review exceptions. Online-only sellers and physical shops are both relevant.</p>
+<h2>What we want to test</h2>
+<p>Catalogue import, variants, reservations, payment verification, receipts and fulfilment. The measure is whether the records agree with real sales and physical stock.</p>
+<h2>How it starts</h2>
+<p>Discuss your workflow, agree scope and pricing, then confirm access and timing. Expressing interest does not start a subscription or guarantee immediate onboarding.</p>
+<h2>What is not a case study</h2>
+<p>Ada’s Store and other demo businesses are fictional examples. We have not published verified customer results or time-saving claims.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

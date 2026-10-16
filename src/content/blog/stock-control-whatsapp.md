@@ -1,10 +1,12 @@
 ---
-title: Stock control when the shop is a WhatsApp broadcast
-description: Count what left the shelf, not what you meant to sell.
-pubDate: 2026-09-08
-minutes: 4
+title: "On hand, reserved and available are different"
+description: "A payment event should not deduct physical stock twice."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Write down opening stock on Monday. Subtract what the chats actually confirmed, not what people asked for and never paid.
+Start with what is physically present. Reserving two units reduces what other customers may buy, while the units remain on the shelf.
 
-Flag anything that moved more than your usual variance. A freezer that “lost” twelve bags of chicken is a process problem, not a software problem — but a flag is how you see it on Tuesday instead of month-end.
+Payment confirms funds. Pickup or dispatch reduces on-hand stock and consumes the reservation in one operation. An expired unpaid hold releases availability.
+
+Record walk-in sales, new deliveries, damage and accepted returns. A refund without returned goods does not put anything back on the shelf.

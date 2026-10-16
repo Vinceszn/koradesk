@@ -1,10 +1,10 @@
 ---
-title: What to hand your accountant at month-end
-description: Same invoice numbers the customer saw. One export. Then a human review.
-pubDate: 2026-10-01
-minutes: 4
+title: "Give your accountant connected records"
+description: "Orders, payment references, refunds and stock history belong together."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Accountants do not need your WhatsApp archive. They need a numbered list of sales, payments, and outstanding invoices.
+Export the order ID, agreed total, amount received, payment source and outstanding balance. Keep receipt references connected to those entries.
 
-Send CSV. Keep the PDF copies. Do not mark anything filed until they say so.
+Distinguish staff-declared cash from provider-verified payments. Gross sales are not net profit, and a sales export is not a filed tax return. Costs and adjustments need review.

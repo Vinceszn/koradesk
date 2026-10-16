@@ -1,28 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
-import AgentStory from "../../components/AgentStory.astro";
 ---
-
-<BaseLayout title="Books agent" description="Daily sales summaries, simple P&L, and tax-ready exports, with accountant review before filing.">
-  <PageHero
-    eyebrow="Books"
-    title="A daily summary you can actually read"
-    lede="Not a full accounting suite. A clean trail from WhatsApp sales to an export your accountant can file from."
-  />
-  <AgentStory
-    slug="books"
-    title="You run the shop. Your accountant still files."
-    lede="Each evening you get sales, payments, outstanding invoices, and a simple profit sketch."
-    story={[
-      "Exports are CSV and PDF. They use the same invoice numbers the customer saw on WhatsApp.",
-      "Partners on the accountant plan can view many clients without logging into each shop’s WhatsApp.",
-      "Nothing is marked filed until a person — you or your accountant — says so.",
-    ]}
-    checkpoints={[
-      "Accountant review before filing.",
-      "You choose who can see the books.",
-      "Retention limits follow your privacy settings.",
-    ]}
-  />
+<BaseLayout title="Close the day with the records together." description="Sales, receipts, outstanding balances and stock movements in one operating view.">
+<PageHero eyebrow="The Kora product plan" title="Close the day with the records together." lede="Sales, receipts, outstanding balances and stock movements in one operating view." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Sales are not the same as money received</h2>
+<p>A confirmed order may still be unpaid. A paid order may still be awaiting dispatch. Reports should show those differences, along with cash recorded by staff and provider-verified payments.</p>
+<h2>See the cost behind a sale</h2>
+<p>Basic purchase-cost tracking can support indicative gross-margin reports. Incomplete opening costs or unrecorded expenses limit what those figures mean. This is not a complete accounting system.</p>
+<h2>Give your accountant useful records</h2>
+<p>Export order references, recorded payments, refunds and stock history for review. Tax filing, statutory accounts and a multi-client accountant portal are outside the first MVP.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

@@ -1,10 +1,10 @@
 ---
-title: When not to let an assistant talk to a customer
-description: Complaints, credit fights, and anything that needs a human tone.
-pubDate: 2026-10-05
-minutes: 4
+title: "Give the assistant a clear handover point"
+description: "Uncertainty, complaints and payment exceptions need a person."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Let the agent draft. Do not let it argue. If a customer is angry, a person should type.
+An assistant can collect details and draft an order. It should not invent stock, settle a dispute or promise an unapproved refund.
 
-Refunds, bounced cheques, and “I paid you last week” belong in the approval queue. Speed is useful. Tone is yours.
+Make escalation available when a product is ambiguous, a payment is unmatched, an order changes after dispatch or a customer wants help. Preserve the order history so the merchant does not have to start the investigation again.

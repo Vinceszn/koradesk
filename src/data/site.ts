@@ -1,15 +1,15 @@
 export const site = {
   name: "Kora Desk",
-  tagline: "Your shop, organized from WhatsApp.",
+  tagline: "Your shop. Everywhere. Under control.",
   description:
-    "Kora Desk gives small businesses in Africa a team of AI agents that run their back office on WhatsApp: orders, payments, stock, and invoices, with a human approving anything that moves money.",
+    "Kora connects inventory, orders, payments and receipts across your online store, WhatsApp and shop counter. Explore the product preview and help shape the founding pilot.",
   url: "https://koradesk.com",
   email: "hello@koradesk.com",
   supportEmail: "support@koradesk.com",
   whatsappE164: "2348005672000",
   whatsappDisplay: "+234 800 567 2000",
-  address: "12 Adeola Odeku Street, Victoria Island, Lagos, Nigeria",
-  hours: "Monday to Saturday, 8:00–18:00 WAT",
+  address: "Nigeria · founding pilot in preparation",
+  hours: "Pilot conversations by arrangement",
   founderCity: "Lagos",
 };
 
@@ -18,151 +18,49 @@ export const nav = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/who-its-for", label: "Who it's for" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/customers", label: "Customers" },
+  { href: "/customers", label: "Founding pilot" },
   { href: "/trust", label: "Trust" },
 ];
 
 export const agents = [
-  {
-    slug: "orders",
-    name: "Orders",
-    job: "Reads text, voice notes, and photos of handwritten lists; builds the order; confirms with the customer.",
-    checkpoint: "You approve orders above a set value.",
-    href: "/product/orders",
-  },
-  {
-    slug: "payments",
-    name: "Payments",
-    job: "Matches bank alerts and transfer screenshots to open invoices; sends polite reminders.",
-    checkpoint: "You approve any refund or write-off.",
-    href: "/product/payments",
-  },
-  {
-    slug: "stock",
-    name: "Stock",
-    job: "Updates counts from sales and supplier deliveries; flags low stock and odd variances.",
-    checkpoint: "You approve reorder drafts.",
-    href: "/product/stock",
-  },
-  {
-    slug: "books",
-    name: "Books",
-    job: "Produces daily sales summaries, simple P&L, and tax-ready exports.",
-    checkpoint: "Your accountant reviews before filing.",
-    href: "/product/books",
-  },
+  { slug: "orders", name: "Orders", job: "Website checkout, WhatsApp requests and counter sales, connected to one order record.", checkpoint: "Confirm products, variants and prices before committing an order.", href: "/product/orders" },
+  { slug: "payments", name: "Payments & receipts", job: "Match provider-verified payments to orders and prepare receipts with your business branding.", checkpoint: "Screenshots alone never mark an order paid.", href: "/product/payments" },
+  { slug: "stock", name: "Inventory", job: "Know what’s on the shelf, what’s reserved and what’s available to sell across channels.", checkpoint: "Every delivery, sale, return and correction leaves a stock history.", href: "/product/stock" },
+  { slug: "books", name: "Sales & reporting", job: "See recorded sales, money received and outstanding balances without piecing together three separate lists.", checkpoint: "Operational reports for review, not automatic tax filing.", href: "/product/books" },
 ];
 
 export const plans = [
-  {
-    id: "starter",
-    name: "Starter",
-    monthly: 15000,
-    annual: 150000,
-    blurb: "For a single shop that needs orders and payments under control.",
-    includes: [
-      "Orders + Payments agents",
-      "1 WhatsApp number",
-      "300 conversations / month",
-      "14-day free pilot",
-    ],
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    monthly: 45000,
-    annual: 450000,
-    featured: true,
-    blurb: "All four agents for shops that also need stock and books.",
-    includes: [
-      "All four agents",
-      "3 WhatsApp numbers",
-      "1,200 conversations / month",
-      "Integrations and accountant sharing",
-    ],
-  },
-  {
-    id: "partner",
-    name: "Partner",
-    monthly: 8000,
-    annual: 80000,
-    perClient: true,
-    blurb: "For accountants who look after many small clients.",
-    includes: [
-      "Multi-client dashboard",
-      "Volume pricing",
-      "Tax-ready exports",
-      "Named support person",
-    ],
-  },
+ { id: "starter", name: "Founding pilot", monthly: 5000, annual: 50000, blurb: "Proposed starting point for one business and one stock location.", includes: ["100 orders / month", "Catalogue, variants and stock history", "Payment verification and PDF receipts", "Manual WhatsApp sharing"] },
+ { id: "growth", name: "Store", monthly: 10000, annual: 100000, featured: true, blurb: "Proposed next step for merchants handling more orders.", includes: ["300 orders / month", "Reservations and low-stock alerts", "Stock receiving and sales summaries", "Guided catalogue import"] },
+ { id: "automation", name: "Connected", monthly: 20000, annual: 200000, perClient: false, blurb: "Planned channel automation, subject to pilot validation.", includes: ["Storefront and WhatsApp automation roadmap", "One shared catalogue and order system", "Messaging allowance to be confirmed", "Voice calling priced separately later"] },
 ];
 
 export const faqs = [
-  {
-    q: "Do I need to change how customers reach me?",
-    a: "No. Customers keep chatting on WhatsApp. You connect the number you already use. The agent reads incoming messages and drafts the paperwork. You stay in the conversation.",
-  },
-  {
-    q: "Can the agent send money or issue refunds on its own?",
-    a: "No. Anything that moves money waits for your approval. You set thresholds for large orders. Refunds and write-offs always need a tap from you.",
-  },
-  {
-    q: "What if the agent gets an order wrong?",
-    a: "Every action is logged in plain language. You can undo most actions for 24 hours. High-value orders sit in a queue until you approve them.",
-  },
-  {
-    q: "Will this work on a slow phone network?",
-    a: "Yes. The website and the assistant are built for weak connections. Messages queue and send when the network returns. You do not need a high-end phone.",
-  },
-  {
-    q: "What counts as a conversation?",
-    a: "A conversation is a 24-hour thread with one customer on one number. Ten messages with Mrs Ade in the same day count as one conversation. A new day with Mrs Ade counts as another.",
-  },
-  {
-    q: "Which languages does it understand?",
-    a: "Voice and text in English, Pidgin, Yoruba, Hausa, Igbo, and Swahili. This website is in English first. Other site languages will follow.",
-  },
+ { q: "Is Kora a website builder, inventory system or WhatsApp assistant?", a: "The vision brings all three together. One commerce backend holds products, stock and orders; the website, WhatsApp and counter are different ways to sell. The first MVP focuses on inventory, orders, verified payments and receipts." },
+ { q: "Can I use Kora without a physical shop?", a: "Yes. Online sellers need the same product, stock, order and payment records. The pilot is being designed for businesses selling countable physical products, whether online, in person or both." },
+ { q: "Is the full platform available now?", a: "This site is a product preview. The animated orders, stock changes and payments are simulated. We are planning the founding pilot; the storefront, automatic WhatsApp delivery and voice features will be released in stages." },
+ { q: "How does Kora know a customer has paid?", a: "The planned integration checks a connected payment provider’s transaction records against the order reference, amount and currency. An uploaded screenshot can help with matching, but does not establish that money arrived." },
+ { q: "What happens when two people want the last item?", a: "The backend is designed to check and reserve stock in one database transaction. An unpaid hold can expire; a paid order keeps its reservation until fulfilment or cancellation is handled." },
+ { q: "Can I connect my existing ecommerce store?", a: "Existing-store connectors are on the roadmap. We will start with a focused inventory and order core, then add a Kora storefront and selected integrations. No Shopify, WooCommerce or bank connection is active in this preview." },
+ { q: "Will Kora answer phone calls?", a: "Voice ordering is a later feature. We plan to validate text ordering and stock accuracy first, followed by voice notes and a limited inbound calling pilot." },
 ];
 
 export const foundingPerks = [
-  {
-    title: "Named setup person",
-    text: "A real human connects your number, confirms your price list, and watches the first week with you.",
-  },
-  {
-    title: "Weekly check-ins",
-    text: "Short reviews of the log through the first month. Limits move only when you say so.",
-  },
-  {
-    title: "Founding rate",
-    text: "Founding shops hold their pilot rate for 12 months. No surprises while we build.",
-  },
-  {
-    title: "Roadmap vote",
-    text: "You tell us which agent, report, or language comes next.",
-  },
+ { title: "Start with your actual stock", text: "Help us test catalogue import, variants and opening stock against the way your business sells." },
+ { title: "Shape the workflow", text: "Tell us where orders get lost, stock counts disagree or payment checking slows you down." },
+ { title: "Agree the scope first", text: "Pilot access, limits, timing and price are confirmed with each merchant before live trading." },
+ { title: "Build the useful parts first", text: "Inventory accuracy and order-to-receipt come before extra channels and voice features." },
 ];
-
 export const pilotSteps = [
-  {
-    when: "Days 1–2",
-    title: "Connect",
-    text: "We link the WhatsApp number your customers already use and confirm your price list, units, and approval limits.",
-  },
-  {
-    when: "Days 3–10",
-    title: "Approve",
-    text: "The agents draft orders, match payments, and update stock. You approve the queue and correct anything that looks off.",
-  },
-  {
-    when: "Days 11–14",
-    title: "Decide",
-    text: "We review the two weeks together — hours saved, matches made, misses caught. Stay on a plan or walk away with your exports.",
-  },
+ { when: "Set up", title: "Count and catalogue", text: "Choose one location, import products and variants, and confirm opening stock together." },
+ { when: "Trade", title: "Follow real orders", text: "Test reservations, payments, receipts and fulfilment on an agreed small set of orders." },
+ { when: "Review", title: "Check the difference", text: "Compare records with physical stock, review exceptions and decide what needs to improve." },
 ];
 
 export const businessTypes = [
   "Retail shop",
+  "Ecommerce store",
+  "Instagram / WhatsApp seller",
   "Food vendor or caterer",
   "Food distributor",
   "Wholesale distributor",

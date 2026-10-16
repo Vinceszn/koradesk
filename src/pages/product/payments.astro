@@ -1,28 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
-import AgentStory from "../../components/AgentStory.astro";
 ---
-
-<BaseLayout title="Payments agent" description="Match bank alerts and transfer screenshots to open invoices, with you approving refunds and write-offs.">
-  <PageHero
-    eyebrow="Payments"
-    title="Match the alert. Stop hunting screenshots."
-    lede="Bank transfers, USSD, and mobile money sit next to the invoice they belong to."
-  />
-  <AgentStory
-    slug="payments"
-    title="Polite reminders. Strict rules on money."
-    lede="When a GTBank alert or a transfer screenshot arrives, the agent tries to match amount, name, and open invoice."
-    story={[
-      "If the match is clear, the invoice is marked paid and the delivery note can move. If two invoices are close, it asks you.",
-      "Reminders go out in the language the customer used. They stay short and polite. You control the schedule.",
-      "Refunds and write-offs never send themselves. They sit with a reason until you tap approve.",
-    ]}
-    checkpoints={[
-      "Approve every refund and write-off.",
-      "See unmatched items in one list.",
-      "Export a payment log for your accountant.",
-    ]}
-  />
+<BaseLayout title="\u201cI\u2019ve paid\u201d meets a payment record." description="Verify the transaction, match the order and prepare a receipt with your business name on it.">
+<PageHero eyebrow="The Kora product plan" title="\u201cI\u2019ve paid\u201d meets a payment record." lede="Verify the transaction, match the order and prepare a receipt with your business name on it." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>Confirmation comes from the provider</h2>
+<p>The planned Paystack integration uses authenticated webhook events and server-side transaction verification. Expected amount, currency, order reference and receiving merchant must match before an order is marked paid.</p>
+<h2>A screenshot is a clue</h2>
+<p>A customer’s screenshot or forwarded alert may help identify a payment. It does not prove money arrived. Unmatched, partial or overpaid transactions need a review workflow.</p>
+<h2>Your order supplies the shopping list</h2>
+<p>Item names, quantities and agreed prices come from the saved order. Payment data supplies the amount received and transaction reference. Together they produce a merchant-issued branded PDF receipt.</p>
+<h2>Honest status, clear exceptions</h2>
+<p>Cash sales are recorded as declared by staff, with an audit trail. They are not labelled provider-verified. Refunds, reversals and late payments require explicit handling. No live bank or payment account is connected to this preview.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

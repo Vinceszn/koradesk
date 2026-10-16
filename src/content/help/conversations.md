@@ -1,9 +1,9 @@
 ---
-title: What counts as a conversation
-description: A 24-hour thread with one customer on one number.
-category: Billing
+title: "What the proposed order limits mean"
+description: "Plans are being explored around orders, with messaging charged separately."
+category: "Pricing"
 ---
 
-Ten messages with Mrs Ade on Tuesday are one conversation. Wednesday with Mrs Ade is another. Broadcasts you send are counted separately.
+The proposed pilot includes 100 orders per month and the proposed Store plan includes 300. An order is a saved sale record, not a 24-hour conversation.
 
-Starter includes 300 conversations each month. Growth includes 1,200. Need more? Overage packs add 100 conversations for ₦5,000.
+Prices and limits are proposals, not active subscriptions. Payment processing and provider messaging charges are separate. Automatic messaging allowances will be defined before that feature launches.

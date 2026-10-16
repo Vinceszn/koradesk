@@ -1,0 +1,5 @@
+---
+interface Props { href: string; label: string; compact?: boolean; }
+const {href,label,compact=false} = Astro.props;
+---
+<a class:list={["art-button", compact && "art-button-compact"]} href={href}><span>{label}</span><span aria-hidden="true">↗</span></a>

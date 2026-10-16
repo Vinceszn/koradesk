@@ -2,22 +2,15 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 ---
-
-<BaseLayout title="Distributors" description="For wholesale distributors reconciling many small invoices and bank alerts.">
-  <PageHero
-    eyebrow="Distributors"
-    title="Forty shops. One inbox. Fewer unmatched alerts."
-    lede="Wholesale is a Payments and Stock problem as much as an Orders problem."
-  />
-  <section class="mx-auto max-w-3xl px-4 py-14">
-    <div class="prose-kora">
-      <p>
-        If you sell to many small retailers, Growth is usually the right plan: three numbers, all four agents, and accountant sharing.
-      </p>
-    </div>
-    <div class="mt-6 flex flex-wrap gap-3">
-      <a class="btn btn-primary" href="/pilot">Start a pilot</a>
-      <a class="btn btn-ghost" href="/pricing">See Growth pricing</a>
-    </div>
-  </section>
+<BaseLayout title="Cases, cartons and payments. Accounted for." description="For distributors who need clear units and a traceable order-to-dispatch workflow.">
+<PageHero eyebrow="The Kora product plan" title="Cases, cartons and payments. Accounted for." lede="For distributors who need clear units and a traceable order-to-dispatch workflow." />
+<section class="mx-auto max-w-3xl px-4 py-14 prose-kora">
+<h2>A carton is not a loose unit</h2>
+<p>Catalogue each sellable pack explicitly. Mixed-unit conversions and breaking bulk require defined rules; the assistant should never guess a conversion.</p>
+<h2>Receive stock, then sell it</h2>
+<p>A supplier order is not stock on hand. Record what was actually delivered, then reserve and dispatch against available quantities.</p>
+<h2>Keep credit visible</h2>
+<p>Show remaining invoice balances. Complex credit limits, supplier purchasing and multiple warehouses need additional releases beyond the initial pilot.</p>
+<p><a href="/pilot" class="btn btn-primary">Explore the founding pilot</a></p>
+</section>
 </BaseLayout>

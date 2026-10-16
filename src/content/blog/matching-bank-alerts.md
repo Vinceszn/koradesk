@@ -1,10 +1,12 @@
 ---
-title: Matching bank alerts without a full-time admin
-description: Amount, name, and open invoice — in that order.
-pubDate: 2026-09-22
-minutes: 4
+title: "Payment confirmation starts at the provider"
+description: "A screenshot can help find a payment; it cannot verify one."
+pubDate: 2026-10-15
+minutes: 2
 ---
 
-Start with the amount. If two invoices share it, use the sender name. If the name is a personal account, ask one question: “Is this for invoice KD-1842?”
+Tie each payment attempt to a unique order reference. Check the provider’s signed event and transaction record, expected amount, currency and receiving merchant before marking the order paid.
 
-Do not write off small differences automatically. A ₦50 gap can hide a wrong invoice.
+Two customers can owe the same amount. The person who transfers can have a different name from the buyer. Names and amounts alone are weak matching keys.
+
+Keep partial payments, overpayments and unmatched funds in a review workflow. A delayed receipt job should not make a successful payment disappear.
