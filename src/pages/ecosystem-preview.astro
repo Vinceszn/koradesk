@@ -382,22 +382,23 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
       <h2 class="mt-3 text-3xl md:text-4xl">
         Everything a sale needs, connected.
       </h2>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      <div class="brand-functions mt-8 grid gap-4 sm:grid-cols-2">
         {agents.map((agent, i) => (
           <a
             href={agent.href}
             class:list={[
-              "rounded-3xl border border-sand bg-white p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:border-ink hover:shadow-soft active:scale-[0.99]",
+              `brand-function brand-${agent.tone} rounded-3xl p-6 text-ink no-underline transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-soft active:scale-[0.99]`,
               i % 2 === 1 && "sm:mt-10",
             ]}
           >
             <img
-              src={`/brand/agent-${agent.slug}.png`}
+              class="brand-function-art"
+              src={agent.art}
               alt=""
-              width="44"
-              height="44"
+              width="88"
+              height="88"
               loading="lazy"
-              class="mb-4 h-11 w-11"
+              decoding="async"
             />
             <h3 class="text-2xl">{agent.name}</h3>
             <p class="mt-2 text-muted">{agent.job}</p>
@@ -585,6 +586,18 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
         paused = !paused;
         paintMotion();
       });
+      // Touch hold pauses both strips together and resumes from position.
+      root.querySelectorAll<HTMLElement>(".ticker").forEach((strip) => {
+        const release = () => {
+          root.dataset.holding = "false";
+        };
+        strip.addEventListener("pointerdown", () => {
+          root.dataset.holding = "true";
+        });
+        strip.addEventListener("pointerup", release);
+        strip.addEventListener("pointercancel", release);
+        strip.addEventListener("pointerleave", release);
+      });
       const observer = new IntersectionObserver((entries) => {
         visible = entries.some((entry) => entry.isIntersecting);
         paintMotion();
@@ -597,6 +610,7 @@ import { agents, faqs, foundingPerks, naira, site, waLink } from "../data/site";
         () => {
           observer.disconnect();
           root.dataset.moving = "false";
+          root.dataset.holding = "false";
           reduced.removeEventListener("change", paintMotion);
           document.removeEventListener("visibilitychange", paintMotion);
         },

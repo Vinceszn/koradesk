@@ -23,10 +23,10 @@ export const nav = [
 ];
 
 export const agents = [
-  { slug: "orders", name: "Orders", job: "Website checkout, WhatsApp requests and counter sales, connected to one order record.", checkpoint: "Confirm products, variants and prices before committing an order.", href: "/product/orders" },
-  { slug: "payments", name: "Payments & receipts", job: "Match provider-verified payments to orders and prepare receipts with your business branding.", checkpoint: "Screenshots alone never mark an order paid.", href: "/product/payments" },
-  { slug: "stock", name: "Inventory", job: "Know what’s on the shelf, what’s reserved and what’s available to sell across channels.", checkpoint: "Every delivery, sale, return and correction leaves a stock history.", href: "/product/stock" },
-  { slug: "books", name: "Sales & reporting", job: "See recorded sales, money received and outstanding balances without piecing together three separate lists.", checkpoint: "Operational reports for review, not automatic tax filing.", href: "/product/books" },
+  { slug: "orders", tone: "emerald", art: "/brand/commerce/orders-enamel-v1.webp", name: "Orders", job: "Website checkout, WhatsApp requests and counter sales, connected to one order record.", checkpoint: "Confirm products, variants and prices before committing an order.", href: "/product/orders" },
+  { slug: "payments", tone: "gold", art: "/brand/commerce/payments-enamel-v1.webp", name: "Payments & receipts", job: "Match provider-verified payments to orders and prepare receipts with your business branding.", checkpoint: "Screenshots alone never mark an order paid.", href: "/product/payments" },
+  { slug: "stock", tone: "rose", art: "/brand/commerce/inventory-enamel-v1.webp", name: "Inventory", job: "Know what’s on the shelf, what’s reserved and what’s available to sell across channels.", checkpoint: "Every delivery, sale, return and correction leaves a stock history.", href: "/product/stock" },
+  { slug: "books", tone: "violet", art: "/brand/commerce/reporting-enamel-v1.webp", name: "Sales & reporting", job: "See recorded sales, money received and outstanding balances without piecing together three separate lists.", checkpoint: "Operational reports for review, not automatic tax filing.", href: "/product/books" },
 ];
 
 export const plans = [
