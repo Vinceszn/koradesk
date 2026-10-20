@@ -2,7 +2,7 @@
 
 ## Start here
 
-The editable Astro marketing site is in `src/`. The complete newer UI preview is in `references/kora-ui-preview/`, copied from Sites source commit `9e6c8548b6df5b82d3c7f7f1d2f352286bf988b8` on 2026-10-15. This snapshot is compiled HTML/CSS/JS, not editable Astro components or a working commerce backend. Original source files have been preserved.
+The editable Astro marketing site is in `src/`. The complete newer UI preview is in `references/kora-ui-preview/`, copied from Sites source commit `9e6c8548b6df5b82d3c7f7f1d2f352286bf988b8` on 2026-10-15. The homepage channel/button refinements from Sites source commit `2631f1dfe8dcf904e95620d879a2de1109cc17e2` were applied to this snapshot on 2026-10-20. This snapshot is compiled HTML/CSS/JS, not editable Astro components or a working commerce backend. Original source files have been preserved.
 
 Private visual preview: https://koradesk-ui-preview.cheeryeagle512.chatgpt.site
 A separate Codex session may not have access to that private URL. Use the checked-in snapshot and assets as the reliable reference.
@@ -29,12 +29,17 @@ Confirmed design requirements:
 - Almost transparent floating Liquid Glass header, including dark and mobile states.
 - Hero banner rows move in opposite directions, pause together during mouse hover or touch hold, and resume from the current position on release.
 - Retain a manual pause control and reduced-motion support.
-- Keep the green CTA free of an unwanted green rectangle behind its artwork.
+- Keep the green CTA free of an unwanted green rectangle behind its artwork. Centre the “Build with Kora” label independently of its arrow.
+- Use matte emerald, gold and rose channel buttons for WhatsApp, Website and Walk-ins; preserve the existing demo actions and selected states.
+- Give the shared stock counter violet-tinted Liquid Glass, including dark-mode styling and a non-blur fallback.
+- Keep the four function cards’ gradients; remove their solid coloured borders.
 - Use custom SVGs/images only where they clarify the product or improve the design.
 
 Useful reference paths:
 - `references/kora-ui-preview/index.html`: updated homepage, commerce demo, hero ticker logic.
 - `references/kora-ui-preview/glass-header.css`: shared floating glass header.
+- `references/kora-ui-preview/channel-refinements.css`: centred hero CTA, matte channel buttons and violet glass stock counter.
+- `references/kora-ui-preview/brand-colors.css`: logo tokens and borderless function-card gradients.
 - `references/kora-ui-preview/brand/commerce/`: artwork and editable SVG details.
 - `references/kora-ui-preview/_astro/`: compiled styles, scripts and local fonts.
 - All secondary routes are included in the snapshot.
