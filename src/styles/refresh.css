@@ -311,11 +311,11 @@ svg {
 .art-button {
   display:inline-flex;align-items:center;justify-content:center;gap:1.1rem;
   width:264px;max-width:100%;min-height:88px;padding:1.3rem 2rem;
-  position:relative;border-radius:1.2rem;background:#075e54;
+  position:relative;border-radius:1.2rem;background:transparent;
   color:#fff;font-weight:800;text-decoration:none;isolation:isolate;
   transition:transform .16s ease;
 }
-.art-button::before {content:"";position:absolute;inset:0;background:url('/brand/commerce/button-enamel.webp') center/cover no-repeat;z-index:-1;border-radius:inherit;pointer-events:none}
+.art-button::before {content:"";position:absolute;inset:0;background:url('/brand/commerce/button-enamel.webp') 50%/100% 100% no-repeat;z-index:-1;border-radius:inherit;pointer-events:none}
 .art-button:hover {transform:translateY(-2px)}
 .art-button:active {transform:translateY(2px)}
 .art-button:focus-visible {outline:3px solid #c76b4f;outline-offset:5px}
